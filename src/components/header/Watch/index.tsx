@@ -10,10 +10,13 @@ import {
 import SearchIcon from '@mui/icons-material/Search'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import logo from '../../../../assets/watch.png'
-
 import classes from './watch.module.css'
 import { useState } from 'react'
+
+interface WatchHeaderProps {
+  logo: string;
+  title?:string;
+}
 
 const Search = () => {
   return (
@@ -31,7 +34,7 @@ const Search = () => {
   )
 }
 
-export const WatchHeader: React.FC = () => {
+export const WatchHeader: React.FC<WatchHeaderProps> = ({title,logo}) => {
   const [showSearch, setShowSearch] = useState(false)
 
   return (
@@ -39,9 +42,9 @@ export const WatchHeader: React.FC = () => {
       <div className={classes.header}>
         <div className={classes.logoSection}>
           <img src={logo} className={classes.logo} />
-          <Typography variant="h4" color="primary">
+          {title && <Typography variant="h4" color="primary">
             Watches
-          </Typography>
+          </Typography>}
           <IconButton
             className={classes.searchIconButton}
             onClick={() => setShowSearch((prev) => !prev)}
