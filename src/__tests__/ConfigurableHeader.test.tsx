@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { describe, it, expect, vi } from 'vitest'
-import { ConfigurableHeader } from 'src/components/header/configurableHeader'
+import { ConfigurableHeader } from 'src/components/header'
 import HomeIcon from '@mui/icons-material/Home'
 
 describe('ConfigurableHeader', () => {
