@@ -1,19 +1,12 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import { Box } from '@mui/material'
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
-import { ConfigurableHeader } from 'src/components/header/configurableHeader'
+import { WatchHeader } from 'src/components/header'
 
 export const BusinessLayout: React.FC = () => {
   return (
     <Box height="100%">
-      <ConfigurableHeader
-        headerIcon={AddShoppingCartIcon}
-        headerName="Sample"
-        onMenuClick={() => {}}
-        onProfileClick={() => {}}
-        onCartClick={() => {}}
-      />
+      <WatchHeader logo='https://logodownload.org/wp-content/uploads/2017/05/rolex-logo-9.png' />
       <Outlet />
     </Box>
   )

@@ -1,0 +1,51 @@
+.header {
+    display: flex;
+    padding: 7px 15px;
+}
+
+.logoSection {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1
+}
+
+.logo {
+    height: 40px;
+}
+
+.userSection {
+    align-items: center;
+    display: flex;
+    gap: 6px;
+
+    :global(.MuiAvatar-root) {
+        margin-left: 10px
+    }
+}
+
+.logoSection {
+    .searchBar {
+        max-width: 600px;
+        display: none;
+    }
+}
+
+.searchMobile{
+    padding: 7px 15px;
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .searchIconButton {
+        display: none;
+    }
+    .logoSection {
+        .searchBar {
+            display: block;
+        }
+    }
+    .searchMobile{
+        display: none;
+    }
+}
