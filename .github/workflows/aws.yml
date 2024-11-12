@@ -1,0 +1,64 @@
+name: Deploy to Amazon EC2
+
+on:
+  push:
+    branches: [ "development" ]
+
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.15.0'
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Building app
+        run: |
+          echo "Creating .env file"
+          echo "VITE_BASE_URL=${{ secrets.VITE_BASE_URL }}" >> .env
+          echo ".env file created"
+          echo "Building app"
+          npm run build
+          echo "Building app completed"
+
+      - name: Remove existing dist folder on server
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.HOST }}
+          key: ${{ secrets.SSH_KEY }}
+          username: ${{ secrets.SSH_USERNAME }}
+          script: |
+            echo "Connected to server"
+            rm -rf ~/Apps/client/dist
+            mkdir ~/Apps/client/dist
+            echo "Removed existing dist folder"
+      
+
+      - name: Upload dist folder
+        run: |
+          echo "Creating SSH key file"
+          echo "${{ secrets.SSH_KEY }}" > ssh_key
+          chmod 600 ssh_key
+          echo "Uploading dist folder"
+          scp -r -i ssh_key -o StrictHostKeyChecking=no dist/* ${{ secrets.SSH_USERNAME }}@${{ secrets.HOST }}:~/Apps/client/dist/
+          echo "Uploaded dist folder"
+          rm ssh_key
+
+      - name: Run server script
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.HOST }}
+          key: ${{ secrets.SSH_KEY }}
+          username: ${{ secrets.SSH_USERNAME }}
+          script: |
+            echo "Connected to server"
+            cd ~/deploy
+            echo "Running start script"
+            ./start-client.sh
