@@ -1,0 +1,8 @@
+.link {
+    text-decoration: none;
+    color: var(--mui-primary-color);
+}
+
+.link:hover {
+    color: var(--mui-primary-dark-color)
+}
