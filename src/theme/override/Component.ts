@@ -6,6 +6,7 @@ export const Component = (theme: Theme) => {
       styleOverrides: {
         body: {
           '--mui-primary-color': theme.palette.primary.main,
+          '--mui-primary-dark-color': theme.palette.primary.dark,
         },
       },
     },

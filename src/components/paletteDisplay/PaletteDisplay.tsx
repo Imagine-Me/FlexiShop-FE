@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { Typography, Box, Grid } from '@mui/material';
 import { PaletteOptions } from '@mui/material/styles/createPalette';

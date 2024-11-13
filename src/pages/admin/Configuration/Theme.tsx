@@ -26,7 +26,6 @@ const ThemePage = () => {
 
   const changeTheme = (key1: string, key2: string, color: string) => {
     if (state) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const clonedState = structuredClone(state) as any
       if (typeof clonedState[key1 as keyof IThemePalette] === 'object') {
         clonedState[key1][key2] = color
@@ -105,7 +104,6 @@ const ThemePage = () => {
                   >
                     {convertCamelCaseToReadableString(key)}
                   </Typography>
-                  {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                   {(typeof obj[key as keyof IThemePalette] as any) ===
                   'number' ? (
                     <NumberField
