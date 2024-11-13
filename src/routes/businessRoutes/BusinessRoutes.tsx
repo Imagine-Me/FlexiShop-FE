@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 import { Route, Navigate } from 'react-router-dom'
-import { Home } from 'src/pages/business/home'
+import { Home } from 'src/pages/business'
 import { BusinessLayout } from 'src/components/layout/businessLayout'
 
 export const BusinessRoutes = () => {
