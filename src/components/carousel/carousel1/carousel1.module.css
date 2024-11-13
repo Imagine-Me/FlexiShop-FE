@@ -1,0 +1,33 @@
+.carouselContainer {
+    margin: 15px auto;
+}
+
+.image {
+    border-radius: 10px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 800px;
+}
+
+.carouselDots {
+    list-style: none;
+    display: flex !important;
+    gap: 5px;
+
+    button {
+        font-size: 0;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        outline: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    li:global(.slick-active) {
+        button {
+            background-color: var(--mui-primary-color);
+        }
+    }
+}
