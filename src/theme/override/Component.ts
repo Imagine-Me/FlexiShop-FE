@@ -7,7 +7,9 @@ export const Component = (theme: Theme) => {
         body: {
           '--mui-primary-color': theme.palette.primary.main,
           '--mui-primary-dark-color': theme.palette.primary.dark,
+          '--mui-primary-light-color': theme.palette.primary.light,
           '--mui-paper-color': theme.palette.background.paper,
+          '--mui-grey-color': theme.palette.grey[100],
         },
       },
     },
