@@ -2,8 +2,6 @@
     border-radius: 12px;
     height: 700px;
     background-color: var(--mui-primary-light-color);
-    background-repeat: no-repeat;
-    background-size: contain;
     position: relative;
 
     .card1Container {
@@ -24,31 +22,53 @@
     }
 }
 
-.card2 {
-    border-radius: 12px;
-    height: 344px;
-    background-color: var(--mui-grey-color);
+.backgroundImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background-repeat: no-repeat;
     background-size: contain;
-    position: relative;
-
-    .card2Container {
-        display: flex;
-        align-items: center;
-        width: 60%;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        padding: 25px;
-
-        &.left {
-            right: 0;
-        }
-    }
 }
+
 
 .cardContainer {
     display: flex;
-    gap: 12px;
+    gap: 14px;
     flex-direction: column;
+}
+
+@media (max-width: 1200px) {
+
+    .backgroundImage {
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    }
+
+    .card1 {
+        .card1Container {
+            width: 100%;
+        }
+
+        .backgroundImage {
+            &::after {
+                background-color: rgba(0, 0, 0, 0.5);
+            }
+        }
+    }
+
+}
+
+@media (max-width: 899px) {
+    .card1 {
+        height: 400px;
+    }
+
 }
