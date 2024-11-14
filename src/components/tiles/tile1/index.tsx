@@ -26,15 +26,16 @@ export interface Tile1Props {
 
 export const Tile1: React.FC<Tile1Props> = ({ card1, card2, card3 }) => {
   return (
-    <Grid container spacing={6}>
-      <Grid item xs={12} sm={6} md={5}>
-        <Card
-          className={classes.card1}
-          style={{
-            backgroundImage: `url(${card1.image})`,
-            backgroundPosition: `bottom ${card1.align}`,
-          }}
-        >
+    <Grid container spacing={4}>
+      <Grid item xs={12} md={6} lg={5}>
+        <Card className={classes.card1}>
+          <div
+            className={classes.backgroundImage}
+            style={{
+              backgroundImage: `url(${card1.image})`,
+              backgroundPosition: `bottom ${card1.align}`,
+            }}
+          ></div>
           <div className={`${classes.card1Container} ${classes[card1.align]}`}>
             <Typography variant="h4">{card1.title1}</Typography>
             <Typography variant="h2">{card1.title2}</Typography>
@@ -42,15 +43,16 @@ export const Tile1: React.FC<Tile1Props> = ({ card1, card2, card3 }) => {
           </div>
         </Card>
       </Grid>
-      <Grid item xs={12} sm={6} md={7}>
+      <Grid item xs={12} md={6} lg={7}>
         <div className={classes.cardContainer}>
-          <Card
-            className={classes.card2}
-            style={{
-              backgroundImage: `url(${card2.image})`,
-              backgroundPosition: `bottom ${card2.align}`,
-            }}
-          >
+          <Card className={classes.card2}>
+            <div
+              className={classes.backgroundImage}
+              style={{
+                backgroundImage: `url(${card2.image})`,
+                backgroundPosition: `bottom ${card2.align}`,
+              }}
+            ></div>
             <div
               className={`${classes.card2Container} ${classes[card2.align]}`}
             >
@@ -63,13 +65,14 @@ export const Tile1: React.FC<Tile1Props> = ({ card1, card2, card3 }) => {
               </div>
             </div>
           </Card>
-          <Card
-            className={classes.card2}
-            style={{
-              backgroundImage: `url(${card3.image})`,
-              backgroundPosition: `bottom ${card3.align}`,
-            }}
-          >
+          <Card className={classes.card2}>
+            <div
+              className={classes.backgroundImage}
+              style={{
+                backgroundImage: `url(${card3.image})`,
+                backgroundPosition: `bottom ${card3.align}`,
+              }}
+            ></div>
             <div
               className={`${classes.card2Container} ${classes[card3.align]}`}
             >
