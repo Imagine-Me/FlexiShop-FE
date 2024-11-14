@@ -1,0 +1,54 @@
+.card1 {
+    border-radius: 12px;
+    height: 700px;
+    background-color: var(--mui-primary-light-color);
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: relative;
+
+    .card1Container {
+        width: 45%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        padding: 25px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        &.left {
+            right: 0;
+            text-align: right;
+        }
+    }
+}
+
+.card2 {
+    border-radius: 12px;
+    height: 344px;
+    background-color: var(--mui-grey-color);
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: relative;
+
+    .card2Container {
+        display: flex;
+        align-items: center;
+        width: 60%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        padding: 25px;
+
+        &.left {
+            right: 0;
+        }
+    }
+}
+
+.cardContainer {
+    display: flex;
+    gap: 12px;
+    flex-direction: column;
+}
