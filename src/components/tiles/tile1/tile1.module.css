@@ -32,26 +32,6 @@
     background-size: contain;
 }
 
-.card2 {
-    border-radius: 12px;
-    height: 343px;
-    background-color: var(--mui-grey-color);
-    position: relative;
-
-    .card2Container {
-        display: flex;
-        align-items: center;
-        width: 60%;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        padding: 25px;
-
-        &.left {
-            right: 0;
-        }
-    }
-}
 
 .cardContainer {
     display: flex;
@@ -73,8 +53,6 @@
     }
 
     .card1 {
-        height: 400px;
-
         .card1Container {
             width: 100%;
         }
@@ -86,20 +64,11 @@
         }
     }
 
-    .card2 {
-        height: 300px;
+}
 
-        .card2Container {
-            width: 100%;
-        }
-
-        .backgroundImage {
-            background-position: center center;
-            background-size: cover;
-
-            &::after {
-                background-color: rgba(255, 255, 255, 0.5);
-            }
-        }
+@media (max-width: 899px) {
+    .card1 {
+        height: 400px;
     }
+
 }

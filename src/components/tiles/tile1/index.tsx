@@ -1,6 +1,7 @@
-import { Button, Card, Grid, Typography } from '@mui/material'
+import { Card, Grid, Typography } from '@mui/material'
 
 import classes from './tile1.module.css'
+import { CommonCard, CommonCardProps } from '../common/card'
 
 export interface Tile1Props {
   card1: {
@@ -10,18 +11,8 @@ export interface Tile1Props {
     footer: string
     image: string
   }
-  card2: {
-    align: 'left' | 'right'
-    title1: string
-    title2: string
-    image: string
-  }
-  card3: {
-    align: 'left' | 'right'
-    title1: string
-    title2: string
-    image: string
-  }
+  card2: CommonCardProps
+  card3: CommonCardProps
 }
 
 export const Tile1: React.FC<Tile1Props> = ({ card1, card2, card3 }) => {
@@ -45,46 +36,8 @@ export const Tile1: React.FC<Tile1Props> = ({ card1, card2, card3 }) => {
       </Grid>
       <Grid item xs={12} md={6} lg={7}>
         <div className={classes.cardContainer}>
-          <Card className={classes.card2}>
-            <div
-              className={classes.backgroundImage}
-              style={{
-                backgroundImage: `url(${card2.image})`,
-                backgroundPosition: `bottom ${card2.align}`,
-              }}
-            ></div>
-            <div
-              className={`${classes.card2Container} ${classes[card2.align]}`}
-            >
-              <div>
-                <Typography variant="h4">{card2.title1}</Typography>
-                <Typography variant="h2">{card2.title2}</Typography>
-                <Button variant="contained" size="large">
-                  Shop Now
-                </Button>
-              </div>
-            </div>
-          </Card>
-          <Card className={classes.card2}>
-            <div
-              className={classes.backgroundImage}
-              style={{
-                backgroundImage: `url(${card3.image})`,
-                backgroundPosition: `bottom ${card3.align}`,
-              }}
-            ></div>
-            <div
-              className={`${classes.card2Container} ${classes[card3.align]}`}
-            >
-              <div>
-                <Typography variant="h4">{card3.title1}</Typography>
-                <Typography variant="h2">{card3.title2}</Typography>
-                <Button variant="contained" size="large">
-                  Shop Now
-                </Button>
-              </div>
-            </div>
-          </Card>
+          <CommonCard {...card2} />
+          <CommonCard {...card3} />
         </div>
       </Grid>
     </Grid>
