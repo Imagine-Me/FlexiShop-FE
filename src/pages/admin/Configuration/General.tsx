@@ -4,11 +4,11 @@ import { FormBuilder } from 'src/components/formBuilder/FormBuilder'
 import { generalPageSchema } from 'src/constants/formSchema/general'
 import { AppConfigUrls } from 'src/constants/urls.constant'
 import {
-  ICustomGeneralModel,
+  ICustomConfigModel,
   IGeneralConfigData,
 } from 'src/interfaces/config.interface'
-import useConfigService from 'src/service/business/config.service'
-import { useConfigStore } from 'src/store/business/config.store'
+import useConfigService from 'src/service/config.service'
+import { useConfigStore } from 'src/store/config.store'
 
 const GeneralPage = () => {
   const { general, setGeneral } = useConfigStore()
@@ -19,10 +19,9 @@ const GeneralPage = () => {
     setState(data as typeof general)
   }
   const onFormSubmit = async () => {
-    const response = await updateConfig<ICustomGeneralModel>(
-      AppConfigUrls.GENERAL,
-      state
-    )
+    const response = await updateConfig<
+      ICustomConfigModel<'general', IGeneralConfigData>
+    >(AppConfigUrls.GENERAL, state)
     if (response) {
       setGeneral(response.data)
     }

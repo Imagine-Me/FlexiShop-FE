@@ -4,25 +4,22 @@ import {
   Card,
   CircularProgress,
   Grid,
+  ThemeOptions,
   Typography,
 } from '@mui/material'
 import { useCallback, useEffect, useState } from 'react'
 import { convertCamelCaseToReadableString } from 'src/utils/string.utils'
 import { ColorPickerTrigger } from 'src/components/generic/colorPicker/ColorPicker'
-import { useConfigStore } from 'src/store/business/config.store'
-import {
-  ICustomThemeModel,
-  IThemePalette,
-} from 'src/interfaces/config.interface'
+import { IThemePalette } from 'src/interfaces/config.interface'
 import { NumberField } from 'src/components/generic/numberField/NumberField'
-import useConfigService from 'src/service/business/config.service'
-import { AppConfigUrls } from 'src/constants/urls.constant'
+import useConfigService from 'src/service/config.service'
+import { useTemplateStore } from 'src/store/template.store'
 
 const ThemePage = () => {
-  const { appTheme, setTheme } = useConfigStore()
-  const [state, setState] = useState<IThemePalette | undefined>()
+  const { theme } = useTemplateStore()
+  const [state, setState] = useState<ThemeOptions | undefined | null>()
 
-  const { isLoading, updateConfig } = useConfigService()
+  const { isLoading } = useConfigService()
 
   const changeTheme = (key1: string, key2: string, color: string) => {
     if (state) {
@@ -35,24 +32,21 @@ const ThemePage = () => {
   }
 
   const onThemeUpdate = async () => {
-    if (state) {
-      const response = await updateConfig<
-        ICustomThemeModel<AppConfigUrls.LIGHT_THEME>
-      >(AppConfigUrls.LIGHT_THEME, state)
-      if (response) {
-        setTheme(response.data)
-      }
-    }
+    return null
+    // if (state) {
+    //   const response = await updateConfig<
+    //     ICustomThemeModel<AppConfigUrls.LIGHT_THEME>
+    //   >(AppConfigUrls.LIGHT_THEME, state)
+    //   if (response) {
+    //     setTheme(response.data)
+    //   }
+    // }
   }
 
   useEffect(() => {
-    const palette = structuredClone(appTheme as IThemePalette)
-    if (palette) {
-      delete palette['mode']
-      delete palette['contrastThreshold']
-    }
+    const palette = structuredClone(theme)
     setState(palette)
-  }, [appTheme])
+  }, [theme])
 
   const getThemeElements = useCallback(
     (obj: IThemePalette, result = [] as React.ReactNode[], index_key = '') => {
@@ -155,7 +149,8 @@ const ThemePage = () => {
         </Button>
       </Box>
       <Grid container spacing={2}>
-        {!state ? <CircularProgress /> : getThemeElements(state!)}
+        {/* {!state ? <CircularProgress /> : getThemeElements(state!)} */}
+        {!state ? <CircularProgress /> : null}
       </Grid>
     </>
   )

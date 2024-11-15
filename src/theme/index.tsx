@@ -5,15 +5,14 @@ import {
   ThemeProvider as MUIThemeProvider,
   createTheme,
   StyledEngineProvider,
-  ThemeOptions,
 } from '@mui/material/styles'
-import useConfigService from 'src/service/business/config.service'
-import typography from './typography'
+import useConfigService from 'src/service/config.service'
 import GlobalStyles from './globalStyles'
-import ComponentsOverrides from './override'
-import { useConfigStore } from 'src/store/business/config.store'
+import { useConfigStore } from 'src/store/config.store'
+import { Component } from './override/Component'
 
-import { palette } from './palette'
+import { useTemplateStore } from 'src/store/template.store'
+import useTemplateService from 'src/service/template.service'
 
 interface ThemeProviderProps {
   children: React.ReactNode
@@ -21,27 +20,37 @@ interface ThemeProviderProps {
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const { getConfigs } = useConfigService()
-  const { appTheme } = useConfigStore()
+  const { getTemplate } = useTemplateService()
+  const { theme } = useTemplateStore()
+
+  const { theme: currentTheme } = useConfigStore()
 
   useEffect(() => {
     getConfigs()
   }, [])
 
-  const themeOptions: ThemeOptions = useMemo(
-    () => ({
-      palette: appTheme || palette,
-      spacing: 4,
-      typography: typography,
-    }),
-    [appTheme]
-  )
+  // TODO: fetch theme based on version
+  useEffect(() => {
+    if (currentTheme?.name) {
+      getTemplate(currentTheme.name)
+    }
+  }, [currentTheme])
 
-  const theme = createTheme(themeOptions)
-  theme.components = ComponentsOverrides(theme)
+  const appTheme = useMemo(() => {
+    if (!theme) {
+      return createTheme()
+    }
+    const updatedTheme = createTheme(theme)
+    updatedTheme.components = {
+      ...updatedTheme.components,
+      ...Component(updatedTheme),
+    }
+    return updatedTheme
+  }, [theme])
 
   return (
     <StyledEngineProvider injectFirst>
-      <MUIThemeProvider theme={theme}>
+      <MUIThemeProvider theme={appTheme}>
         <CssBaseline />
         <GlobalStyles />
         {children}

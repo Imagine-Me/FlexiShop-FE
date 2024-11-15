@@ -3,12 +3,15 @@ export enum AdminUrls {
 }
 
 export enum AppConfigUrls {
-  LIGHT_THEME = 'light',
-  DARK_THEME = 'dark',
-  GENERAL='general'
+  GENERAL = 'general',
+  THEME = 'theme',
 }
 
 export enum ImageUrls {
   GET_ALL = '/filestore',
-  UPLOAD = '/filestore/upload'
+  UPLOAD = '/filestore/upload',
+}
+
+export enum TemplateUrls {
+  GET = '/templates',
 }
