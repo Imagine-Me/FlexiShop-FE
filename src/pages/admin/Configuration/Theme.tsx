@@ -49,9 +49,13 @@ const ThemePage = () => {
   }, [theme])
 
   const getThemeElements = useCallback(
-    (obj: IThemePalette, result = [] as React.ReactNode[], index_key = '') => {
-      Object.keys(obj).forEach((key, index) => {
-        if (typeof obj[key as keyof IThemePalette] === 'object') {
+    (
+      obj: ThemeOptions['palette'],
+      result = [] as React.ReactNode[],
+      index_key = ''
+    ) => {
+      Object.keys(obj!).forEach((key, index) => {
+        if (typeof obj![key as keyof IThemePalette] === 'object') {
           index_key = key
           // there is sub elements
           result.push(
@@ -66,7 +70,7 @@ const ThemePage = () => {
             </Grid>
           )
           return getThemeElements(
-            obj[key as keyof IThemePalette] as unknown as IThemePalette,
+            obj![key as keyof IThemePalette] as unknown as IThemePalette,
             result,
             index_key
           )
@@ -98,12 +102,12 @@ const ThemePage = () => {
                   >
                     {convertCamelCaseToReadableString(key)}
                   </Typography>
-                  {(typeof obj[key as keyof IThemePalette] as any) ===
+                  {(typeof obj![key as keyof IThemePalette] as any) ===
                   'number' ? (
                     <NumberField
                       size="small"
                       fullWidth={false}
-                      value={obj[key as keyof IThemePalette]}
+                      value={obj![key as keyof IThemePalette]}
                       onChange={(value) =>
                         changeTheme(index_key, key, value as unknown as string)
                       }
@@ -114,7 +118,7 @@ const ThemePage = () => {
                     />
                   ) : (
                     <ColorPickerTrigger
-                      color={obj[key as keyof IThemePalette] as string}
+                      color={obj![key as keyof IThemePalette] as string}
                       onChange={(color) => changeTheme(index_key, key, color)}
                     />
                   )}
@@ -149,7 +153,7 @@ const ThemePage = () => {
         </Button>
       </Box>
       <Grid container spacing={2}>
-        {/* {!state ? <CircularProgress /> : getThemeElements(state!)} */}
+        {!state ? <CircularProgress /> : getThemeElements(state.palette)}
         {!state ? <CircularProgress /> : null}
       </Grid>
     </>

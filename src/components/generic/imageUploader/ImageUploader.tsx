@@ -205,8 +205,6 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
     setSelectedImages(selectedImages.filter((_, i) => index !== i))
   }
 
-  console.log(error)
-
   return (
     <>
       <Box>
