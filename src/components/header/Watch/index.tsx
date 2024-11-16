@@ -14,8 +14,8 @@ import classes from './watch.module.css'
 import { useState } from 'react'
 
 interface WatchHeaderProps {
-  logo: string;
-  title?:string;
+  logo: string
+  title?: string
 }
 
 const Search = () => {
@@ -34,7 +34,7 @@ const Search = () => {
   )
 }
 
-export const WatchHeader: React.FC<WatchHeaderProps> = ({title,logo}) => {
+export const WatchHeader: React.FC<WatchHeaderProps> = ({ title, logo }) => {
   const [showSearch, setShowSearch] = useState(false)
 
   return (
@@ -42,9 +42,11 @@ export const WatchHeader: React.FC<WatchHeaderProps> = ({title,logo}) => {
       <div className={classes.header}>
         <div className={classes.logoSection}>
           <img src={logo} className={classes.logo} />
-          {title && <Typography variant="h4" color="primary">
-            Watches
-          </Typography>}
+          {title && (
+            <Typography variant="h4" color="primary">
+              {title}
+            </Typography>
+          )}
           <IconButton
             className={classes.searchIconButton}
             onClick={() => setShowSearch((prev) => !prev)}
@@ -70,7 +72,7 @@ export const WatchHeader: React.FC<WatchHeaderProps> = ({title,logo}) => {
       </div>
       {showSearch && (
         <>
-        <Divider />
+          <Divider />
           <div className={classes.searchMobile}>
             <Search />
           </div>

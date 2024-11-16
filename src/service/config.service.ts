@@ -2,7 +2,7 @@ import { AppConfigUrls } from 'src/constants/urls.constant'
 import { useAxios } from 'src/hooks/axios.hook'
 import { IConfigModel } from 'src/interfaces/config.interface'
 import { BusinessURL } from 'src/service/config/url.constant'
-import { useConfigStore } from 'src/store/business/config.store'
+import { useConfigStore } from 'src/store/config.store'
 
 const useConfigService = () => {
   const { fetchData, isLoading, error } = useAxios()

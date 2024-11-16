@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { ThemeProvider } from 'src/theme'
 import { AppRouter } from 'src/routes/routes'
-import { useConfigStore } from './store/business/config.store'
+import { useConfigStore } from './store/config.store'
 import { Helmet } from './components/generic/helmet/Helmet'
-import { useImageService } from './service/admin/images.service'
+import { useImageService } from './service/images.service'
 
 export const App: React.FC = () => {
   const { general } = useConfigStore()

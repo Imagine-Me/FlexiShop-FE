@@ -16,7 +16,7 @@ import {
 import AddIcon from '@mui/icons-material/Add'
 import { ChangeEvent, useRef, useState } from 'react'
 import FileUploadIcon from '@mui/icons-material/FileUpload'
-import { useImageService } from 'src/service/admin/images.service'
+import { useImageService } from 'src/service/images.service'
 import { IImageModel } from 'src/interfaces/image.interface'
 import { readFileAsDataURL } from 'src/utils/file.utils'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -204,8 +204,6 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
   const onSelectedImageDelete = (index: number) => {
     setSelectedImages(selectedImages.filter((_, i) => index !== i))
   }
-
-  console.log(error)
 
   return (
     <>

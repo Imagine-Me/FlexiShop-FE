@@ -1,20 +1,18 @@
 import { Card, CardActionArea, Grid, Typography } from '@mui/material'
 
 import classes from './category1.module.css'
-import { Link } from 'react-router-dom'
 import React from 'react'
 import DynamicIcon from 'src/components/dynamicIcon'
 import { categoriesMock } from 'src/mock/category'
+import { LinkButton } from 'src/components/linkButton/LinkButton'
 
 export const Category1: React.FC = () => {
   return (
     <Grid container>
       <Grid item sm={12} md={6} lg={4}>
         <div className={classes.titleSection}>
-          <Typography variant="h3">Shop by Category</Typography>
-          <Link to="/">
-            <Typography color="primary">See All</Typography>
-          </Link>
+          <Typography variant="h2">Shop by Category</Typography>
+          <LinkButton to="/">See All</LinkButton>
         </div>
       </Grid>
       <Grid item sm={12} md={6} lg={8}>

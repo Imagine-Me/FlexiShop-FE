@@ -30,9 +30,13 @@ export const CommonCard: React.FC<CommonCardProps> = ({
       ></div>
       <div className={`${classes.cardContainer} ${classes[align]}`}>
         <div>
-          <Typography variant="h4">{title1}</Typography>
-          <Typography variant="h2">{title2}</Typography>
-          <Button variant="contained" size="large">
+          <Typography variant="h4" className={classes.title1}>
+            {title1}
+          </Typography>
+          <Typography variant="h1" className={classes.title2}>
+            {title2}
+          </Typography>
+          <Button variant="contained" size="large" className={classes.button}>
             {buttonText}
           </Button>
         </div>

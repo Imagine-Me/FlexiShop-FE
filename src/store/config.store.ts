@@ -4,27 +4,23 @@ import { APP_NAME } from 'src/constants/common'
 
 import {
   IConfigModel,
-  ICustomGeneralModel,
-  IThemePalette,
+  IGeneralConfigData,
+  IThemeConfigData,
 } from 'src/interfaces/config.interface'
 import { AppConfigUrls } from 'src/constants/urls.constant'
 
 interface IConfigStore {
-  appTheme: IThemePalette | null
-  general: ICustomGeneralModel['data'] | null
-  setTheme: (user: IThemePalette | null) => void
-  setGeneral: (user: ICustomGeneralModel['data'] | null) => void
+  general: IGeneralConfigData | null
+  theme: IThemeConfigData | null
+  setGeneral: (user: IGeneralConfigData | null) => void
   setConfigs: (configs: IConfigModel) => void
 }
 
 export const useConfigStore = create<IConfigStore>()(
   persist(
     (set) => ({
-      appTheme: null,
       general: null,
-      setTheme(appTheme) {
-        set({ appTheme })
-      },
+      theme: null,
       setGeneral(general) {
         set({ general })
       },
@@ -34,8 +30,8 @@ export const useConfigStore = create<IConfigStore>()(
             case AppConfigUrls.GENERAL:
               set({ general: config.data })
               break
-            case AppConfigUrls.LIGHT_THEME:
-              set({ appTheme: config.data })
+            case AppConfigUrls.THEME:
+              set({ theme: config.data })
               break
           }
         })

@@ -11,14 +11,13 @@ export interface IThemePalette
   contrastThreshold?: number
 }
 
-interface IBaseModel<T = AppConfigUrls.LIGHT_THEME> {
+interface IBaseModel<T = AppConfigUrls.THEME> {
   id: string
   name: T
 }
 
-export interface ICustomThemeModel<T extends AppConfigUrls>
-  extends IBaseModel<T> {
-  data: IThemePalette
+export interface ICustomConfigModel<T, E> extends IBaseModel<T> {
+  data: E
 }
 
 export interface IGeneralConfigData {
@@ -36,12 +35,11 @@ export interface IGeneralConfigData {
   ['twitter:image']: string
 }
 
-export interface ICustomGeneralModel extends IBaseModel<AppConfigUrls.GENERAL> {
-  data: IGeneralConfigData
+export interface IThemeConfigData {
+  name: string
 }
 
 export type IConfigModel = [
-  ICustomThemeModel<AppConfigUrls.LIGHT_THEME>,
-  ICustomThemeModel<AppConfigUrls.DARK_THEME>,
-  ICustomGeneralModel,
+  ICustomConfigModel<'general', IGeneralConfigData>,
+  ICustomConfigModel<'theme', IThemeConfigData>,
 ]

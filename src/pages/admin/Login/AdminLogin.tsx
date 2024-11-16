@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react'
 import { IUserLoginCredentials } from 'src/interfaces/user.interface'
-import useAuthService from 'src/service/admin/authentication.service'
+import useAuthService from 'src/service/authentication.service'
 import {
   Box,
   Button,

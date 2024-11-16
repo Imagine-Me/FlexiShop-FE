@@ -25,20 +25,31 @@
         &.left {
             right: 0;
         }
+
+        >div {
+            .title1 {
+                margin-bottom: 12px;
+            }
+
+            .title2 {
+                margin-bottom: 12px;
+            }
+        }
     }
 
     &.primary {
         background-color: var(--mui-primary-light-color);
-        color: white;
+        color: var(--mui-primary-contrast-text);
     }
 
     &.secondary {
         background-color: var(--mui-secondary-light-color);
-        color: white;
+        color: var(--mui-secondary-contrast-text);
     }
 
     &.grey {
         background-color: var(--mui-grey-color);
+        color: var(--mui-common-black);
     }
 }
 

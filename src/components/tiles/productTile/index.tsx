@@ -1,10 +1,9 @@
 import { Box, Grid, Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
-
 import classes from './ProductTile.module.css'
 import { useGrid } from 'src/hooks/grid.hook'
 import { ProductCard1 } from 'src/components/productCard'
 import { productList } from 'src/mock/product'
+import { LinkButton } from 'src/components/linkButton/LinkButton'
 
 export const ProductTile = () => {
   const cardCount = useGrid()
@@ -15,13 +14,14 @@ export const ProductTile = () => {
 
   return (
     <Box>
-      <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Typography variant="h3">New Arrivals</Typography>
-        <Typography>
-          <Link className={classes.link} to="">
-            See All
-          </Link>
-        </Typography>
+      <Box
+        className={classes.titleSection}
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        <Typography variant="h2">New Arrivals</Typography>
+        <LinkButton to="">See All</LinkButton>
       </Box>
       <Grid container spacing={4}>
         {products.map((card) => (

@@ -10,10 +10,16 @@
         top: 0;
         bottom: 0;
         padding: 25px;
-        color: white;
+        color: var(--mui-primary-contrast-text);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+
+        .title2 {
+            font-size: 32px;
+            font-weight: 900;
+            line-height: 48px;
+        }
 
         &.left {
             right: 0;

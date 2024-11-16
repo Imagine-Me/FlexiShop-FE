@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
 import { AdminLogin } from 'src/pages/admin/Login/AdminLogin'
-import useAuthService from 'src/service/admin/authentication.service'
+import useAuthService from 'src/service/authentication.service'
 import { BrowserRouter } from 'react-router-dom'
 import '@testing-library/jest-dom'
 
