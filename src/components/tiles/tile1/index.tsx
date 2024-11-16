@@ -29,7 +29,9 @@ export const Tile1: React.FC<Tile1Props> = ({ card1, card2, card3 }) => {
           ></div>
           <div className={`${classes.card1Container} ${classes[card1.align]}`}>
             <Typography variant="h4">{card1.title1}</Typography>
-            <Typography variant="h2">{card1.title2}</Typography>
+            <Typography variant="h2" className={classes.title2}>
+              {card1.title2}
+            </Typography>
             <Typography variant="h5">{card1.footer}</Typography>
           </div>
         </Card>
