@@ -11,6 +11,7 @@ export const Component = (theme: Theme) => {
           '--mui-secondary-light-color': theme.palette.secondary.light,
           '--mui-paper-color': theme.palette.background.paper,
           '--mui-grey-color': theme.palette.grey[100],
+          '--mui-success-color': theme.palette.success.main,
         },
       },
     },

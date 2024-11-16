@@ -25,7 +25,7 @@ export const ProductCard1: React.FC<ProductCard1Props> = ({
           <Typography variant="body1" className={classes.title}>
             {title}
           </Typography>
-          <Typography variant="body1" className={classes.title} color="success">
+          <Typography variant="body1" className={classes.price} color="success">
             ${price}
           </Typography>
         </div>
