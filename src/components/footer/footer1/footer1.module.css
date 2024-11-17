@@ -1,0 +1,47 @@
+.Footer {
+    background-color: var(--mui-grey-color);
+    padding: 20px 120px;
+
+    .logo {
+        width: 100px;
+        margin-bottom: 16px;
+    }
+
+    .socialMedia {
+        >a {
+            margin-right: 8px;
+        }
+
+        .socialMediaIcon {
+            color: var(--mui-primary-color)
+        }
+    }
+
+    .menuTitle {
+        margin-bottom: 12px;
+    }
+
+    .menuLinks {
+        list-style: none;
+
+        a {
+            text-decoration: none;
+            color: var(--mui-primary-color);
+        }
+
+        a:hover {
+            color: var(--mui-primary-dark-color);
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+    }
+
+    .copyRight {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 12px;
+    }
+}
