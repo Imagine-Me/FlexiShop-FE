@@ -12,8 +12,7 @@ const useTemplateService = () => {
       `${TemplateUrls.GET}/${name}`
     )
     if (response) {
-      const { theme } = response
-      useTemplateStore.getState().setTheme(theme)
+      useTemplateStore.getState().setTemplate(response)
     }
   }
 

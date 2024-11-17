@@ -1,2 +1,1 @@
-export { ConfigurableHeader } from './Header'
-export { WatchHeader } from './Watch'
+export { Header } from './Header'
