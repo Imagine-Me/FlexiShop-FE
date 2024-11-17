@@ -11,6 +11,12 @@ export const loadIcon = (icon: { name: string; type: string }) => {
           default: module[name],
         }))
       )
+    case 'ai':
+      return React.lazy(() =>
+        import(`react-icons/ai`).then((module: any) => ({
+          default: module[name],
+        }))
+      )
     case 'io5':
       return React.lazy(() =>
         import(`react-icons/io5`).then((module: any) => ({
@@ -24,12 +30,24 @@ export const loadIcon = (icon: { name: string; type: string }) => {
           default: module[name],
         }))
       )
-      case 'md':
-        return React.lazy(() =>
-          import(`react-icons/md`).then((module: any) => ({
-            default: module[name],
-          }))
-        )
+    case 'md':
+      return React.lazy(() =>
+        import(`react-icons/md`).then((module: any) => ({
+          default: module[name],
+        }))
+      )
+    case 'fa':
+      return React.lazy(() =>
+        import(`react-icons/fa`).then((module: any) => ({
+          default: module[name],
+        }))
+      )
+    case 'fa6':
+      return React.lazy(() =>
+        import(`react-icons/fa6`).then((module: any) => ({
+          default: module[name],
+        }))
+      )
   }
   return React.lazy(() =>
     import(`react-icons/md`).then((module) => ({

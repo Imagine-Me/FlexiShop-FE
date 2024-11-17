@@ -3,8 +3,8 @@
      padding: 20px 120px;
      justify-content: space-between;
      align-items: center;
-     background-color: var(--mui-secondary-light-color);
-     color: var(--mui-secondary-contrast-text);
+     background-color: var(--mui-primary-light-color);
+     color: var(--mui-primary-contrast-text);
 }
 
 .contactContainer {
@@ -19,7 +19,7 @@
 }
 
 .icon {
-     color: var(--mui-primary-color);
+     color: var(--mui-primary-contrast-text);
 }
 
 @media (max-width: 1200px) {
