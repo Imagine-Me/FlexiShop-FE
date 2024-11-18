@@ -5,6 +5,8 @@ import { useTemplateStore } from 'src/store/template.store'
 import { headerPageSchema } from 'src/constants/formSchema/header'
 import { useConfigStore } from 'src/store/config.store'
 import { FormBuilder } from 'src/components/form/formBuilder/FormBuilder'
+import PreviewComponent from 'src/components/generic/previewComponent'
+import { HeaderPreview } from 'src/components/admin/adminHeader'
 
 const Header = () => {
   const [header] = useTemplateStore((state) => [state.header])
@@ -39,6 +41,11 @@ const Header = () => {
           </Button>
         </div>
       </Box>
+
+      <PreviewComponent>
+        <HeaderPreview headerProps={state} />
+      </PreviewComponent>
+
       {state && (
         <FormBuilder
           schema={headerPageSchema}
