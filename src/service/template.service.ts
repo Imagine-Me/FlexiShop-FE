@@ -1,5 +1,6 @@
 import { TemplateUrls } from 'src/constants/urls.constant'
 import { useAxios } from 'src/hooks/axios.hook'
+import { IHeader } from 'src/interfaces/components/header.interface'
 import { ITemplateModel } from 'src/interfaces/template.interface'
 import { useTemplateStore } from 'src/store/template.store'
 
@@ -14,6 +15,15 @@ const useTemplateService = () => {
     if (response) {
       useTemplateStore.getState().setTemplate(response)
     }
+  }
+
+  const updateHeader = async (name: string, data: IHeader) => {
+    const response = await fetchData<ITemplateModel>(
+      'post',
+      `${TemplateUrls.UPDATE_HEADER}/${name}`,
+      { ...data }
+    )
+    return response
   }
 
   //   const getConfig = async <T>(type: AppConfigUrls) => {
@@ -37,7 +47,7 @@ const useTemplateService = () => {
   //     }
   //   }
 
-  return { getTemplate, isLoading, error }
+  return { getTemplate, updateHeader, isLoading, error }
 }
 
 export default useTemplateService

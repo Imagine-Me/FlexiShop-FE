@@ -14,6 +14,7 @@ import { AdminUrls } from 'src/constants/routes.constant'
 // lazy imports
 const ThemePage = lazy(() => import('../Configuration/Theme'))
 const GeneralPage = lazy(() => import('../Configuration/General'))
+const HeaderPage = lazy(() => import('../Configuration/Header'))
 
 const drawerWidth = 240
 export const AdminLanding = () => {
@@ -95,7 +96,7 @@ export const AdminLanding = () => {
         component="main"
         sx={{
           flexGrow: 1,
-          p: 5,
+          p: 2,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           height: '100%',
           overflowY: 'auto',
@@ -118,6 +119,7 @@ export const AdminLanding = () => {
             <Route path={AdminUrls.DASHBOARD_PAGE} element="Dashboard" />
             <Route path={AdminUrls.THEME_PAGE} element={<ThemePage />} />
             <Route path={AdminUrls.GENERAL_PAGE} element={<GeneralPage />} />
+            <Route path={AdminUrls.HEADER_PAGE} element={<HeaderPage />} />
             <Route path={AdminUrls.HOME_PAGE} element="Home" />
             <Route
               path="/*"

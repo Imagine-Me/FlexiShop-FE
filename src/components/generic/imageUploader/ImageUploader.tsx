@@ -14,7 +14,7 @@ import {
   Typography,
 } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
-import { ChangeEvent, useRef, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import FileUploadIcon from '@mui/icons-material/FileUpload'
 import { useImageService } from 'src/service/images.service'
 import { IImageModel } from 'src/interfaces/image.interface'
@@ -204,6 +204,12 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
   const onSelectedImageDelete = (index: number) => {
     setSelectedImages(selectedImages.filter((_, i) => index !== i))
   }
+
+  useEffect(() => {
+    getImages()
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <>

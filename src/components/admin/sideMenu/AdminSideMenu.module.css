@@ -1,0 +1,11 @@
+.listButton {
+    &.active {
+        color: var(--mui-primary-contrast-text);
+        background-color: var(--mui-primary-color);
+
+        :global(.MuiListItemIcon-root) {
+            color: var(--mui-primary-contrast-text);
+
+        }
+    }
+}

@@ -43,7 +43,7 @@ export const WatchHeader: React.FC<WatchHeaderProps> = ({
     <div>
       <div className={classes.header}>
         <div className={classes.logoSection}>
-          <img src={logo} className={classes.logo} />
+          <img src={logo?.url} className={classes.logo} alt={logo?.name} />
           {title && (
             <Typography variant="h4" color="primary">
               {title}

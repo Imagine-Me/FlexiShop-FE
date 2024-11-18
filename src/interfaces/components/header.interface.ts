@@ -1,7 +1,7 @@
-import { IIcon } from '../image.interface'
+import { IIcon, IImageModel } from '../image.interface'
 
 export interface IHeader {
-  logo?: string
+  logo?: IImageModel
   title?: string
   name: 'watchHeader'
   wishListIcon: IIcon
