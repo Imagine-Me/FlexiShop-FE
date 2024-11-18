@@ -10,7 +10,7 @@ import {
   Typography,
 } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import { FormError } from 'src/components/formError/FormError'
+import { FormError } from 'src/components/form/formError/FormError'
 import CircularProgress from '@mui/material/CircularProgress'
 
 const StyledContainer = styled(Container)(({ theme }) => ({

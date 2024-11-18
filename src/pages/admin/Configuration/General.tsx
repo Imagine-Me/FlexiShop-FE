@@ -1,6 +1,6 @@
 import { Box, Button, CircularProgress, Typography } from '@mui/material'
 import { useState } from 'react'
-import { FormBuilder } from 'src/components/formBuilder/FormBuilder'
+import { FormBuilder } from 'src/components/form/formBuilder/FormBuilder'
 import { generalPageSchema } from 'src/constants/formSchema/general'
 import { AppConfigUrls } from 'src/constants/urls.constant'
 import {

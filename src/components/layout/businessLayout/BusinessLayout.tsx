@@ -1,8 +1,8 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import { Box } from '@mui/material'
-import { Header } from 'src/components/header'
-import { Footer1 } from 'src/components/footer'
+import { Header } from 'src/components/dynamicComponents/header'
+import { Footer1 } from 'src/components/dynamicComponents/footer'
 import { mockFooter } from 'src/mock/footer'
 
 export const BusinessLayout: React.FC = () => {

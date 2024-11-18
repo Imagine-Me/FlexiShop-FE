@@ -1,7 +1,7 @@
 import { Grid, TextField, Typography } from '@mui/material'
 import { useCallback, useState } from 'react'
+import { ImageUploader } from 'src/components/generic/imageUploader/ImageUploader'
 import { IFormSchema } from 'src/interfaces/formSchema.interface'
-import { ImageUploader } from '../generic/imageUploader/ImageUploader'
 import { IImageModel } from 'src/interfaces/image.interface'
 
 interface IFormBuilderProps<T> {

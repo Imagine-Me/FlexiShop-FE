@@ -1,13 +1,13 @@
 import React from 'react'
-import { Carousel1 } from 'src/components/carousel'
-import { Category1 } from 'src/components/category'
-import { ProductTile, Tile1, Tile2 } from 'src/components/tiles'
+import { Carousel1 } from 'src/components/dynamicComponents/carousel'
+import { Category1 } from 'src/components/dynamicComponents/category'
+import { ProductTile, Tile1, Tile2 } from 'src/components/dynamicComponents/tiles'
 
 import { mockCarousel1 } from 'src/mock/fullSizeBanner'
 
 import classes from './home.module.css'
 import { tile1MockData, tile2MockData } from 'src/mock/tile'
-import { Contact1 } from 'src/components/contact'
+import { Contact1 } from 'src/components/dynamicComponents/contact'
 import { mockContact } from 'src/mock/contact'
 
 export const Home: React.FC = () => {

@@ -1,4 +1,4 @@
-import { Contact1Props } from 'src/components/contact/contact1'
+import { Contact1Props } from 'src/components/dynamicComponents/contact/contact1'
 
 export const mockContact: Contact1Props = {
   title1: "We're always here to help",

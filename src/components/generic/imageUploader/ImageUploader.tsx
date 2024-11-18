@@ -24,7 +24,7 @@ import DoneIcon from '@mui/icons-material/Done'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import CloseIcon from '@mui/icons-material/Close'
 import { useImageStore } from 'src/store/image.store'
-import { FormError } from 'src/components/formError/FormError'
+import { FormError } from 'src/components/form/formError/FormError'
 
 interface ImageUploaderProps {
   multiple?: boolean

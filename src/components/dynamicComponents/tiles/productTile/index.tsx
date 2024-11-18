@@ -1,9 +1,9 @@
 import { Box, Grid, Typography } from '@mui/material'
 import classes from './ProductTile.module.css'
 import { useGrid } from 'src/hooks/grid.hook'
-import { ProductCard1 } from 'src/components/productCard'
+import { ProductCard1 } from 'src/components/dynamicComponents/productCard'
 import { productList } from 'src/mock/product'
-import { LinkButton } from 'src/components/linkButton/LinkButton'
+import { LinkButton } from 'src/components/generic/linkButton/LinkButton'
 
 export const ProductTile = () => {
   const cardCount = useGrid()

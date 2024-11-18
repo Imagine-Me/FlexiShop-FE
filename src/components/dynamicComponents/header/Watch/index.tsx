@@ -10,7 +10,7 @@ import {
 import SearchIcon from '@mui/icons-material/Search'
 import classes from './watch.module.css'
 import { useState } from 'react'
-import DynamicIcon from 'src/components/dynamicIcon'
+import DynamicIcon from 'src/components/generic/dynamicIcon'
 import { IHeader } from 'src/interfaces/components/header.interface'
 
 type WatchHeaderProps = Omit<IHeader, 'name'>

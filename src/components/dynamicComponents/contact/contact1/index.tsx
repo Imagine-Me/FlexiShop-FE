@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material'
 
 import classes from './contact1.module.css'
-import DynamicIcon from 'src/components/dynamicIcon'
+import DynamicIcon from 'src/components/generic/dynamicIcon'
 
 interface Contacts {
   icon: { name: string; type: string }

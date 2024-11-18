@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Box, Button, CircularProgress, Typography } from '@mui/material'
-import { FormBuilder } from 'src/components/formBuilder/FormBuilder'
 import useTemplateService from 'src/service/template.service'
 import { useTemplateStore } from 'src/store/template.store'
 import { headerPageSchema } from 'src/constants/formSchema/header'
 import { useConfigStore } from 'src/store/config.store'
+import { FormBuilder } from 'src/components/form/formBuilder/FormBuilder'
 
 const Header = () => {
   const [header] = useTemplateStore((state) => [state.header])
