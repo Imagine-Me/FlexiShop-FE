@@ -18,6 +18,8 @@ export const Component = (theme: Theme) => {
           '--mui-secondary-contrast-text': theme.palette.secondary.contrastText,
           '--mui-common-white': theme.palette.common.white,
           '--mui-common-black': theme.palette.common.black,
+          '--mui-action-selected': theme.palette.action.selected,
+          '--mui-action-active': theme.palette.action.active,
         },
       },
     },

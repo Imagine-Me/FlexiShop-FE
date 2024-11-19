@@ -16,4 +16,23 @@ export const headerPageSchema: IFormSchema[] = [
     label: 'Title',
     description: 'Header title',
   },
+  {
+    name: '',
+    field: 'flex-2',
+    label: '',
+    subSchema: [
+      {
+        name: 'cartIcon',
+        field: 'icon',
+        label: 'Cart Icon',
+        description: 'Icon for cart',
+      },
+      {
+        name: 'wishListIcon',
+        field: 'icon',
+        label: 'Wish list Icon',
+        description: 'Icon for wish list',
+      },
+    ],
+  },
 ]

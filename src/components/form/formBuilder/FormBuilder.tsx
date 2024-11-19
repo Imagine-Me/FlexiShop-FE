@@ -1,8 +1,9 @@
 import { Grid, TextField, Typography } from '@mui/material'
 import { useCallback, useState } from 'react'
+import { IconPicker } from 'src/components/generic/iconPicker'
 import { ImageUploader } from 'src/components/generic/imageUploader/ImageUploader'
 import { IFormSchema } from 'src/interfaces/formSchema.interface'
-import { IImageModel } from 'src/interfaces/image.interface'
+import { IIcon, IImageModel } from 'src/interfaces/image.interface'
 
 interface IFormBuilderProps<T> {
   schema: IFormSchema[]
@@ -18,7 +19,6 @@ export function FormBuilder<T = unknown>({
   const [formValue, setFormValue] = useState(structuredClone(value))
 
   const onFormChange = (value: unknown, key: string) => {
-    console.log(key, value)
     const updatedValue = { ...formValue, [key]: value }
     setFormValue(updatedValue)
     onChange && onChange(updatedValue)
@@ -71,6 +71,31 @@ export function FormBuilder<T = unknown>({
               description={form.description}
               onChange={(value) => onFormChange(value, form.name ?? '')}
             />
+          )
+        }
+
+        case 'icon': {
+          return (
+            <IconPicker
+              icon={
+                (formValue as Record<string, unknown>)[form.name ?? ''] as IIcon
+              }
+              description={form.description}
+              label={form.label}
+              onChange={(icon) => onFormChange(icon, form.name ?? '')}
+            />
+          )
+        }
+
+        case 'flex-2': {
+          return (
+            <Grid container spacing={2}>
+              {form.subSchema?.map((subForm, subIndex) => (
+                <Grid item key={subIndex} xs={12} md={6}>
+                  {getFormElement(subForm)}
+                </Grid>
+              ))}
+            </Grid>
           )
         }
       }

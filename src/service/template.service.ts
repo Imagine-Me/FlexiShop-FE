@@ -23,7 +23,9 @@ const useTemplateService = () => {
       `${TemplateUrls.UPDATE_HEADER}/${name}`,
       { ...data }
     )
-    return response
+    if(response){
+      useTemplateStore.getState().setTemplate(response)
+    }
   }
 
   //   const getConfig = async <T>(type: AppConfigUrls) => {

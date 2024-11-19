@@ -1,0 +1,57 @@
+.button {
+    height: 100px;
+    width: 100px;
+    outline: none;
+    background: var(--mui-paper-color);
+    border: 1px dashed var(--mui-primary-color);
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+}
+
+.container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: var(--mui-action-active);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: var(--mui-common-white);
+}
+
+.dialogContent {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.button:hover {
+    .container {
+        display: flex;
+    }
+}
+
+.iconContainer {
+    margin-top: 10px;
+    overflow-y: auto;
+    max-height: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.icon {
+    padding: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+}
+
+.icon:hover {
+    color: var(--mui-primary-contrast-text);
+    background-color: var(--mui-primary-color);
+}
