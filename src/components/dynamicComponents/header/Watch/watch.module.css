@@ -31,21 +31,29 @@
     }
 }
 
-.searchMobile{
+.searchMobile {
     padding: 7px 15px;
     display: block;
+}
+
+.avatar {
+    font-size: 16px;
+    width: 36px;
+    height: 36px;
 }
 
 @media (min-width: 768px) {
     .searchIconButton {
         display: none;
     }
+
     .logoSection {
         .searchBar {
             display: block;
         }
     }
-    .searchMobile{
+
+    .searchMobile {
         display: none;
     }
 }

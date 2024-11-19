@@ -30,18 +30,31 @@ export const adminSideMenuConstant: IAdminSideMenuConstant[] = [
     title: 'Configuration',
     icon: BuildRoundedIcon,
     hasSubMenu: true,
+    path: AdminUrls.CONFIGURATION_URL,
     subMenu: [
+      {
+        title: 'Template',
+        path: AdminUrls.TEMPLATE_PAGE,
+      },
       {
         title: 'General',
         path: AdminUrls.GENERAL_PAGE,
       },
       {
-        title: 'Theme',
-        path: AdminUrls.THEME_PAGE,
+        title: 'Header',
+        path: AdminUrls.HEADER_PAGE,
+      },
+      {
+        title: 'Footer',
+        path: AdminUrls.FOOTER_PAGE,
       },
       {
         title: 'Home Page',
         path: AdminUrls.HOME_PAGE,
+      },
+      {
+        title: 'Theme',
+        path: AdminUrls.THEME_PAGE,
       },
     ],
   },

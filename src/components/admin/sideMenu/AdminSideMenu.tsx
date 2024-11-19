@@ -6,32 +6,10 @@ import ListItemText from '@mui/material/ListItemText'
 import Collapse from '@mui/material/Collapse'
 import { adminSideMenuConstant } from 'src/constants/adminSideMenu.constant'
 import { ExpandLess, ExpandMore } from '@mui/icons-material'
-import { Divider, styled } from '@mui/material'
+import { Divider } from '@mui/material'
 import { Link, useLocation } from 'react-router-dom'
 
-const StyledListItemButton = styled(ListItemButton)(({ theme }) => ({
-  '&.active': {
-    '.MuiListItemIcon-root': {
-      color: theme.palette.primary.contrastText,
-    },
-    '.MuiListItemText-root': {
-      color: theme.palette.primary.contrastText,
-    },
-    backgroundColor: theme.palette.primary.main,
-  },
-  '&:hover': {
-    '.MuiListItemIcon-root': {
-      color: theme.palette.primary.contrastText,
-    },
-    '.MuiListItemText-root': {
-      color: theme.palette.primary.contrastText,
-    },
-    backgroundColor: theme.palette.primary.main,
-  },
-  '.MuiListItemIcon-root': {
-    minWidth: '30px',
-  },
-}))
+import classes from './AdminSideMenu.module.css'
 
 export const AdminSideMenu = () => {
   const [open, setOpen] = React.useState<string[]>([])
@@ -66,19 +44,18 @@ export const AdminSideMenu = () => {
       aria-labelledby="nested-list-subheader"
     >
       {adminSideMenuConstant.map((item) => {
+        const activeClass = pathname.includes(`/admin/${item.path}`)
+          ? classes.active
+          : ''
         return (
           <React.Fragment key={item.title}>
             <Link
               to={item.path ?? '#'}
               style={{ textDecoration: 'none', color: 'unset' }}
             >
-              <StyledListItemButton
+              <ListItemButton
                 onClick={() => handleClick(item.title)}
-                className={
-                  pathname.replace(/\/$/, '') === `/admin/${item.path}`
-                    ? 'active'
-                    : ''
-                }
+                className={`${classes.listButton} ${activeClass}`}
               >
                 <ListItemIcon>{<item.icon />}</ListItemIcon>
                 <ListItemText primary={item.title} />
@@ -89,10 +66,14 @@ export const AdminSideMenu = () => {
                     <ExpandMore />
                   )
                 ) : null}
-              </StyledListItemButton>
+              </ListItemButton>
             </Link>
             {item.hasSubMenu &&
               item.subMenu!.map((subMenu) => {
+                const activeClass =
+                  pathname.replace(/\/$/, '') === `/admin/${subMenu.path}`
+                    ? classes.active
+                    : ''
                 return (
                   <Collapse
                     in={open.includes(item.title)}
@@ -105,18 +86,12 @@ export const AdminSideMenu = () => {
                       style={{ textDecoration: 'none', color: 'unset' }}
                     >
                       <List component="div" disablePadding>
-                        <StyledListItemButton
-                          sx={{ pl: 6 }}
-                          className={
-                            pathname.replace(/\/$/, '') ===
-                            `/admin/${subMenu.path}`
-                              ? 'active'
-                              : ''
-                          }
+                        <ListItemButton
+                          className={`${classes.listButton} ${activeClass}`}
                         >
                           <ListItemIcon></ListItemIcon>
                           <ListItemText primary={subMenu.title} />
-                        </StyledListItemButton>
+                        </ListItemButton>
                       </List>
                     </Link>
                   </Collapse>

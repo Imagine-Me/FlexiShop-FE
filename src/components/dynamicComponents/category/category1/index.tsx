@@ -2,9 +2,9 @@ import { Card, CardActionArea, Grid, Typography } from '@mui/material'
 
 import classes from './category1.module.css'
 import React from 'react'
-import DynamicIcon from 'src/components/dynamicIcon'
+import DynamicIcon from 'src/components/generic/dynamicIcon'
 import { categoriesMock } from 'src/mock/category'
-import { LinkButton } from 'src/components/linkButton/LinkButton'
+import { LinkButton } from 'src/components/generic/linkButton/LinkButton'
 
 export const Category1: React.FC = () => {
   return (

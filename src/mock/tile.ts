@@ -1,5 +1,5 @@
-import { Tile1Props } from 'src/components/tiles/tile1'
-import { Tile2Props } from 'src/components/tiles/tile2'
+import { Tile1Props } from 'src/components/dynamicComponents/tiles/tile1'
+import { Tile2Props } from 'src/components/dynamicComponents/tiles/tile2'
 
 export const tile1MockData: Tile1Props = {
   card1: {

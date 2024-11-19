@@ -1,7 +1,7 @@
 import { Grid, Typography } from '@mui/material'
 import classes from './footer1.module.css'
 import { Link } from 'react-router-dom'
-import DynamicIcon from 'src/components/dynamicIcon'
+import DynamicIcon from 'src/components/generic/dynamicIcon'
 import { MdCopyright } from 'react-icons/md'
 
 interface LinkIcon {

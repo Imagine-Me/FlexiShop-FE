@@ -14,4 +14,5 @@ export enum ImageUrls {
 
 export enum TemplateUrls {
   GET = '/templates',
+  UPDATE_HEADER = '/templates/header',
 }

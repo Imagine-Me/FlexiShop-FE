@@ -8,15 +8,12 @@ import {
   Typography,
 } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import classes from './watch.module.css'
 import { useState } from 'react'
+import DynamicIcon from 'src/components/generic/dynamicIcon'
+import { IHeader } from 'src/interfaces/components/header.interface'
 
-interface WatchHeaderProps {
-  logo: string
-  title?: string
-}
+type WatchHeaderProps = Omit<IHeader, 'name'>
 
 const Search = () => {
   return (
@@ -34,14 +31,19 @@ const Search = () => {
   )
 }
 
-export const WatchHeader: React.FC<WatchHeaderProps> = ({ title, logo }) => {
+export const WatchHeader: React.FC<WatchHeaderProps> = ({
+  title,
+  logo,
+  cartIcon,
+  wishListIcon,
+}) => {
   const [showSearch, setShowSearch] = useState(false)
 
   return (
     <div>
       <div className={classes.header}>
         <div className={classes.logoSection}>
-          <img src={logo} className={classes.logo} />
+          <img src={logo?.url} className={classes.logo} alt={logo?.name} />
           {title && (
             <Typography variant="h4" color="primary">
               {title}
@@ -58,16 +60,18 @@ export const WatchHeader: React.FC<WatchHeaderProps> = ({ title, logo }) => {
         <div className={classes.userSection}>
           <IconButton>
             <Badge badgeContent={4} color="primary">
-              <AddShoppingCartIcon />
+              <DynamicIcon iconName={cartIcon} />
             </Badge>
           </IconButton>
           <IconButton>
             <Badge badgeContent={4} color="secondary">
-              <FavoriteBorderIcon />
+              <DynamicIcon iconName={wishListIcon} />
             </Badge>
           </IconButton>
           <Divider orientation="vertical" variant="middle" />
-          <Avatar sx={{ bgcolor: 'primary.main' }}>G</Avatar>
+          <Avatar className={classes.avatar} sx={{ bgcolor: 'primary.main' }}>
+            G
+          </Avatar>
         </div>
       </div>
       {showSearch && (

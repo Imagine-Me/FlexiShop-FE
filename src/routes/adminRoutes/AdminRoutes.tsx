@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 import { Route } from 'react-router-dom'
-import { AdminGuard } from 'src/components/Guard/AdminGuard'
+import { AdminGuard } from 'src/components/generic/Guard/AdminGuard'
 import { AdminUrls } from 'src/constants/routes.constant'
 import { AdminLanding } from 'src/pages/admin/Landing'
 import { AdminLogin } from 'src/pages/admin/Login'
