@@ -25,6 +25,8 @@ export interface IProductModel {
 interface Component<T, E extends Components> {
   name: E
   data: T
+  styles?: React.CSSProperties
+  className?: string
 }
 
 // Carousel 1

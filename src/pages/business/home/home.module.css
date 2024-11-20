@@ -7,4 +7,8 @@
 
 .body {
     flex: 1;
+
+    :global(.watchPadding) {
+        padding: 0 25px;
+    }
 }

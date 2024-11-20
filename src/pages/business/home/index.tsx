@@ -13,7 +13,7 @@ export const Home: React.FC = () => {
   return (
     <div className={`${classes.body} ${classes[theme?.name ?? '']}`}>
       {home?.map((component, index) => (
-        <div key={`component_${index}`}>
+        <div key={`component_${index}`} className={component.className}>
           <HomeComponentLazy {...component} />{' '}
         </div>
       ))}
