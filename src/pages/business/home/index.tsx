@@ -20,12 +20,6 @@ export const Home: React.FC = () => {
 
       {/*
       <div className={classes.componentContainer}>
-        <ProductTile />
-      </div>
-      <div className={classes.componentContainer}>
-        <Tile1 {...tile1MockData} />
-      </div>
-      <div className={classes.componentContainer}>
         <Tile2 {...tile2MockData} />
       </div>
       <div>

@@ -1,14 +1,19 @@
 import { Button, Card, Typography } from '@mui/material'
 
 import classes from './card.module.css'
+import {
+  AlignmentEnum,
+  ColorEnum,
+} from 'src/interfaces/components/common.interface'
+import { IImageModel } from 'src/interfaces/image.interface'
 
 export interface CommonCardProps {
-  image: string
+  image: IImageModel
   title1: string
   title2: string
-  align: 'left' | 'right'
+  align: AlignmentEnum
   buttonText?: string
-  color?: 'primary' | 'secondary' | 'grey'
+  color?: ColorEnum
 }
 
 export const CommonCard: React.FC<CommonCardProps> = ({
@@ -24,7 +29,7 @@ export const CommonCard: React.FC<CommonCardProps> = ({
       <div
         className={classes.backgroundImage}
         style={{
-          backgroundImage: `url(${image})`,
+          backgroundImage: `url(${image.url})`,
           backgroundPosition: `bottom ${align}`,
         }}
       ></div>

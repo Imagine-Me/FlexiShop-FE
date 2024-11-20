@@ -23,6 +23,12 @@ export const HomeComponentLazy: React.FC<HomeComponents> = (props) => {
             default: module.ProductTile,
           }))
         )
+      case 'tile1':
+        return React.lazy(() =>
+          import('./tiles/tile1').then((module) => ({
+            default: module.Tile1,
+          }))
+        )
     }
   }, [props])
 
