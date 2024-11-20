@@ -8,4 +8,10 @@
 
         }
     }
+
+    &.collapseMenu {
+        &.active {
+            background-color: var(--mui-primary-light-color);
+        }
+    }
 }

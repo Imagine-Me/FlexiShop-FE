@@ -1,6 +1,7 @@
 import BuildRoundedIcon from '@mui/icons-material/BuildRounded'
 import SpaceDashboardRoundedIcon from '@mui/icons-material/SpaceDashboardRounded'
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded'
+import LayersIcon from '@mui/icons-material/Layers'
 import { IAdminSideMenuConstant } from 'src/interfaces/admin.interface'
 import { AdminUrls } from './routes.constant'
 
@@ -49,12 +50,20 @@ export const adminSideMenuConstant: IAdminSideMenuConstant[] = [
         path: AdminUrls.FOOTER_PAGE,
       },
       {
-        title: 'Home Page',
-        path: AdminUrls.HOME_PAGE,
-      },
-      {
         title: 'Theme',
         path: AdminUrls.THEME_PAGE,
+      },
+    ],
+  },
+  {
+    title: 'Pages',
+    icon: LayersIcon,
+    hasSubMenu: true,
+    path: AdminUrls.PAGE_URL,
+    subMenu: [
+      {
+        title: 'Home',
+        path: AdminUrls.HOME_PAGE,
       },
     ],
   },
