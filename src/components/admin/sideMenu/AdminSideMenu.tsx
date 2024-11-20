@@ -50,12 +50,12 @@ export const AdminSideMenu = () => {
         return (
           <React.Fragment key={item.title}>
             <Link
-              to={item.path ?? '#'}
+              to={item.hasSubMenu ? '#' : (item.path ?? '')}
               style={{ textDecoration: 'none', color: 'unset' }}
             >
               <ListItemButton
                 onClick={() => handleClick(item.title)}
-                className={`${classes.listButton} ${activeClass}`}
+                className={`${classes.listButton} ${activeClass} ${item.subMenu ? classes.collapseMenu : ''}`}
               >
                 <ListItemIcon>{<item.icon />}</ListItemIcon>
                 <ListItemText primary={item.title} />

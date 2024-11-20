@@ -2,15 +2,19 @@ import { Box, Grid, Typography } from '@mui/material'
 import classes from './ProductTile.module.css'
 import { useGrid } from 'src/hooks/grid.hook'
 import { ProductCard1 } from 'src/components/dynamicComponents/productCard'
-import { productList } from 'src/mock/product'
 import { LinkButton } from 'src/components/generic/linkButton/LinkButton'
+import { ProductTile as ProductTileProps } from 'src/interfaces/components/home.interface'
 
-export const ProductTile = () => {
+interface IProductTileProps {
+  data: ProductTileProps
+}
+
+export const ProductTile: React.FC<IProductTileProps> = ({ data }) => {
   const cardCount = useGrid()
 
   const colCount = 12 / cardCount
 
-  const products = productList.filter((_, index) => index < cardCount)
+  const products = data.products.filter((_, index) => index < cardCount)
 
   return (
     <Box>
@@ -20,8 +24,8 @@ export const ProductTile = () => {
         justifyContent="space-between"
         alignItems="center"
       >
-        <Typography variant="h2">New Arrivals</Typography>
-        <LinkButton to="">See All</LinkButton>
+        <Typography variant="h2">{data.title}</Typography>
+        <LinkButton to={data.link.url}>{data.link.title}</LinkButton>
       </Box>
       <Grid container spacing={4}>
         {products.map((card) => (

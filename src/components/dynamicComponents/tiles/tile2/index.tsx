@@ -1,13 +1,14 @@
 import { Grid } from '@mui/material'
 
-import { CommonCard, CommonCardProps } from '../common/card'
+import { CommonCard } from '../common/card'
+import { Tile2Props } from 'src/interfaces/components/home.interface'
 
-export interface Tile2Props {
-  card1: CommonCardProps
-  card2: CommonCardProps
+interface ITile2Props {
+  data: Tile2Props
 }
 
-export const Tile2: React.FC<Tile2Props> = ({ card1, card2 }) => {
+export const Tile2: React.FC<ITile2Props> = ({ data }) => {
+  const { card1, card2 } = data
   return (
     <Grid container spacing={4}>
       <Grid item xs={12} md={6}>

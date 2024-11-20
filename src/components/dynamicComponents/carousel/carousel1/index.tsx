@@ -1,9 +1,6 @@
 import Slider, { Settings } from 'react-slick'
 import classes from './carousel1.module.css'
-
-interface Carousel1Props {
-  images: string[]
-}
+import { Carousel1 as Carousel1Props } from 'src/interfaces/components/home.interface'
 
 const settings: Settings = {
   dots: true,
@@ -15,15 +12,19 @@ const settings: Settings = {
   autoplay: true,
 }
 
-export const Carousel1: React.FC<Carousel1Props> = ({ images }) => {
+interface ICarousel1Props {
+  data: Carousel1Props
+}
+
+export const Carousel1: React.FC<ICarousel1Props> = ({ data }) => {
   return (
     <div className={`${classes.carouselContainer} slider-container`}>
       <Slider {...settings}>
-        {images.map((image, index) => (
+        {data.map((image, index) => (
           <img
             key={`banner_image_${index}`}
-            src={image}
-            alt={`banner_image_${index}`}
+            src={image.url}
+            alt={image.name}
             className={classes.image}
           />
         ))}

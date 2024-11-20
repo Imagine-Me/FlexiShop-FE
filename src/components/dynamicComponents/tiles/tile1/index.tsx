@@ -1,21 +1,15 @@
 import { Card, Grid, Typography } from '@mui/material'
 
 import classes from './tile1.module.css'
-import { CommonCard, CommonCardProps } from '../common/card'
+import { CommonCard } from '../common/card'
+import { Tile1Props } from 'src/interfaces/components/home.interface'
 
-export interface Tile1Props {
-  card1: {
-    align: 'left' | 'right'
-    title1: string
-    title2: string
-    footer: string
-    image: string
-  }
-  card2: CommonCardProps
-  card3: CommonCardProps
+interface ITile1Props {
+  data: Tile1Props
 }
 
-export const Tile1: React.FC<Tile1Props> = ({ card1, card2, card3 }) => {
+export const Tile1: React.FC<ITile1Props> = ({ data }) => {
+  const { card1, card2, card3 } = data
   return (
     <Grid container spacing={4}>
       <Grid item xs={12} md={6} lg={5}>
@@ -23,7 +17,7 @@ export const Tile1: React.FC<Tile1Props> = ({ card1, card2, card3 }) => {
           <div
             className={classes.backgroundImage}
             style={{
-              backgroundImage: `url(${card1.image})`,
+              backgroundImage: `url(${card1.image.url})`,
               backgroundPosition: `bottom ${card1.align}`,
             }}
           ></div>

@@ -1,10 +1,14 @@
-.watchTemplate {
+.watch {
     display: flex;
     width: 100%;
     flex-direction: column;
     gap: 24px;
+}
 
-    .componentContainer {
+.body {
+    flex: 1;
+
+    :global(.watchPadding) {
         padding: 0 25px;
     }
 }
