@@ -11,6 +11,12 @@ export const HomeComponentLazy: React.FC<HomeComponents> = (props) => {
             default: module.Carousel1,
           }))
         )
+      case 'category1':
+        return React.lazy(() =>
+          import('./category/category1').then((module) => ({
+            default: module.Category1,
+          }))
+        )
     }
   }, [props])
 
