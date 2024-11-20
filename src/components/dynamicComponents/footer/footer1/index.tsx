@@ -20,8 +20,8 @@ export const Footer1: React.FC<Footer1Props> = ({
           <div>
             <img src={logo.url} alt={logo.name} className={classes.logo} />
             <div className={classes.socialMedia}>
-              {socialMedia.map(({ url, name, icon }) => (
-                <Link to={url} title={name} key={name}>
+              {socialMedia.map(({ url, title, icon }, index) => (
+                <Link to={url} title={title} key={`${title}_${index}`}>
                   <DynamicIcon
                     size={28}
                     iconName={icon}
@@ -33,9 +33,14 @@ export const Footer1: React.FC<Footer1Props> = ({
           </div>
         </Grid>
         <Grid item xs={12} md={8} xl={6}>
-          <Grid container>
-            {linkMenu.map(({ title, links }) => (
-              <Grid item md={12} lg={4} key={title}>
+          <Grid
+            container
+            sx={{
+              justifyContent: 'flex-end',
+            }}
+          >
+            {linkMenu.map(({ title, links }, index) => (
+              <Grid item md={12} lg={4} key={title + index}>
                 <h3 className={classes.menuTitle}>{title}</h3>
                 <ul className={classes.menuLinks}>
                   {links.map(({ url, title }) => (

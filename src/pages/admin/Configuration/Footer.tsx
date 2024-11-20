@@ -6,6 +6,7 @@ import { useConfigStore } from 'src/store/config.store'
 import { FormBuilder } from 'src/components/form/formBuilder/FormBuilder'
 import PreviewComponent from 'src/components/generic/previewComponent'
 import { footerPageSchema } from 'src/constants/formSchema/footer'
+import { FooterPreview } from 'src/components/admin/adminFooter'
 
 const Footer = () => {
   const [footer] = useTemplateStore((state) => [state.footer])
@@ -13,11 +14,11 @@ const Footer = () => {
   const [theme] = useConfigStore((state) => [state.theme])
 
   const [state, setState] = useState(footer)
-  const { isLoading } = useTemplateService()
+  const { isLoading, updateFooter } = useTemplateService()
 
   const onFormSubmit = async () => {
     if (theme?.name && state) {
-      //   updateHeader(theme.name, state)
+      updateFooter(theme.name, state)
     }
   }
 
@@ -42,7 +43,7 @@ const Footer = () => {
       </Box>
 
       <PreviewComponent>
-        {/* <HeaderPreview headerProps={state} /> */}aaa
+        <FooterPreview footerProps={state} />
       </PreviewComponent>
 
       {state && (

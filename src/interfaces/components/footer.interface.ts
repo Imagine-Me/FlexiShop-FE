@@ -1,17 +1,19 @@
 import { IIcon, IImageModel } from '../image.interface'
 
-interface IIconLinks {
-  name: string
+export interface IIconLinks {
+  title: string
   url: string
   icon: IIcon
 }
 
-interface ILinkMenu {
+export interface ILink {
   title: string
-  links: {
-    title: string
-    url: string
-  }[]
+  url: string
+}
+
+export interface ILinkMenu {
+  title: string
+  links: ILink[]
 }
 
 export interface IFooter {
