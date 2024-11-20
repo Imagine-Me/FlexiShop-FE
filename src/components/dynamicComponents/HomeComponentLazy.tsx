@@ -17,6 +17,12 @@ export const HomeComponentLazy: React.FC<HomeComponents> = (props) => {
             default: module.Category1,
           }))
         )
+      case 'productTile':
+        return React.lazy(() =>
+          import('./tiles/productTile').then((module) => ({
+            default: module.ProductTile,
+          }))
+        )
     }
   }, [props])
 
