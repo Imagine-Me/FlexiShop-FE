@@ -4,6 +4,12 @@ import { IconPicker } from 'src/components/generic/iconPicker'
 import { ImageUploader } from 'src/components/generic/imageUploader/ImageUploader'
 import { IFormSchema } from 'src/interfaces/formSchema.interface'
 import { IIcon, IImageModel } from 'src/interfaces/image.interface'
+import { MultipleMenuLinks } from '../multipleForms/MultipleMenuLinks'
+import {
+  IIconLinks,
+  ILinkMenu,
+} from 'src/interfaces/components/footer.interface'
+import { MultipleIconLinks } from '../multipleForms/MultipleIconLinks'
 
 interface IFormBuilderProps<T> {
   schema: IFormSchema[]
@@ -96,6 +102,31 @@ export function FormBuilder<T = unknown>({
                 </Grid>
               ))}
             </Grid>
+          )
+        }
+        case 'multiple-menu-links': {
+          return (
+            <MultipleMenuLinks
+              value={
+                (formValue as Record<string, unknown>)[
+                  form.name ?? ''
+                ] as ILinkMenu[]
+              }
+              onChange={(value) => onFormChange(value, form.name ?? '')}
+            />
+          )
+        }
+
+        case 'social-media-links': {
+          return (
+            <MultipleIconLinks
+              value={
+                (formValue as Record<string, unknown>)[
+                  form.name ?? ''
+                ] as IIconLinks[]
+              }
+              onChange={(value) => onFormChange(value, form.name ?? '')}
+            />
           )
         }
       }

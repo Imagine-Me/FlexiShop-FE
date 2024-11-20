@@ -15,6 +15,7 @@ import { AdminUrls } from 'src/constants/routes.constant'
 const ThemePage = lazy(() => import('../Configuration/Theme'))
 const GeneralPage = lazy(() => import('../Configuration/General'))
 const HeaderPage = lazy(() => import('../Configuration/Header'))
+const FooterPage = lazy(() => import('../Configuration/Footer'))
 
 const drawerWidth = 240
 export const AdminLanding = () => {
@@ -120,6 +121,7 @@ export const AdminLanding = () => {
             <Route path={AdminUrls.THEME_PAGE} element={<ThemePage />} />
             <Route path={AdminUrls.GENERAL_PAGE} element={<GeneralPage />} />
             <Route path={AdminUrls.HEADER_PAGE} element={<HeaderPage />} />
+            <Route path={AdminUrls.FOOTER_PAGE} element={<FooterPage />} />
             <Route path={AdminUrls.HOME_PAGE} element="Home" />
             <Route
               path="/*"

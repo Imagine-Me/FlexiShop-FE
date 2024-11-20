@@ -85,6 +85,7 @@ interface IconPickerProps {
   label: string
   description?: string
   onChange?: (icon: IIcon) => void
+  className?: string
 }
 
 export const IconPicker: React.FC<IconPickerProps> = ({
@@ -92,6 +93,7 @@ export const IconPicker: React.FC<IconPickerProps> = ({
   label,
   description,
   onChange,
+  className = '',
 }) => {
   const [state, setState] = useState(icon)
   const [open, setOpen] = useState(false)
@@ -114,7 +116,10 @@ export const IconPicker: React.FC<IconPickerProps> = ({
       <FormLabel>{label}</FormLabel>
       <Typography sx={{ mb: 2 }}>{description}</Typography>
 
-      <button onClick={() => setOpen(true)} className={classes.button}>
+      <button
+        onClick={() => setOpen(true)}
+        className={`${classes.button} ${className}`}
+      >
         <div className={classes.container}>Select Icon</div>
         {state ? <DynamicIcon iconName={state} size={34} /> : 'Select Icon'}
       </button>

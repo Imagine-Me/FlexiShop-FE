@@ -10,6 +10,9 @@ export interface IFormSchema {
     | 'image'
     | 'icon'
     | 'flex-2'
+    | 'multiple-links'
+    | 'multiple-menu-links'
+    | 'social-media-links'
   description?: string
   cols?: number
   metadata?: Record<string, unknown>
