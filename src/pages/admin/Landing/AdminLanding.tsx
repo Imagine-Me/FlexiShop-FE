@@ -16,6 +16,7 @@ const ThemePage = lazy(() => import('../Configuration/Theme'))
 const GeneralPage = lazy(() => import('../Configuration/General'))
 const HeaderPage = lazy(() => import('../Configuration/Header'))
 const FooterPage = lazy(() => import('../Configuration/Footer'))
+const HomePage = lazy(() => import('../Pages/Home'))
 
 const drawerWidth = 240
 export const AdminLanding = () => {
@@ -122,7 +123,7 @@ export const AdminLanding = () => {
             <Route path={AdminUrls.GENERAL_PAGE} element={<GeneralPage />} />
             <Route path={AdminUrls.HEADER_PAGE} element={<HeaderPage />} />
             <Route path={AdminUrls.FOOTER_PAGE} element={<FooterPage />} />
-            <Route path={AdminUrls.HOME_PAGE} element="Home" />
+            <Route path={AdminUrls.HOME_PAGE} element={<HomePage />} />
             <Route
               path="/*"
               element={<Navigate to={AdminUrls.DASHBOARD_PAGE} />}

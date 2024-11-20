@@ -1,4 +1,4 @@
-.watchTemplate {
+.watch {
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -7,4 +7,8 @@
     .componentContainer {
         padding: 0 25px;
     }
+}
+
+.body {
+    flex: 1;
 }

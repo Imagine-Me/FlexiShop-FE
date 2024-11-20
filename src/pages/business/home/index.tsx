@@ -1,21 +1,24 @@
 import React from 'react'
-import { Carousel1 } from 'src/components/dynamicComponents/carousel'
-import { Category1 } from 'src/components/dynamicComponents/category'
-import { ProductTile, Tile1, Tile2 } from 'src/components/dynamicComponents/tiles'
 
-import { mockCarousel1 } from 'src/mock/fullSizeBanner'
+import { useTemplateStore } from 'src/store/template.store'
+import { useConfigStore } from 'src/store/config.store'
+import { HomeComponentLazy } from 'src/components/dynamicComponents/HomeComponentLazy'
 
 import classes from './home.module.css'
-import { tile1MockData, tile2MockData } from 'src/mock/tile'
-import { Contact1 } from 'src/components/dynamicComponents/contact'
-import { mockContact } from 'src/mock/contact'
 
 export const Home: React.FC = () => {
+  const [home] = useTemplateStore((state) => [state.home])
+  const [theme] = useConfigStore((state) => [state.theme])
+
   return (
-    <div className={classes.watchTemplate}>
-      <div className={classes.componentContainer}>
-        <Carousel1 images={mockCarousel1} />
-      </div>
+    <div className={`${classes.body} ${classes[theme?.name ?? '']}`}>
+      {home?.map((component, index) => (
+        <div className={classes.componentContainer} key={`component_${index}`}>
+          <HomeComponentLazy {...component} />{' '}
+        </div>
+      ))}
+
+      {/*
       <div className={classes.componentContainer}>
         <Category1 />
       </div>
@@ -30,7 +33,7 @@ export const Home: React.FC = () => {
       </div>
       <div>
         <Contact1 {...mockContact} />
-      </div>
+      </div> */}
     </div>
   )
 }
