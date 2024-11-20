@@ -1,3 +1,5 @@
+import { IIcon } from '../image.interface'
+
 export enum AlignmentEnum {
   LEFT = 'left',
   RIGHT = 'right',
@@ -21,4 +23,10 @@ export enum ColorEnum {
   ERROR = 'error',
   WARNING = 'warning',
   INFO = 'info',
+}
+
+export interface Contacts {
+  icon: IIcon
+  title: string
+  contact: string
 }

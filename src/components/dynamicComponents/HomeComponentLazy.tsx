@@ -35,6 +35,12 @@ export const HomeComponentLazy: React.FC<HomeComponents> = (props) => {
             default: module.Tile2,
           }))
         )
+      case 'contact1':
+        return React.lazy(() =>
+          import('./contact/contact1').then((module) => ({
+            default: module.Contact1,
+          }))
+        )
     }
   }, [props])
 

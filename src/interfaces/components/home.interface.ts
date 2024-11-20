@@ -3,7 +3,7 @@
 import { CommonCardProps } from 'src/components/dynamicComponents/tiles/common/card'
 import { IIcon, IImageModel } from '../image.interface'
 import { ILink } from './footer.interface'
-import { AlignmentEnum } from './common.interface'
+import { AlignmentEnum, Contacts } from './common.interface'
 
 export type Components =
   | 'carousel1'
@@ -11,6 +11,7 @@ export type Components =
   | 'productTile'
   | 'tile1'
   | 'tile2'
+  | 'contact1'
 
 // TODO: remove once product page implemented
 export interface IProductModel {
@@ -65,9 +66,17 @@ export interface Tile2Props {
   card2: CommonCardProps
 }
 
+// Contact 1
+export interface Contact1Props {
+  title1: string
+  title2: string
+  contacts: Contacts[]
+}
+
 export type HomeComponents =
   | Component<Carousel1, 'carousel1'>
   | Component<Category1, 'category1'>
   | Component<ProductTile, 'productTile'>
   | Component<Tile1Props, 'tile1'>
   | Component<Tile2Props, 'tile2'>
+  | Component<Contact1Props, 'contact1'>

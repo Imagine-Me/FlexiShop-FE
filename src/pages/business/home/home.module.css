@@ -3,10 +3,6 @@
     width: 100%;
     flex-direction: column;
     gap: 24px;
-
-    .componentContainer {
-        padding: 0 25px;
-    }
 }
 
 .body {
