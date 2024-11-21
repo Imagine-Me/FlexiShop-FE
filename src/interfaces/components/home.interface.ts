@@ -20,6 +20,7 @@ export interface IProductModel {
   price: number
   rating: number
   description: string
+  link?: ILink
 }
 
 interface Component<T, E extends Components> {
@@ -27,6 +28,7 @@ interface Component<T, E extends Components> {
   data: T
   styles?: React.CSSProperties
   className?: string
+  description: string
 }
 
 // Carousel 1
@@ -38,6 +40,7 @@ export interface Category1 {
   categories: {
     icon: IIcon
     category: string
+    link: ILink
   }[]
   link: ILink
 }

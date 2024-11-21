@@ -64,6 +64,7 @@ export const adminSideMenuConstant: IAdminSideMenuConstant[] = [
       {
         title: 'Home',
         path: AdminUrls.HOME_PAGE,
+        subPath: [AdminUrls.HOME_PAGE_EDIT],
       },
     ],
   },

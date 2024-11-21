@@ -1,9 +1,11 @@
 import { Box, Button, Typography } from '@mui/material'
+import { Outlet } from 'react-router-dom'
+import { HomeContextProvider } from 'src/context/home/home.context'
 
 const HomePage = () => {
   return (
     <>
-      <Box display="flex" flexWrap="wrap" alignItems="center" sx={{ mb: 8 }}>
+      <Box display="flex" flexWrap="wrap" alignItems="center" sx={{ mb: 2 }}>
         <Typography variant="h3" flex={1}>
           Pages - Home
         </Typography>
@@ -20,6 +22,9 @@ const HomePage = () => {
           </Button>
         </div>
       </Box>
+      <HomeContextProvider>
+        <Outlet />
+      </HomeContextProvider>
     </>
   )
 }

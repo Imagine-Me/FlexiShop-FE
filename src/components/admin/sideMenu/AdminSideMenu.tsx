@@ -10,6 +10,7 @@ import { Divider } from '@mui/material'
 import { Link, useLocation } from 'react-router-dom'
 
 import classes from './AdminSideMenu.module.css'
+import { useCallback } from 'react'
 
 export const AdminSideMenu = () => {
   const [open, setOpen] = React.useState<string[]>([])
@@ -23,12 +24,32 @@ export const AdminSideMenu = () => {
     }
   }
 
+  const isPathMatching = useCallback(
+    (path: string, subPaths: string[] = []) => {
+      const createRegexp = (subPath: string) =>
+        new RegExp(
+          '^' +
+            subPath
+              .replace(/:[^/]+/g, '[^/]+') // Replace dynamic segments (e.g., :any) with regex
+              .replace(/\//g, '\\/') + // Escape forward slashes
+            '$'
+        )
+      const allPaths = [path, ...subPaths.map((value) => `${path}/${value}`)]
+      return allPaths.some((path) => createRegexp(path).test(pathname))
+    },
+    [pathname]
+  )
+
   // set initial active menu in open
   React.useEffect(() => {
     for (const menu of adminSideMenuConstant) {
       if (menu.hasSubMenu) {
         for (const menuItem of menu.subMenu!) {
-          if (pathname.replace(/\/$/, '') === `/admin/${menuItem.path}`) {
+          const condition = isPathMatching(
+            `/admin/${menuItem.path}`,
+            menuItem.subPath
+          )
+          if (condition) {
             setOpen([menu.title])
             break
           }
@@ -44,7 +65,7 @@ export const AdminSideMenu = () => {
       aria-labelledby="nested-list-subheader"
     >
       {adminSideMenuConstant.map((item) => {
-        const activeClass = pathname.includes(`/admin/${item.path}`)
+        const activeClass = isPathMatching(`/admin/${item.path}`)
           ? classes.active
           : ''
         return (
@@ -70,10 +91,11 @@ export const AdminSideMenu = () => {
             </Link>
             {item.hasSubMenu &&
               item.subMenu!.map((subMenu) => {
-                const activeClass =
-                  pathname.replace(/\/$/, '') === `/admin/${subMenu.path}`
-                    ? classes.active
-                    : ''
+                const condition = isPathMatching(
+                  `/admin/${subMenu.path}`,
+                  subMenu.subPath
+                )
+                const activeClass = condition ? classes.active : ''
                 return (
                   <Collapse
                     in={open.includes(item.title)}

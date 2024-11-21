@@ -10,13 +10,14 @@ import { CircularProgress, useMediaQuery, useTheme } from '@mui/material'
 import { AdminSideMenu } from 'src/components/admin/sideMenu/AdminSideMenu'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { AdminUrls } from 'src/constants/routes.constant'
+import { ComponentPage } from '../Pages/home/component'
 
 // lazy imports
 const ThemePage = lazy(() => import('../Configuration/Theme'))
 const GeneralPage = lazy(() => import('../Configuration/General'))
 const HeaderPage = lazy(() => import('../Configuration/Header'))
 const FooterPage = lazy(() => import('../Configuration/Footer'))
-const HomePage = lazy(() => import('../Pages/Home'))
+const HomePage = lazy(() => import('../Pages/home'))
 
 const drawerWidth = 240
 export const AdminLanding = () => {
@@ -123,7 +124,10 @@ export const AdminLanding = () => {
             <Route path={AdminUrls.GENERAL_PAGE} element={<GeneralPage />} />
             <Route path={AdminUrls.HEADER_PAGE} element={<HeaderPage />} />
             <Route path={AdminUrls.FOOTER_PAGE} element={<FooterPage />} />
-            <Route path={AdminUrls.HOME_PAGE} element={<HomePage />} />
+            <Route path={AdminUrls.HOME_PAGE} element={<HomePage />}>
+              <Route path={AdminUrls.HOME_PAGE_EDIT} element="Edit Component" />
+              <Route path="" element={<ComponentPage />} />
+            </Route>
             <Route
               path="/*"
               element={<Navigate to={AdminUrls.DASHBOARD_PAGE} />}

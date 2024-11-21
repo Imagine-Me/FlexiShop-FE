@@ -10,4 +10,5 @@ export enum AdminUrls {
   FOOTER_PAGE = 'configuration/footer',
   PAGE_URL = 'pages',
   HOME_PAGE = 'pages/home-page',
+  HOME_PAGE_EDIT = 'edit/:id',
 }

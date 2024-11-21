@@ -6,5 +6,6 @@ export interface IAdminSideMenuConstant {
   subMenu?: {
     title: string
     path: string
+    subPath?: string[]
   }[]
 }
