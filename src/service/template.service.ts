@@ -2,6 +2,7 @@ import { TemplateUrls } from 'src/constants/urls.constant'
 import { useAxios } from 'src/hooks/axios.hook'
 import { IFooter } from 'src/interfaces/components/footer.interface'
 import { IHeader } from 'src/interfaces/components/header.interface'
+import { HomeComponents } from 'src/interfaces/components/home.interface'
 import { ITemplateModel } from 'src/interfaces/template.interface'
 import { useTemplateStore } from 'src/store/template.store'
 
@@ -15,6 +16,16 @@ const useTemplateService = () => {
     )
     if (response) {
       useTemplateStore.getState().setTemplate(response)
+    }
+  }
+
+  const getAllComponents = async () => {
+    const response = await fetchData<HomeComponents[]>(
+      'get',
+      TemplateUrls.GET_ALL
+    )
+    if (response) {
+      return response
     }
   }
 
@@ -34,6 +45,17 @@ const useTemplateService = () => {
       'post',
       `${TemplateUrls.UPDATE_FOOTER}/${name}`,
       { ...data }
+    )
+    if (response) {
+      useTemplateStore.getState().setTemplate(response)
+    }
+  }
+
+  const updateHomeComponents = async (name: string, data: HomeComponents[]) => {
+    const response = await fetchData<ITemplateModel>(
+      'post',
+      `${TemplateUrls.UPDATE_HOME}/${name}`,
+      { data }
     )
     if (response) {
       useTemplateStore.getState().setTemplate(response)
@@ -61,7 +83,15 @@ const useTemplateService = () => {
   //     }
   //   }
 
-  return { getTemplate, updateHeader, updateFooter, isLoading, error }
+  return {
+    getTemplate,
+    updateHeader,
+    updateFooter,
+    getAllComponents,
+    updateHomeComponents,
+    isLoading,
+    error,
+  }
 }
 
 export default useTemplateService

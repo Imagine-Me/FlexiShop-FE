@@ -30,3 +30,6 @@ export interface Contacts {
   title: string
   contact: string
 }
+
+
+export type AnyFunction = (...args: any[]) => any;

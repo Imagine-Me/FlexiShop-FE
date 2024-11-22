@@ -3,23 +3,41 @@ import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
-
-import classes from './component.module.css'
 import ReactDragList from 'react-drag-list'
 import { HomeComponents } from 'src/interfaces/components/home.interface'
 import { convertCamelCaseToReadableString } from 'src/utils/string.utils'
 import { useHomeContext } from 'src/context/home/home.hook'
-// import { useState } from 'react'
+
+import classes from './component.module.css'
+import { useAlertDialogContext } from 'src/context/alertDialog/alertDialog.hook'
 
 interface DraggableCardProps {
   prop: HomeComponents
+  index: number
   isDraggable?: boolean
+  actions?: {
+    onAdd?: (component: HomeComponents) => void
+    onEdit?: (component: HomeComponents) => void
+    onDelete?: (index: number) => void
+  }
 }
 
 const ListCard: React.FC<DraggableCardProps> = ({
   prop,
+  index,
   isDraggable = true,
+  actions,
 }) => {
+  const { showDialog } = useAlertDialogContext()
+
+  const deleteComponent = (action?: any) => () => {
+    showDialog(
+      'Remove Component?',
+      'Are you sure you want to remove this component from the home page? This action cannot be undone.',
+      action
+    )
+  }
+
   return (
     <Card className={classes.draggableCard}>
       {isDraggable && <DragIndicatorIcon color="action" />}
@@ -35,12 +53,20 @@ const ListCard: React.FC<DraggableCardProps> = ({
             <IconButton color="info" title="Edit component">
               <EditIcon />
             </IconButton>
-            <IconButton color="error" title="Remove component">
+            <IconButton
+              color="error"
+              title="Remove component"
+              onClick={deleteComponent(() => actions?.onDelete?.(index))}
+            >
               <DeleteIcon />
             </IconButton>
           </>
         ) : (
-          <IconButton color="primary" title="Add component">
+          <IconButton
+            color="primary"
+            title="Add component"
+            onClick={() => actions?.onAdd?.(prop)}
+          >
             <AddCircleIcon />
           </IconButton>
         )}
@@ -50,14 +76,17 @@ const ListCard: React.FC<DraggableCardProps> = ({
 }
 
 export const ComponentPage = () => {
-  const { components } = useHomeContext()
+  const {
+    components,
+    allComponents,
+    setComponents,
+    addComponent,
+    deleteComponent,
+  } = useHomeContext()
 
-  // const [allComponent,setAllComponents] = useState<HomeComponents[]>([])
-
-  // const onListChange = (newList: ReadonlyArray<PlanetListItem>) => {
-  //   console.log(newList)
-  //   // this.setState({ list: newList });
-  // }
+  const onListChange = (_: any, newList: unknown) => {
+    setComponents(newList as HomeComponents[])
+  }
 
   return (
     <>
@@ -136,15 +165,32 @@ export const ComponentPage = () => {
         <Grid item xs={12} md={6}>
           <div className={classes.listContainer}>
             <ReactDragList
-              rowKey="name"
+              rowKey="id"
               dataSource={components}
               handles={false}
-              row={(record) => <ListCard prop={record as HomeComponents} />}
+              row={(record, index) => (
+                <ListCard
+                  index={index}
+                  prop={record as HomeComponents}
+                  actions={{ onDelete: deleteComponent }}
+                />
+              )}
+              onUpdate={onListChange}
             />
           </div>
         </Grid>
         <Grid item xs={12} md={6}>
-          2
+          <div className={classes.listContainer}>
+            {allComponents.map((component, index) => (
+              <ListCard
+                index={index}
+                key={component.name}
+                prop={component}
+                isDraggable={false}
+                actions={{ onAdd: addComponent }}
+              />
+            ))}
+          </div>
         </Grid>
       </Grid>
     </>

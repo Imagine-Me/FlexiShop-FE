@@ -1,14 +1,35 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, {
+  createContext,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
+import { useMatch } from 'react-router-dom'
+import { AdminUrls } from 'src/constants/routes.constant'
 import { HomeComponents } from 'src/interfaces/components/home.interface'
-// import { useConfigStore } from 'src/store/config.store'
+import useTemplateService from 'src/service/template.service'
+import { useConfigStore } from 'src/store/config.store'
 import { useTemplateStore } from 'src/store/template.store'
 
 export interface HomeContextState {
   components: HomeComponents[]
+  allComponents: HomeComponents[]
+  isLoading: boolean
+  setComponents: React.Dispatch<React.SetStateAction<HomeComponents[]>>
+  saveComponent: () => void
+  addComponent: (component: HomeComponents) => void
+  deleteComponent: (index: number) => void
 }
 
 export const HomeContext = createContext<HomeContextState>({
   components: [],
+  allComponents: [],
+  isLoading: false,
+  setComponents: () => {},
+  saveComponent: () => {},
+  addComponent: () => {},
+  deleteComponent: () => {},
 })
 
 interface HomeContextProviderProps {
@@ -18,10 +39,31 @@ interface HomeContextProviderProps {
 export const HomeContextProvider: React.FC<HomeContextProviderProps> = ({
   children,
 }) => {
-  // const [theme] = useConfigStore((state) => [state.theme])
+  const isHomePage = useMatch(`/admin/${AdminUrls.HOME_PAGE}`)
+  const isEditPage = useMatch(
+    `/admin/${AdminUrls.HOME_PAGE}/${AdminUrls.HOME_PAGE_EDIT}`
+  )
+
+  const [theme] = useConfigStore((state) => [state.theme])
   const [home] = useTemplateStore((state) => [state.home])
 
   const [components, setComponents] = useState<HomeComponents[]>([])
+  const [allComponents, setAllComponents] = useState<HomeComponents[]>([])
+
+  const { getAllComponents, isLoading, updateHomeComponents } =
+    useTemplateService()
+
+  const addComponent = (component: HomeComponents) => {
+    setComponents([...components, component])
+  }
+
+  const deleteComponent = (index: number) => {
+    setComponents(components.filter((_, i) => index !== i))
+  }
+
+  const indexedComponents = useMemo(() => {
+    return components.map((component, index) => ({ ...component, id: index }))
+  }, [components])
 
   useEffect(() => {
     if (home) {
@@ -29,10 +71,39 @@ export const HomeContextProvider: React.FC<HomeContextProviderProps> = ({
     }
   }, [home])
 
+  useEffect(() => {
+    getAllComponents()
+      .then((data) => {
+        data && setAllComponents(data)
+      })
+      .catch(console.log)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const saveComponent = useCallback(() => {
+    if (theme?.name) updateHomeComponents(theme.name, components)
+    // if (isHomePage && theme?.name) {
+    //   // Update all components
+    //   return
+    // }
+
+    // if (isEditPage) {
+    //   // update cer
+    //   return
+    // }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [components, isHomePage, isEditPage, theme])
+
   return (
     <HomeContext.Provider
       value={{
-        components,
+        components: indexedComponents,
+        isLoading,
+        allComponents,
+        setComponents,
+        saveComponent,
+        addComponent,
+        deleteComponent,
       }}
     >
       {children}
