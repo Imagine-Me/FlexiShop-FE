@@ -38,6 +38,7 @@
     "react-router-dom": "^6.25.1",
     "react-slick": "^0.30.2",
     "tss-react": "^4.9.12",
+    "uuid": "^11.0.3",
     "zustand": "^4.5.4"
   },
   "devDependencies": {

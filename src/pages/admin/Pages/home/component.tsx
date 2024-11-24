@@ -1,4 +1,12 @@
-import { Alert, Card, Grid, IconButton, Typography } from '@mui/material'
+import {
+  Alert,
+  Button,
+  Card,
+  CircularProgress,
+  Grid,
+  IconButton,
+  Typography,
+} from '@mui/material'
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -11,6 +19,7 @@ import { useHomeContext } from 'src/context/home/home.hook'
 import classes from './component.module.css'
 import { useAlertDialogContext } from 'src/context/alertDialog/alertDialog.hook'
 import { Link } from 'react-router-dom'
+import { PageWrapper } from '../../Landing/PageWrapper'
 
 interface DraggableCardProps {
   prop: HomeComponents
@@ -85,6 +94,8 @@ export const ComponentPage = () => {
     setComponents,
     addComponent,
     deleteComponent,
+    saveComponent,
+    isLoading,
   } = useHomeContext()
 
   const onListChange = (_: any, newList: unknown) => {
@@ -92,13 +103,29 @@ export const ComponentPage = () => {
   }
 
   return (
-    <>
+    <PageWrapper
+      breadcrumbs={[{ title: 'Pages' }, { title: 'Home' }]}
+      footer={{
+        right: (
+          <Button
+            variant="contained"
+            disabled={isLoading}
+            onClick={saveComponent}
+          >
+            {isLoading && (
+              <CircularProgress sx={{ mr: 1, color: 'white' }} size={12} />
+            )}
+            Update
+          </Button>
+        ),
+      }}
+    >
       <Typography>
         This page allows you to configure the <b>Home Page</b> of your app
       </Typography>
 
       <Alert severity="warning" sx={{ my: 1 }}>
-        After making your updates, click the "Update" button at the top-right
+        After making your updates, click the "Update" button at the bottom-right
         corner to apply the changes to the app.
       </Alert>
 
@@ -196,6 +223,6 @@ export const ComponentPage = () => {
           </div>
         </Grid>
       </Grid>
-    </>
+    </PageWrapper>
   )
 }

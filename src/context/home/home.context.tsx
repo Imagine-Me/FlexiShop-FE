@@ -11,6 +11,7 @@ import { HomeComponents } from 'src/interfaces/components/home.interface'
 import useTemplateService from 'src/service/template.service'
 import { useConfigStore } from 'src/store/config.store'
 import { useTemplateStore } from 'src/store/template.store'
+import { v4 as uuidv4 } from 'uuid'
 
 export interface HomeContextState {
   components: HomeComponents[]
@@ -62,7 +63,10 @@ export const HomeContextProvider: React.FC<HomeContextProviderProps> = ({
   }
 
   const indexedComponents = useMemo(() => {
-    return components.map((component, index) => ({ ...component, id: index }))
+    return components.map((component) => ({
+      ...component,
+      id: component.id ?? uuidv4(),
+    }))
   }, [components])
 
   useEffect(() => {

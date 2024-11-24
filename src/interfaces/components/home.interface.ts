@@ -28,7 +28,7 @@ interface Component<T, E extends Components> {
   data: T
   styles?: React.CSSProperties
   className?: string
-  id?: number // for indexing in FE
+  id?: string // for indexing in FE
   description: string
 }
 
