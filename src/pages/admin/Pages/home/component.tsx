@@ -10,6 +10,7 @@ import { useHomeContext } from 'src/context/home/home.hook'
 
 import classes from './component.module.css'
 import { useAlertDialogContext } from 'src/context/alertDialog/alertDialog.hook'
+import { Link } from 'react-router-dom'
 
 interface DraggableCardProps {
   prop: HomeComponents
@@ -17,7 +18,7 @@ interface DraggableCardProps {
   isDraggable?: boolean
   actions?: {
     onAdd?: (component: HomeComponents) => void
-    onEdit?: (component: HomeComponents) => void
+    // onEdit?: (component: HomeComponents) => void
     onDelete?: (index: number) => void
   }
 }
@@ -50,9 +51,11 @@ const ListCard: React.FC<DraggableCardProps> = ({
       <div className={classes.action}>
         {isDraggable ? (
           <>
-            <IconButton color="info" title="Edit component">
-              <EditIcon />
-            </IconButton>
+            <Link to={`edit/${index}`}>
+              <IconButton color="info" title="Edit component">
+                <EditIcon />
+              </IconButton>
+            </Link>
             <IconButton
               color="error"
               title="Remove component"

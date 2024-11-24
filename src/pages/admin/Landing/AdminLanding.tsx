@@ -99,7 +99,6 @@ export const AdminLanding = () => {
         component="main"
         sx={{
           flexGrow: 1,
-          p: 2,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           height: '100%',
           overflowY: 'auto',
@@ -119,7 +118,7 @@ export const AdminLanding = () => {
           }
         >
           <Routes>
-            <Route path={AdminUrls.DASHBOARD_PAGE} element="Dashboard" />
+            <Route path={AdminUrls.DASHBOARD_PAGE} element={'Dashboard'} />
             <Route path={AdminUrls.THEME_PAGE} element={<ThemePage />} />
             <Route path={AdminUrls.GENERAL_PAGE} element={<GeneralPage />} />
             <Route path={AdminUrls.HEADER_PAGE} element={<HeaderPage />} />

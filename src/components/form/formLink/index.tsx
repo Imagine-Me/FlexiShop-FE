@@ -25,7 +25,6 @@ export const FormLink: React.FC<IFormLinkProps> = ({ link, onChange }) => {
       if (actualUrl) {
         updatedValue = actualUrl
       }
-      console.log(value)
     }
     updatedState[key] = value
     setState(updatedState)

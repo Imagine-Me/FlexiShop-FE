@@ -1,4 +1,4 @@
-import { Box, Button, CircularProgress, Typography } from '@mui/material'
+import { Button, CircularProgress } from '@mui/material'
 import { useState } from 'react'
 import { FormBuilder } from 'src/components/form/formBuilder/FormBuilder'
 import { generalPageSchema } from 'src/constants/formSchema/general'
@@ -9,6 +9,7 @@ import {
 } from 'src/interfaces/config.interface'
 import useConfigService from 'src/service/config.service'
 import { useConfigStore } from 'src/store/config.store'
+import { PageWrapper } from '../Landing/PageWrapper'
 
 const GeneralPage = () => {
   const { general, setGeneral } = useConfigStore()
@@ -27,12 +28,10 @@ const GeneralPage = () => {
     }
   }
   return (
-    <>
-      <Box display="flex" flexWrap="wrap" alignItems="center" sx={{ mb: 8 }}>
-        <Typography variant="h3" flex={1}>
-          Configurations - General
-        </Typography>
-        <div>
+    <PageWrapper
+      breadcrumbs={[{ title: 'Configurations' }, { title: 'General' }]}
+      footer={{
+        right: (
           <Button
             variant="contained"
             disabled={isLoading}
@@ -43,8 +42,9 @@ const GeneralPage = () => {
             )}
             Update
           </Button>
-        </div>
-      </Box>
+        ),
+      }}
+    >
       {state && (
         <FormBuilder
           schema={generalPageSchema}
@@ -52,7 +52,7 @@ const GeneralPage = () => {
           onChange={onChange}
         />
       )}
-    </>
+    </PageWrapper>
   )
 }
 export default GeneralPage
