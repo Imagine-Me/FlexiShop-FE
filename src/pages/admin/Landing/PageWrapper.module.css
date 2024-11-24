@@ -9,6 +9,10 @@
         &.isBreadCrumb {
             padding-top: 45px;
         }
+
+        &.isFooter {
+            padding-bottom: 65px;
+        }
     }
 
     .breadCrumbNav {

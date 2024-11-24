@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Box, Button, CircularProgress, Typography } from '@mui/material'
+import { Button, CircularProgress } from '@mui/material'
 import useTemplateService from 'src/service/template.service'
 import { useTemplateStore } from 'src/store/template.store'
 import { useConfigStore } from 'src/store/config.store'
@@ -7,6 +7,7 @@ import { FormBuilder } from 'src/components/form/formBuilder/FormBuilder'
 import PreviewComponent from 'src/components/generic/previewComponent'
 import { footerPageSchema } from 'src/constants/formSchema/footer'
 import { FooterPreview } from 'src/components/admin/adminFooter'
+import { PageWrapper } from '../Landing/PageWrapper'
 
 const Footer = () => {
   const [footer] = useTemplateStore((state) => [state.footer])
@@ -23,12 +24,9 @@ const Footer = () => {
   }
 
   return (
-    <>
-      <Box display="flex" flexWrap="wrap" alignItems="center" sx={{ mb: 8 }}>
-        <Typography variant="h3" flex={1}>
-          Configurations - General
-        </Typography>
-        <div>
+    <PageWrapper
+      footer={{
+        right: (
           <Button
             variant="contained"
             disabled={isLoading}
@@ -39,9 +37,10 @@ const Footer = () => {
             )}
             Update
           </Button>
-        </div>
-      </Box>
-
+        ),
+      }}
+      breadcrumbs={[{ title: 'Configurations' }, { title: 'Footer' }]}
+    >
       <PreviewComponent>
         <FooterPreview footerProps={state} />
       </PreviewComponent>
@@ -53,7 +52,7 @@ const Footer = () => {
           onChange={setState}
         />
       )}
-    </>
+    </PageWrapper>
   )
 }
 
