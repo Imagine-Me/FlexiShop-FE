@@ -23,18 +23,15 @@ import { PageWrapper } from '../../Landing/PageWrapper'
 
 interface DraggableCardProps {
   prop: HomeComponents
-  index: number
   isDraggable?: boolean
   actions?: {
     onAdd?: (component: HomeComponents) => void
-    // onEdit?: (component: HomeComponents) => void
-    onDelete?: (index: number) => void
+    onDelete?: (id: string) => void
   }
 }
 
 const ListCard: React.FC<DraggableCardProps> = ({
   prop,
-  index,
   isDraggable = true,
   actions,
 }) => {
@@ -60,7 +57,7 @@ const ListCard: React.FC<DraggableCardProps> = ({
       <div className={classes.action}>
         {isDraggable ? (
           <>
-            <Link to={`edit/${index}`}>
+            <Link to={`edit/${prop.id}`}>
               <IconButton color="info" title="Edit component">
                 <EditIcon />
               </IconButton>
@@ -68,7 +65,7 @@ const ListCard: React.FC<DraggableCardProps> = ({
             <IconButton
               color="error"
               title="Remove component"
-              onClick={deleteComponent(() => actions?.onDelete?.(index))}
+              onClick={deleteComponent(() => actions?.onDelete?.(prop.id!))}
             >
               <DeleteIcon />
             </IconButton>
@@ -198,9 +195,8 @@ export const ComponentPage = () => {
               rowKey="id"
               dataSource={components}
               handles={false}
-              row={(record, index) => (
+              row={(record) => (
                 <ListCard
-                  index={index}
                   prop={record as HomeComponents}
                   actions={{ onDelete: deleteComponent }}
                 />
@@ -211,10 +207,9 @@ export const ComponentPage = () => {
         </Grid>
         <Grid item xs={12} md={6}>
           <div className={classes.listContainer}>
-            {allComponents.map((component, index) => (
+            {allComponents.map((component) => (
               <ListCard
-                index={index}
-                key={component.name}
+                key={component.id}
                 prop={component}
                 isDraggable={false}
                 actions={{ onAdd: addComponent }}

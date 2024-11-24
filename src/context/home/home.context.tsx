@@ -20,7 +20,7 @@ export interface HomeContextState {
   setComponents: React.Dispatch<React.SetStateAction<HomeComponents[]>>
   saveComponent: () => void
   addComponent: (component: HomeComponents) => void
-  deleteComponent: (index: number) => void
+  deleteComponent: (id: string) => void
 }
 
 export const HomeContext = createContext<HomeContextState>({
@@ -58,8 +58,8 @@ export const HomeContextProvider: React.FC<HomeContextProviderProps> = ({
     setComponents([...components, component])
   }
 
-  const deleteComponent = (index: number) => {
-    setComponents(components.filter((_, i) => index !== i))
+  const deleteComponent = (id: string) => {
+    setComponents(components.filter((component) => id !== component.id))
   }
 
   const indexedComponents = useMemo(() => {
