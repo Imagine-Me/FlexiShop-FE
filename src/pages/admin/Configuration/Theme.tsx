@@ -12,35 +12,33 @@ import { convertCamelCaseToReadableString } from 'src/utils/string.utils'
 import { ColorPickerTrigger } from 'src/components/generic/colorPicker/ColorPicker'
 import { IThemePalette } from 'src/interfaces/config.interface'
 import { NumberField } from 'src/components/generic/numberField/NumberField'
-import useConfigService from 'src/service/config.service'
 import { useTemplateStore } from 'src/store/template.store'
+import { PageWrapper } from '../Landing/PageWrapper'
+import useTemplateService from 'src/service/template.service'
+import { useConfigStore } from 'src/store/config.store'
 
 const ThemePage = () => {
   const { theme } = useTemplateStore()
   const [state, setState] = useState<ThemeOptions | undefined | null>()
 
-  const { isLoading } = useConfigService()
+  const { isLoading, updateTheme } = useTemplateService()
+
+  const { theme: themeName } = useConfigStore()
 
   const changeTheme = (key1: string, key2: string, color: string) => {
     if (state) {
       const clonedState = structuredClone(state) as any
-      if (typeof clonedState[key1 as keyof IThemePalette] === 'object') {
-        clonedState[key1][key2] = color
+      if (typeof clonedState.palette[key1 as keyof ThemeOptions] === 'object') {
+        clonedState.palette[key1][key2] = color
         setState(clonedState)
       }
     }
   }
 
   const onThemeUpdate = async () => {
-    return null
-    // if (state) {
-    //   const response = await updateConfig<
-    //     ICustomThemeModel<AppConfigUrls.LIGHT_THEME>
-    //   >(AppConfigUrls.LIGHT_THEME, state)
-    //   if (response) {
-    //     setTheme(response.data)
-    //   }
-    // }
+    if (state && themeName?.name) {
+      await updateTheme(themeName.name, state)
+    }
   }
 
   useEffect(() => {
@@ -135,28 +133,26 @@ const ThemePage = () => {
   )
 
   return (
-    <>
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        width="100%"
-      >
-        <Typography variant="h3">Theme</Typography>
-        <Button
-          variant="contained"
-          onClick={onThemeUpdate}
-          disabled={isLoading}
-        >
-          {isLoading && <CircularProgress size={12} />}
-          Update
-        </Button>
-      </Box>
+    <PageWrapper
+      breadcrumbs={[{ title: 'Configurations' }, { title: 'Theme' }]}
+      footer={{
+        right: (
+          <Button
+            variant="contained"
+            onClick={onThemeUpdate}
+            disabled={isLoading}
+          >
+            {isLoading && <CircularProgress size={12} />}
+            Update
+          </Button>
+        ),
+      }}
+    >
       <Grid container spacing={2}>
         {!state ? <CircularProgress /> : getThemeElements(state.palette)}
         {!state ? <CircularProgress /> : null}
       </Grid>
-    </>
+    </PageWrapper>
   )
 }
 

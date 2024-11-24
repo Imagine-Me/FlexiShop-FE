@@ -1,3 +1,3 @@
-export enum BusinessURL {
-    APP_CONFIG_URL = '/appconfig'
+export enum AdminURL {
+  APP_CONFIG_URL = '/appconfig',
 }

@@ -22,4 +22,5 @@ export enum TemplateUrls {
   UPDATE_HEADER = '/templates/header',
   UPDATE_FOOTER = '/templates/footer',
   UPDATE_HOME = '/templates/home',
+  UPDATE_THEME = '/templates/theme',
 }

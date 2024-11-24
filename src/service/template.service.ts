@@ -1,3 +1,4 @@
+import { ThemeOptions } from '@mui/material'
 import { TemplateUrls } from 'src/constants/urls.constant'
 import { useAxios } from 'src/hooks/axios.hook'
 import { IFooter } from 'src/interfaces/components/footer.interface'
@@ -51,6 +52,17 @@ const useTemplateService = () => {
     }
   }
 
+  const updateTheme = async (name: string, data: ThemeOptions) => {
+    const response = await fetchData<ITemplateModel>(
+      'post',
+      `${TemplateUrls.UPDATE_THEME}/${name}`,
+      { ...data }
+    )
+    if (response) {
+      useTemplateStore.getState().setTemplate(response)
+    }
+  }
+
   const updateHomeComponents = async (name: string, data: HomeComponents[]) => {
     const response = await fetchData<ITemplateModel>(
       'post',
@@ -89,6 +101,7 @@ const useTemplateService = () => {
     updateFooter,
     getAllComponents,
     updateHomeComponents,
+    updateTheme,
     isLoading,
     error,
   }
