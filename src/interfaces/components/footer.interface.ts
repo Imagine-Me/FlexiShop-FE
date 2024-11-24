@@ -1,8 +1,7 @@
 import { IIcon, IImageModel } from '../image.interface'
 
 export interface IIconLinks {
-  title: string
-  url: string
+  link: ILink
   icon: IIcon
 }
 

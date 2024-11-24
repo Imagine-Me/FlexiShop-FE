@@ -27,7 +27,7 @@ export const MultipleIconLinks: React.FC<MultipleIconLinksProps> = ({
         onChange={onChange}
       >
         {(state, onChange) => {
-          const { icon, ...linkProps } = state
+          const { icon, link } = state
           return (
             <>
               <IconPicker
@@ -37,8 +37,8 @@ export const MultipleIconLinks: React.FC<MultipleIconLinksProps> = ({
                 className={classes.marginBottom}
               />
               <FormLink
-                link={linkProps}
-                onChange={(key, value) => onChange(key, value)}
+                link={link}
+                onChange={(value) => onChange('link', value)}
               />
             </>
           )

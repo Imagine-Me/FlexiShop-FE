@@ -26,6 +26,16 @@
     }
 
     .breadcrumbList {
+        a {
+            text-decoration: none;
+            color: var(--mui-action-active);
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: var(--mui-primary-color);
+        }
+
         :global(.MuiBreadcrumbs-li:last-child) {
             >p {
                 color: var(--mui-primary-color);

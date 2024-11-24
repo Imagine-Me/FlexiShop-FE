@@ -33,7 +33,9 @@ interface Component<T, E extends Components> {
 }
 
 // Carousel 1
-export type Carousel1 = Array<IImageModel>
+export interface Carousel1 {
+  images: Array<IImageModel>
+}
 
 // Category 1
 export interface Category1 {

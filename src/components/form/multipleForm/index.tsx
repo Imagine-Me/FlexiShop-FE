@@ -20,7 +20,7 @@ import { capitalizeFirstLetter } from 'src/utils/string.utils'
 interface MultipleFormProps<T> {
   children: (
     value: T,
-    onFormChange: (key: keyof T, value: any) => void
+    onFormChange: (key: keyof T | '__default__', value: any) => void
   ) => React.ReactNode
   value: T[]
   label: string
@@ -39,18 +39,23 @@ export const MultipleForm = <T,>({
 }: MultipleFormProps<T>) => {
   const [state, setState] = useState(structuredClone(value))
 
-  const onFormChange = (index: number) => (key: keyof T, value: any) => {
-    const updatedState = state.map((state, i) => {
-      if (index === i) {
-        const updatedState = { ...state }
-        updatedState[key] = value
-        return updatedState
-      }
-      return state
-    })
+  const onFormChange =
+    (index: number) => (key: keyof T | '__default__', value: any) => {
+      const updatedState = state.map((state, i) => {
+        if (index === i) {
+          if (key === '__default__') {
+            return value
+          } else {
+            const updatedState = { ...state }
+            updatedState[key] = value
+            return updatedState
+          }
+        }
+        return state
+      })
 
-    setState(updatedState)
-  }
+      setState(updatedState)
+    }
 
   const addNewRow = () => {
     const updatedState = [

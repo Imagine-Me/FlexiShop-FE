@@ -7,9 +7,14 @@ import { IIcon, IImageModel } from 'src/interfaces/image.interface'
 import { MultipleMenuLinks } from '../multipleForms/MultipleMenuLinks'
 import {
   IIconLinks,
+  ILink,
   ILinkMenu,
 } from 'src/interfaces/components/footer.interface'
 import { MultipleIconLinks } from '../multipleForms/MultipleIconLinks'
+import { MultipleForm } from '../multipleForm'
+import { FormLink } from '../formLink'
+import { MultipleCategory1 } from '../multipleForms/MultipleCategory1'
+import { Category1 } from 'src/interfaces/components/home.interface'
 
 interface IFormBuilderProps<T> {
   schema: IFormSchema[]
@@ -17,7 +22,7 @@ interface IFormBuilderProps<T> {
   onChange?: (value: T) => void
 }
 
-export function FormBuilder<T = unknown>({
+export function FormBuilder<T>({
   schema,
   value,
   onChange,
@@ -104,6 +109,23 @@ export function FormBuilder<T = unknown>({
             </Grid>
           )
         }
+
+        case 'link':
+          return (
+            <>
+              <Typography sx={{ mb: 2 }}>{form.label}</Typography>
+              {form.description && <Typography>{form.description}</Typography>}
+              <FormLink
+                link={
+                  (formValue as Record<string, unknown>)[
+                    form.name ?? ''
+                  ] as ILink
+                }
+                onChange={(link: ILink) => onFormChange(link, form.name ?? '')}
+              />
+            </>
+          )
+
         case 'multiple-menu-links': {
           return (
             <MultipleMenuLinks
@@ -129,6 +151,37 @@ export function FormBuilder<T = unknown>({
             />
           )
         }
+
+        case 'multiple': {
+          return (
+            form.metadata && (
+              <MultipleForm
+                value={
+                  (formValue as Record<string, unknown>)[
+                    form.name ?? ''
+                  ] as IImageModel[]
+                }
+                label={form.label}
+                titleKey="name"
+                defaultData={[]}
+              >
+                {form.metadata.component!}
+              </MultipleForm>
+            )
+          )
+        }
+
+        case 'multiple-category1-form':
+          return (
+            <MultipleCategory1
+              value={
+                (formValue as Record<string, unknown>)[
+                  form.name ?? ''
+                ] as Category1['categories']
+              }
+              onChange={(value) => onFormChange(value, form.name ?? '')}
+            />
+          )
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -9,9 +9,9 @@ const appLinks = Object.entries(BusinessUrls).map(([label, value]) => ({
   value,
 }))
 
-interface IFormLinkProps {
+type IFormLinkProps = {
   link: ILink
-  onChange?: (key: keyof ILink, value: any) => void
+  onChange?: (value: ILink) => void
 }
 
 export const FormLink: React.FC<IFormLinkProps> = ({ link, onChange }) => {
@@ -19,16 +19,9 @@ export const FormLink: React.FC<IFormLinkProps> = ({ link, onChange }) => {
 
   const onLinkChanged = (key: keyof ILink, value: string) => {
     const updatedState = { ...state }
-    let updatedValue = value
-    if (key === 'url') {
-      const actualUrl = appLinks.find((link) => link.label === value)?.value
-      if (actualUrl) {
-        updatedValue = actualUrl
-      }
-    }
     updatedState[key] = value
     setState(updatedState)
-    onChange && onChange(key, updatedValue)
+    onChange && onChange(updatedState)
   }
 
   return (

@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
+import React, { createContext, useCallback, useEffect, useState } from 'react'
 import { useMatch } from 'react-router-dom'
 import { AdminUrls } from 'src/constants/routes.constant'
 import { HomeComponents } from 'src/interfaces/components/home.interface'
@@ -21,6 +15,7 @@ export interface HomeContextState {
   saveComponent: () => void
   addComponent: (component: HomeComponents) => void
   deleteComponent: (id: string) => void
+  getComponent: (id: string) => HomeComponents | undefined
 }
 
 export const HomeContext = createContext<HomeContextState>({
@@ -31,6 +26,7 @@ export const HomeContext = createContext<HomeContextState>({
   saveComponent: () => {},
   addComponent: () => {},
   deleteComponent: () => {},
+  getComponent: () => undefined,
 })
 
 interface HomeContextProviderProps {
@@ -55,23 +51,24 @@ export const HomeContextProvider: React.FC<HomeContextProviderProps> = ({
     useTemplateService()
 
   const addComponent = (component: HomeComponents) => {
-    setComponents([...components, component])
+    setComponents([...components, { ...component, id: uuidv4() }])
   }
 
   const deleteComponent = (id: string) => {
     setComponents(components.filter((component) => id !== component.id))
   }
 
-  const indexedComponents = useMemo(() => {
-    return components.map((component) => ({
-      ...component,
-      id: component.id ?? uuidv4(),
-    }))
-  }, [components])
+  const getComponent = (id: string) => {
+    return components.find((component) => component.id === id)
+  }
 
   useEffect(() => {
     if (home) {
-      setComponents(structuredClone(home))
+      const indexedComponents = home.map((component) => ({
+        ...component,
+        id: component.id ?? uuidv4(),
+      }))
+      setComponents(indexedComponents)
     }
   }, [home])
 
@@ -86,28 +83,20 @@ export const HomeContextProvider: React.FC<HomeContextProviderProps> = ({
 
   const saveComponent = useCallback(() => {
     if (theme?.name) updateHomeComponents(theme.name, components)
-    // if (isHomePage && theme?.name) {
-    //   // Update all components
-    //   return
-    // }
-
-    // if (isEditPage) {
-    //   // update cer
-    //   return
-    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [components, isHomePage, isEditPage, theme])
 
   return (
     <HomeContext.Provider
       value={{
-        components: indexedComponents,
+        components,
         isLoading,
         allComponents,
         setComponents,
         saveComponent,
         addComponent,
         deleteComponent,
+        getComponent,
       }}
     >
       {children}

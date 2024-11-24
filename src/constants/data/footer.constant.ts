@@ -13,6 +13,8 @@ export const footerIconLinkData: IIconLinks = {
     name: '',
     type: '',
   },
-  title: '',
-  url: '',
+  link: {
+    title: '',
+    url: '',
+  },
 }

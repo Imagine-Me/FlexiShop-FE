@@ -43,7 +43,10 @@ export const MultipleMenuLinks: React.FC<IMultipleMenuLinks> = ({
                 onChange={(value) => onChange('links', value)}
               >
                 {(state, onChange) => (
-                  <FormLink link={state} onChange={onChange} />
+                  <FormLink
+                    link={state}
+                    onChange={(link) => onChange('__default__', link)}
+                  />
                 )}
               </MultipleForm>
             </div>
