@@ -12,7 +12,7 @@ import {
 import AddIcon from '@mui/icons-material/Add'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import classes from './multipleForm.module.css'
 import { capitalizeFirstLetter } from 'src/utils/string.utils'
@@ -53,6 +53,7 @@ export const MultipleForm = <T,>({
         }
         return state
       })
+      onChange && onChange(updatedState)
 
       setState(updatedState)
     }
@@ -62,20 +63,15 @@ export const MultipleForm = <T,>({
       ...structuredClone(state),
       structuredClone(defaultData),
     ]
+    onChange && onChange(updatedState)
     setState(updatedState)
   }
 
   const removeRow = (index: number) => {
     const updatedState = state.filter((_, i) => i !== index)
+    onChange && onChange(updatedState)
     setState(updatedState)
   }
-
-  useEffect(() => {
-    if (onChange) {
-      onChange(state)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state])
 
   return (
     <>
