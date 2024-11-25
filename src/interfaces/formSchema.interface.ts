@@ -24,6 +24,10 @@ export interface IFormSchema {
   metadata?: {
     component?: (state: any, onChange: any) => React.ReactNode
     schema?: IFormSchema[]
+    multipleField?: {
+      titleKey: string
+      defaultData: Record<string, unknown>
+    }
     [key: string]: unknown
   }
 

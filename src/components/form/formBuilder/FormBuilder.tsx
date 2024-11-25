@@ -194,10 +194,10 @@ export function FormBuilder<T>({
           return (
             form.metadata && (
               <MultipleForm
-                value={fieldValue as IImageModel[]}
+                value={fieldValue as any[]}
                 label={form.label}
-                titleKey="name"
-                defaultData={[]}
+                {...form.metadata.multipleField!}
+                onChange={(value) => onFormChange(value, form.name ?? '')}
               >
                 {form.metadata.component!}
               </MultipleForm>
