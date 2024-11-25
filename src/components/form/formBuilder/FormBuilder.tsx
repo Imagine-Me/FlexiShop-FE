@@ -1,4 +1,4 @@
-import { Grid, TextField, Typography } from '@mui/material'
+import { Card, Grid, TextField, Typography } from '@mui/material'
 import { useCallback, useState } from 'react'
 import { IconPicker } from 'src/components/generic/iconPicker'
 import { ImageUploader } from 'src/components/generic/imageUploader/ImageUploader'
@@ -15,6 +15,8 @@ import { MultipleForm } from '../multipleForm'
 import { FormLink } from '../formLink'
 import { MultipleCategory1 } from '../multipleForms/MultipleCategory1'
 import { Category1 } from 'src/interfaces/components/home.interface'
+import { AlignField } from '../fields/AlignField'
+import { ColorField } from '../fields/ColorField'
 
 interface IFormBuilderProps<T> {
   schema: IFormSchema[]
@@ -30,13 +32,28 @@ export function FormBuilder<T>({
   const [formValue, setFormValue] = useState(structuredClone(value))
 
   const onFormChange = (value: unknown, key: string) => {
-    const updatedValue = { ...formValue, [key]: value }
-    setFormValue(updatedValue)
-    onChange && onChange(updatedValue)
+    const obj = { ...formValue }
+    const keys = key.split('.')
+    let current: any = obj // Start with the root object
+    for (let i = 0; i < keys.length - 1; i++) {
+      const key = keys[i]
+      if (!current[key]) {
+        current[key] = {} // Ensure the key exists
+      }
+      current = current[key] // Navigate deeper
+    }
+    current[keys[keys.length - 1]] = value
+    setFormValue(obj)
+    onChange && onChange(obj)
   }
 
   const getFormElement = useCallback(
     (form: IFormSchema) => {
+      const splittedName = (form.name ?? '').split('.')
+      const fieldValue = splittedName.reduce((acc, value) => {
+        return (acc as Record<string, unknown>)[value]
+      }, formValue as unknown)
+
       switch (form.field) {
         case 'h1':
           return <Typography variant="h1">{form.label}</Typography>
@@ -44,13 +61,48 @@ export function FormBuilder<T>({
           return <Typography variant="h5">{form.label}</Typography>
         case 'p':
           return <Typography>{form.label}</Typography>
+        case 'card':
+          return (
+            <Card sx={{ p: 2 }}>
+              <Typography variant="h6" sx={{ mb: 2 }}>
+                {form.label}
+              </Typography>
+              <Grid container spacing={2}>
+                {form.metadata?.schema?.map((value, index) => (
+                  <Grid item key={index} xs={12} lg={value.cols ?? 12}>
+                    {getFormElement(value)}
+                  </Grid>
+                ))}
+              </Grid>
+            </Card>
+          )
         case 'textfield':
           return (
             <TextField
               helperText={form.description}
               label={form.label}
               name={form.name}
-              value={(formValue as Record<string, unknown>)[form.name ?? '']}
+              value={fieldValue}
+              onChange={(e) => onFormChange(e.target.value, form.name ?? '')}
+            />
+          )
+        case 'alignField':
+          return (
+            <AlignField
+              helperText={form.description}
+              label={form.label}
+              name={form.name}
+              value={fieldValue as string}
+              onChange={(e) => onFormChange(e.target.value, form.name ?? '')}
+            />
+          )
+        case 'colorField':
+          return (
+            <ColorField
+              helperText={form.description}
+              label={form.label}
+              name={form.name}
+              value={fieldValue as string}
               onChange={(e) => onFormChange(e.target.value, form.name ?? '')}
             />
           )
@@ -62,12 +114,12 @@ export function FormBuilder<T>({
               helperText={form.description}
               label={form.label}
               name={form.name}
-              value={(formValue as Record<string, unknown>)[form.name ?? '']}
+              value={fieldValue}
               onChange={(e) => onFormChange(e.target.value, form.name ?? '')}
             />
           )
         case 'image': {
-          let value = (formValue as Record<string, unknown>)[form.name ?? '']
+          let value = fieldValue
           if (typeof value === 'string') {
             value = []
           } else if (!Array.isArray(value)) {
@@ -88,9 +140,7 @@ export function FormBuilder<T>({
         case 'icon': {
           return (
             <IconPicker
-              icon={
-                (formValue as Record<string, unknown>)[form.name ?? ''] as IIcon
-              }
+              icon={fieldValue as IIcon}
               description={form.description}
               label={form.label}
               onChange={(icon) => onFormChange(icon, form.name ?? '')}
@@ -116,11 +166,7 @@ export function FormBuilder<T>({
               <Typography sx={{ mb: 2 }}>{form.label}</Typography>
               {form.description && <Typography>{form.description}</Typography>}
               <FormLink
-                link={
-                  (formValue as Record<string, unknown>)[
-                    form.name ?? ''
-                  ] as ILink
-                }
+                link={fieldValue as ILink}
                 onChange={(link: ILink) => onFormChange(link, form.name ?? '')}
               />
             </>
@@ -129,11 +175,7 @@ export function FormBuilder<T>({
         case 'multiple-menu-links': {
           return (
             <MultipleMenuLinks
-              value={
-                (formValue as Record<string, unknown>)[
-                  form.name ?? ''
-                ] as ILinkMenu[]
-              }
+              value={fieldValue as ILinkMenu[]}
               onChange={(value) => onFormChange(value, form.name ?? '')}
             />
           )
@@ -142,11 +184,7 @@ export function FormBuilder<T>({
         case 'social-media-links': {
           return (
             <MultipleIconLinks
-              value={
-                (formValue as Record<string, unknown>)[
-                  form.name ?? ''
-                ] as IIconLinks[]
-              }
+              value={fieldValue as IIconLinks[]}
               onChange={(value) => onFormChange(value, form.name ?? '')}
             />
           )
@@ -156,11 +194,7 @@ export function FormBuilder<T>({
           return (
             form.metadata && (
               <MultipleForm
-                value={
-                  (formValue as Record<string, unknown>)[
-                    form.name ?? ''
-                  ] as IImageModel[]
-                }
+                value={fieldValue as IImageModel[]}
                 label={form.label}
                 titleKey="name"
                 defaultData={[]}
@@ -174,11 +208,7 @@ export function FormBuilder<T>({
         case 'multiple-category1-form':
           return (
             <MultipleCategory1
-              value={
-                (formValue as Record<string, unknown>)[
-                  form.name ?? ''
-                ] as Category1['categories']
-              }
+              value={fieldValue as Category1['categories']}
               onChange={(value) => onFormChange(value, form.name ?? '')}
             />
           )

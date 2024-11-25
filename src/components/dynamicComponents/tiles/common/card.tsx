@@ -29,7 +29,7 @@ export const CommonCard: React.FC<CommonCardProps> = ({
       <div
         className={classes.backgroundImage}
         style={{
-          backgroundImage: `url(${image.url})`,
+          backgroundImage: `url(${image?.url})`,
           backgroundPosition: `bottom ${align}`,
         }}
       ></div>

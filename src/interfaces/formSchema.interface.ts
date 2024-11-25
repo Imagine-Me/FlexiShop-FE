@@ -16,10 +16,14 @@ export interface IFormSchema {
     | 'social-media-links'
     | 'multiple'
     | 'multiple-category1-form'
+    | 'card'
+    | 'alignField'
+    | 'colorField'
   description?: string
   cols?: number
   metadata?: {
     component?: (state: any, onChange: any) => React.ReactNode
+    schema?: IFormSchema[]
     [key: string]: unknown
   }
 
