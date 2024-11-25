@@ -9,7 +9,7 @@ import * as fa6Icons from 'react-icons/fa6'
 import classes from './iconPicker.module.css'
 import { IIcon } from 'src/interfaces/image.interface'
 import SearchIcon from '@mui/icons-material/Search'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import DynamicIcon from '../dynamicIcon'
 import {
   Card,
@@ -88,84 +88,80 @@ interface IconPickerProps {
   className?: string
 }
 
-export const IconPicker: React.FC<IconPickerProps> = ({
-  icon,
-  label,
-  description,
-  onChange,
-  className = '',
-}) => {
-  const [state, setState] = useState(icon)
-  const [open, setOpen] = useState(false)
-  const [search, setSearch] = useState('')
-  const [icons, setIcons] = useState(searchIcons(''))
+export const IconPicker: React.FC<IconPickerProps> = memo(
+  ({ icon, label, description, onChange, className = '' }) => {
+    const [state, setState] = useState(icon)
+    const [open, setOpen] = useState(false)
+    const [search, setSearch] = useState('')
+    const [icons, setIcons] = useState(searchIcons(''))
 
-  const onIconChange = (icon: (typeof icons)[0]) => {
-    setState(icon.icon)
-    onChange && onChange(icon.icon)
-    setOpen(false)
+    const onIconChange = (icon: (typeof icons)[0]) => {
+      setState(icon.icon)
+      onChange && onChange(icon.icon)
+      setOpen(false)
+    }
+
+    useEffect(() => {
+      const updatedIcons = searchIcons(search)
+      setIcons(updatedIcons)
+    }, [search])
+
+    return (
+      <>
+        <FormLabel>{label}</FormLabel>
+        <Typography sx={{ mb: 2 }}>{description}</Typography>
+
+        <button
+          onClick={() => setOpen(true)}
+          className={`${classes.button} ${className}`}
+        >
+          <div className={classes.container}>Select Icon</div>
+          {state ? <DynamicIcon iconName={state} size={34} /> : 'Select Icon'}
+        </button>
+
+        <Dialog
+          open={open}
+          onClose={() => setOpen(false)}
+          fullWidth
+          maxWidth="xl"
+        >
+          <DialogTitle
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            sx={{ backgroundColor: 'grey.100' }}
+          >
+            Select Icon
+          </DialogTitle>
+          <DialogContent
+            className={classes.dialogContent}
+            sx={{ minHeight: 200 }}
+          >
+            <TextField
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+              placeholder="Search icons"
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <div className={classes.iconContainer}>
+              {icons.map((icon, index) => (
+                <Card
+                  key={index}
+                  className={classes.icon}
+                  onClick={() => onIconChange(icon)}
+                >
+                  <icon.component size={32} />
+                </Card>
+              ))}
+            </div>
+          </DialogContent>
+        </Dialog>
+      </>
+    )
   }
-
-  useEffect(() => {
-    const updatedIcons = searchIcons(search)
-    setIcons(updatedIcons)
-  }, [search])
-
-  return (
-    <>
-      <FormLabel>{label}</FormLabel>
-      <Typography sx={{ mb: 2 }}>{description}</Typography>
-
-      <button
-        onClick={() => setOpen(true)}
-        className={`${classes.button} ${className}`}
-      >
-        <div className={classes.container}>Select Icon</div>
-        {state ? <DynamicIcon iconName={state} size={34} /> : 'Select Icon'}
-      </button>
-
-      <Dialog
-        open={open}
-        onClose={() => setOpen(false)}
-        fullWidth
-        maxWidth="xl"
-      >
-        <DialogTitle
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          sx={{ backgroundColor: 'grey.100' }}
-        >
-          Select Icon
-        </DialogTitle>
-        <DialogContent
-          className={classes.dialogContent}
-          sx={{ minHeight: 200 }}
-        >
-          <TextField
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-            placeholder="Search icons"
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          <div className={classes.iconContainer}>
-            {icons.map((icon, index) => (
-              <Card
-                key={index}
-                className={classes.icon}
-                onClick={() => onIconChange(icon)}
-              >
-                <icon.component size={32} />
-              </Card>
-            ))}
-          </div>
-        </DialogContent>
-      </Dialog>
-    </>
-  )
-}
+)

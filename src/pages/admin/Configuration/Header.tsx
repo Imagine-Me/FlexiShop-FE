@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Box, Button, CircularProgress, Typography } from '@mui/material'
+import { Button, CircularProgress } from '@mui/material'
 import useTemplateService from 'src/service/template.service'
 import { useTemplateStore } from 'src/store/template.store'
 import { headerPageSchema } from 'src/constants/formSchema/header'
@@ -7,6 +7,7 @@ import { useConfigStore } from 'src/store/config.store'
 import { FormBuilder } from 'src/components/form/formBuilder/FormBuilder'
 import PreviewComponent from 'src/components/generic/previewComponent'
 import { HeaderPreview } from 'src/components/admin/adminHeader'
+import { PageWrapper } from '../Landing/PageWrapper'
 
 const Header = () => {
   const [header] = useTemplateStore((state) => [state.header])
@@ -23,12 +24,10 @@ const Header = () => {
   }
 
   return (
-    <>
-      <Box display="flex" flexWrap="wrap" alignItems="center" sx={{ mb: 8 }}>
-        <Typography variant="h3" flex={1}>
-          Configurations - General
-        </Typography>
-        <div>
+    <PageWrapper
+      breadcrumbs={[{ title: 'Configurations' }, { title: 'Header' }]}
+      footer={{
+        right: (
           <Button
             variant="contained"
             disabled={isLoading}
@@ -39,9 +38,9 @@ const Header = () => {
             )}
             Update
           </Button>
-        </div>
-      </Box>
-
+        ),
+      }}
+    >
       <PreviewComponent>
         <HeaderPreview headerProps={state} />
       </PreviewComponent>
@@ -53,7 +52,7 @@ const Header = () => {
           onChange={setState}
         />
       )}
-    </>
+    </PageWrapper>
   )
 }
 

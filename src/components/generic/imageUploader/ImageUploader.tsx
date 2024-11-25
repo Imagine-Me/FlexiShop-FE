@@ -202,7 +202,13 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
   }
 
   const onSelectedImageDelete = (index: number) => {
-    setSelectedImages(selectedImages.filter((_, i) => index !== i))
+    const updateImages = selectedImages.filter((_, i) => index !== i)
+    if (multiple) {
+      onChange(updateImages)
+    } else {
+      onChange(updateImages[0])
+    }
+    setSelectedImages(updateImages)
   }
 
   useEffect(() => {
@@ -222,7 +228,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
             <AddIcon />
           </StyledIconButton>
         )}
-        <Box display="flex">
+        <Box display="flex" gap={2} sx={{ mt: 2 }}>
           {selectedImages.map((item, index) => (
             <DeletableImage
               key={`selected_image_${index}`}

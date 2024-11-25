@@ -4,6 +4,7 @@ import { AppRouter } from 'src/routes/routes'
 import { useConfigStore } from './store/config.store'
 import { Helmet } from './components/generic/helmet/Helmet'
 import { useImageService } from './service/images.service'
+import { AlertDialogProvider } from './context/alertDialog/alertDialog.context'
 
 export const App: React.FC = () => {
   const { general } = useConfigStore()
@@ -17,7 +18,9 @@ export const App: React.FC = () => {
     <>
       {general && <Helmet data={general} />}
       <ThemeProvider>
-        <AppRouter />
+        <AlertDialogProvider>
+          <AppRouter />
+        </AlertDialogProvider>
       </ThemeProvider>
     </>
   )

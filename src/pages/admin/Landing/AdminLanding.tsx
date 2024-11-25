@@ -16,7 +16,17 @@ const ThemePage = lazy(() => import('../Configuration/Theme'))
 const GeneralPage = lazy(() => import('../Configuration/General'))
 const HeaderPage = lazy(() => import('../Configuration/Header'))
 const FooterPage = lazy(() => import('../Configuration/Footer'))
-const HomePage = lazy(() => import('../Pages/Home'))
+const HomePage = lazy(() => import('../Pages/home'))
+const ComponentPage = lazy(() =>
+  import('../Pages/home/component').then((module) => ({
+    default: module.ComponentPage,
+  }))
+)
+const EditComponentPage = lazy(() =>
+  import('../Pages/home/editComponent').then((module) => ({
+    default: module.EditComponent,
+  }))
+)
 
 const drawerWidth = 240
 export const AdminLanding = () => {
@@ -98,7 +108,6 @@ export const AdminLanding = () => {
         component="main"
         sx={{
           flexGrow: 1,
-          p: 2,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           height: '100%',
           overflowY: 'auto',
@@ -118,12 +127,18 @@ export const AdminLanding = () => {
           }
         >
           <Routes>
-            <Route path={AdminUrls.DASHBOARD_PAGE} element="Dashboard" />
+            <Route path={AdminUrls.DASHBOARD_PAGE} element={'Dashboard'} />
             <Route path={AdminUrls.THEME_PAGE} element={<ThemePage />} />
             <Route path={AdminUrls.GENERAL_PAGE} element={<GeneralPage />} />
             <Route path={AdminUrls.HEADER_PAGE} element={<HeaderPage />} />
             <Route path={AdminUrls.FOOTER_PAGE} element={<FooterPage />} />
-            <Route path={AdminUrls.HOME_PAGE} element={<HomePage />} />
+            <Route path={AdminUrls.HOME_PAGE} element={<HomePage />}>
+              <Route
+                path={AdminUrls.HOME_PAGE_EDIT}
+                element={<EditComponentPage />}
+              />
+              <Route path="" element={<ComponentPage />} />
+            </Route>
             <Route
               path="/*"
               element={<Navigate to={AdminUrls.DASHBOARD_PAGE} />}

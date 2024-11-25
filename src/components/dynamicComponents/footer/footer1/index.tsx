@@ -20,7 +20,7 @@ export const Footer1: React.FC<Footer1Props> = ({
           <div>
             <img src={logo.url} alt={logo.name} className={classes.logo} />
             <div className={classes.socialMedia}>
-              {socialMedia.map(({ url, title, icon }, index) => (
+              {socialMedia.map(({ link: { title, url }, icon }, index) => (
                 <Link to={url} title={title} key={`${title}_${index}`}>
                   <DynamicIcon
                     size={28}

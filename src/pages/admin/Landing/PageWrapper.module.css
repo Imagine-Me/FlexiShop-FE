@@ -1,0 +1,69 @@
+.container {
+    height: 100%;
+    padding: 15px;
+    position: relative;
+    overflow-y: auto;
+
+    .main {
+
+        &.isBreadCrumb {
+            padding-top: 45px;
+        }
+
+        &.isFooter {
+            padding-bottom: 65px;
+        }
+    }
+
+    .breadCrumbNav {
+        position: fixed;
+        background-color: var(--mui-body-color);
+        top: 64px;
+        left: 240px;
+        right: 0;
+        z-index: 100;
+        padding: 15px;
+    }
+
+    .breadcrumbList {
+        a {
+            text-decoration: none;
+            color: var(--mui-action-active);
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: var(--mui-primary-color);
+        }
+
+        :global(.MuiBreadcrumbs-li:last-child) {
+            >p {
+                color: var(--mui-primary-color);
+                font-weight: bold;
+            }
+        }
+    }
+
+
+    .footer {
+        position: fixed;
+        bottom: 0;
+        left: 240px;
+        right: 0;
+        border-radius: 0;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        z-index: 100;
+    }
+
+    @media (max-width: 600px) {
+        .footer {
+            left: 0;
+        }
+
+        .breadcrumb {
+            left: 0
+        }
+    }
+}

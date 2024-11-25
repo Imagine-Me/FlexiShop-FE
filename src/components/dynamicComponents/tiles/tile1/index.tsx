@@ -17,7 +17,7 @@ export const Tile1: React.FC<ITile1Props> = ({ data }) => {
           <div
             className={classes.backgroundImage}
             style={{
-              backgroundImage: `url(${card1.image.url})`,
+              backgroundImage: `url(${card1?.image?.url})`,
               backgroundPosition: `bottom ${card1.align}`,
             }}
           ></div>

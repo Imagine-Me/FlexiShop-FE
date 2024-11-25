@@ -12,7 +12,7 @@ import {
 import AddIcon from '@mui/icons-material/Add'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import classes from './multipleForm.module.css'
 import { capitalizeFirstLetter } from 'src/utils/string.utils'
@@ -20,7 +20,7 @@ import { capitalizeFirstLetter } from 'src/utils/string.utils'
 interface MultipleFormProps<T> {
   children: (
     value: T,
-    onFormChange: (key: keyof T, value: any) => void
+    onFormChange: (key: keyof T | '__default__', value: any) => void
   ) => React.ReactNode
   value: T[]
   label: string
@@ -39,38 +39,39 @@ export const MultipleForm = <T,>({
 }: MultipleFormProps<T>) => {
   const [state, setState] = useState(structuredClone(value))
 
-  const onFormChange = (index: number) => (key: keyof T, value: any) => {
-    const updatedState = state.map((state, i) => {
-      if (index === i) {
-        const updatedState = { ...state }
-        updatedState[key] = value
-        return updatedState
-      }
-      return state
-    })
+  const onFormChange =
+    (index: number) => (key: keyof T | '__default__', value: any) => {
+      const updatedState = state.map((state, i) => {
+        if (index === i) {
+          if (key === '__default__') {
+            return value
+          } else {
+            const updatedState = { ...state }
+            updatedState[key] = value
+            return updatedState
+          }
+        }
+        return state
+      })
+      onChange && onChange(updatedState)
 
-    setState(updatedState)
-  }
+      setState(updatedState)
+    }
 
   const addNewRow = () => {
     const updatedState = [
       ...structuredClone(state),
       structuredClone(defaultData),
     ]
+    onChange && onChange(updatedState)
     setState(updatedState)
   }
 
   const removeRow = (index: number) => {
     const updatedState = state.filter((_, i) => i !== index)
+    onChange && onChange(updatedState)
     setState(updatedState)
   }
-
-  useEffect(() => {
-    if (onChange) {
-      onChange(state)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state])
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { Grid, TextField, Typography } from '@mui/material'
+import { Card, Grid, TextField, Typography } from '@mui/material'
 import { useCallback, useState } from 'react'
 import { IconPicker } from 'src/components/generic/iconPicker'
 import { ImageUploader } from 'src/components/generic/imageUploader/ImageUploader'
@@ -7,9 +7,16 @@ import { IIcon, IImageModel } from 'src/interfaces/image.interface'
 import { MultipleMenuLinks } from '../multipleForms/MultipleMenuLinks'
 import {
   IIconLinks,
+  ILink,
   ILinkMenu,
 } from 'src/interfaces/components/footer.interface'
 import { MultipleIconLinks } from '../multipleForms/MultipleIconLinks'
+import { MultipleForm } from '../multipleForm'
+import { FormLink } from '../formLink'
+import { MultipleCategory1 } from '../multipleForms/MultipleCategory1'
+import { Category1 } from 'src/interfaces/components/home.interface'
+import { AlignField } from '../fields/AlignField'
+import { ColorField } from '../fields/ColorField'
 
 interface IFormBuilderProps<T> {
   schema: IFormSchema[]
@@ -17,7 +24,7 @@ interface IFormBuilderProps<T> {
   onChange?: (value: T) => void
 }
 
-export function FormBuilder<T = unknown>({
+export function FormBuilder<T>({
   schema,
   value,
   onChange,
@@ -25,13 +32,28 @@ export function FormBuilder<T = unknown>({
   const [formValue, setFormValue] = useState(structuredClone(value))
 
   const onFormChange = (value: unknown, key: string) => {
-    const updatedValue = { ...formValue, [key]: value }
-    setFormValue(updatedValue)
-    onChange && onChange(updatedValue)
+    const obj = { ...formValue }
+    const keys = key.split('.')
+    let current: any = obj // Start with the root object
+    for (let i = 0; i < keys.length - 1; i++) {
+      const key = keys[i]
+      if (!current[key]) {
+        current[key] = {} // Ensure the key exists
+      }
+      current = current[key] // Navigate deeper
+    }
+    current[keys[keys.length - 1]] = value
+    setFormValue(obj)
+    onChange && onChange(obj)
   }
 
   const getFormElement = useCallback(
     (form: IFormSchema) => {
+      const splittedName = (form.name ?? '').split('.')
+      const fieldValue = splittedName.reduce((acc, value) => {
+        return (acc as Record<string, unknown>)[value]
+      }, formValue as unknown)
+
       switch (form.field) {
         case 'h1':
           return <Typography variant="h1">{form.label}</Typography>
@@ -39,13 +61,48 @@ export function FormBuilder<T = unknown>({
           return <Typography variant="h5">{form.label}</Typography>
         case 'p':
           return <Typography>{form.label}</Typography>
+        case 'card':
+          return (
+            <Card sx={{ p: 2 }}>
+              <Typography variant="h6" sx={{ mb: 2 }}>
+                {form.label}
+              </Typography>
+              <Grid container spacing={2}>
+                {form.metadata?.schema?.map((value, index) => (
+                  <Grid item key={index} xs={12} lg={value.cols ?? 12}>
+                    {getFormElement(value)}
+                  </Grid>
+                ))}
+              </Grid>
+            </Card>
+          )
         case 'textfield':
           return (
             <TextField
               helperText={form.description}
               label={form.label}
               name={form.name}
-              value={(formValue as Record<string, unknown>)[form.name ?? '']}
+              value={fieldValue}
+              onChange={(e) => onFormChange(e.target.value, form.name ?? '')}
+            />
+          )
+        case 'alignField':
+          return (
+            <AlignField
+              helperText={form.description}
+              label={form.label}
+              name={form.name}
+              value={fieldValue as string}
+              onChange={(e) => onFormChange(e.target.value, form.name ?? '')}
+            />
+          )
+        case 'colorField':
+          return (
+            <ColorField
+              helperText={form.description}
+              label={form.label}
+              name={form.name}
+              value={fieldValue as string}
               onChange={(e) => onFormChange(e.target.value, form.name ?? '')}
             />
           )
@@ -57,12 +114,12 @@ export function FormBuilder<T = unknown>({
               helperText={form.description}
               label={form.label}
               name={form.name}
-              value={(formValue as Record<string, unknown>)[form.name ?? '']}
+              value={fieldValue}
               onChange={(e) => onFormChange(e.target.value, form.name ?? '')}
             />
           )
         case 'image': {
-          let value = (formValue as Record<string, unknown>)[form.name ?? '']
+          let value = fieldValue
           if (typeof value === 'string') {
             value = []
           } else if (!Array.isArray(value)) {
@@ -83,9 +140,7 @@ export function FormBuilder<T = unknown>({
         case 'icon': {
           return (
             <IconPicker
-              icon={
-                (formValue as Record<string, unknown>)[form.name ?? ''] as IIcon
-              }
+              icon={fieldValue as IIcon}
               description={form.description}
               label={form.label}
               onChange={(icon) => onFormChange(icon, form.name ?? '')}
@@ -104,14 +159,23 @@ export function FormBuilder<T = unknown>({
             </Grid>
           )
         }
+
+        case 'link':
+          return (
+            <>
+              <Typography sx={{ mb: 2 }}>{form.label}</Typography>
+              {form.description && <Typography>{form.description}</Typography>}
+              <FormLink
+                link={fieldValue as ILink}
+                onChange={(link: ILink) => onFormChange(link, form.name ?? '')}
+              />
+            </>
+          )
+
         case 'multiple-menu-links': {
           return (
             <MultipleMenuLinks
-              value={
-                (formValue as Record<string, unknown>)[
-                  form.name ?? ''
-                ] as ILinkMenu[]
-              }
+              value={fieldValue as ILinkMenu[]}
               onChange={(value) => onFormChange(value, form.name ?? '')}
             />
           )
@@ -120,15 +184,34 @@ export function FormBuilder<T = unknown>({
         case 'social-media-links': {
           return (
             <MultipleIconLinks
-              value={
-                (formValue as Record<string, unknown>)[
-                  form.name ?? ''
-                ] as IIconLinks[]
-              }
+              value={fieldValue as IIconLinks[]}
               onChange={(value) => onFormChange(value, form.name ?? '')}
             />
           )
         }
+
+        case 'multiple': {
+          return (
+            form.metadata && (
+              <MultipleForm
+                value={fieldValue as any[]}
+                label={form.label}
+                {...form.metadata.multipleField!}
+                onChange={(value) => onFormChange(value, form.name ?? '')}
+              >
+                {form.metadata.component!}
+              </MultipleForm>
+            )
+          )
+        }
+
+        case 'multiple-category1-form':
+          return (
+            <MultipleCategory1
+              value={fieldValue as Category1['categories']}
+              onChange={(value) => onFormChange(value, form.name ?? '')}
+            />
+          )
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps

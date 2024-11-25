@@ -1,5 +1,7 @@
 export const convertCamelCaseToReadableString = (text: string) =>
-  text.replace(/([A-Z])/g, ' $1')
+  text
+    .replace(/([a-z])([A-Z0-9])/g, '$1 $2') // Add space between lowercase and uppercase/number
+    .replace(/([0-9])([A-Za-z])/g, '$1 $2') // Add space between number and letter
 
 export const capitalizeFirstLetter = (string: string) => {
   if (typeof string !== 'string' || string.length === 0) {

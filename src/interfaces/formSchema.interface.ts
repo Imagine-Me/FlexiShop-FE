@@ -8,13 +8,28 @@ export interface IFormSchema {
     | 'h1'
     | 'h5'
     | 'image'
+    | 'link'
     | 'icon'
     | 'flex-2'
     | 'multiple-links'
     | 'multiple-menu-links'
     | 'social-media-links'
+    | 'multiple'
+    | 'multiple-category1-form'
+    | 'card'
+    | 'alignField'
+    | 'colorField'
   description?: string
   cols?: number
-  metadata?: Record<string, unknown>
+  metadata?: {
+    component?: (state: any, onChange: any) => React.ReactNode
+    schema?: IFormSchema[]
+    multipleField?: {
+      titleKey: string
+      defaultData: Record<string, unknown>
+    }
+    [key: string]: unknown
+  }
+
   subSchema?: IFormSchema[]
 }

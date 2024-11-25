@@ -20,7 +20,7 @@ export const Carousel1: React.FC<ICarousel1Props> = ({ data }) => {
   return (
     <div className={`${classes.carouselContainer} slider-container`}>
       <Slider {...settings}>
-        {data.map((image, index) => (
+        {data.images.map((image, index) => (
           <img
             key={`banner_image_${index}`}
             src={image.url}

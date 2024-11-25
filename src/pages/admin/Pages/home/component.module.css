@@ -1,0 +1,24 @@
+.list {
+    li {
+        margin: 8px 0;
+    }
+}
+
+.draggableCard {
+    padding: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    text-transform: capitalize;
+
+    .content {
+        flex: 1;
+    }
+}
+
+.listContainer {
+    padding: 12px;
+    border: 1px solid var(--mui-grey-color);
+    border-radius: 7px;
+}

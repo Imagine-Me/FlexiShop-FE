@@ -18,6 +18,9 @@ export enum ImageUrls {
 
 export enum TemplateUrls {
   GET = '/templates',
+  GET_ALL = '/templates/components',
   UPDATE_HEADER = '/templates/header',
   UPDATE_FOOTER = '/templates/footer',
+  UPDATE_HOME = '/templates/home',
+  UPDATE_THEME = '/templates/theme',
 }
