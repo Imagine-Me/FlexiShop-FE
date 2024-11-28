@@ -4,6 +4,7 @@ import { CommonCardProps } from 'src/components/dynamicComponents/tiles/common/c
 import { IIcon, IImageModel } from '../image.interface'
 import { ILink } from './footer.interface'
 import { AlignmentEnum, Contacts } from './common.interface'
+import { IProductModel } from '../product.interface'
 
 export type Components =
   | 'carousel1'
@@ -12,16 +13,6 @@ export type Components =
   | 'tile1'
   | 'tile2'
   | 'contact1'
-
-// TODO: remove once product page implemented
-export interface IProductModel {
-  title: string
-  image: IImageModel
-  price: number
-  rating: number
-  description: string
-  link?: ILink
-}
 
 interface Component<T, E extends Components> {
   name: E

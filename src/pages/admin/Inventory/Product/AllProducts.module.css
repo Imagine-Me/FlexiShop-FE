@@ -1,0 +1,11 @@
+.table {
+    :global(.MuiDataGrid-footerContainer) {
+
+        :global(.MuiInputBase-root) {
+            width: auto !important;
+            /* Prevents it from taking full width */
+            max-width: 120px;
+            /* Limit the maximum width of the dropdown */
+        }
+    }
+}

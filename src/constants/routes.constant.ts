@@ -4,6 +4,7 @@ export enum AdminUrls {
   DASHBOARD_PAGE = 'dashboard',
   INVENTORY_PAGE = 'inventory',
   PRODUCT_PAGE = 'inventory/product',
+  PRODUCT_CREATE_PAGE = 'create',
   ORDER_PAGE = 'inventory/orders',
   CONFIGURATION_URL = 'configuration',
   GENERAL_PAGE = 'configuration/general',

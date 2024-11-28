@@ -19,6 +19,8 @@ export interface IFormSchema {
     | 'card'
     | 'alignField'
     | 'colorField'
+    | 'numberField'
+    | 'htmlEditor'
   description?: string
   cols?: number
   metadata?: {

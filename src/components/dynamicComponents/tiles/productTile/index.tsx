@@ -29,7 +29,7 @@ export const ProductTile: React.FC<IProductTileProps> = ({ data }) => {
       </Box>
       <Grid container spacing={4}>
         {products.map((card) => (
-          <Grid key={card.title} item xs={colCount}>
+          <Grid key={card.name} item xs={colCount}>
             <ProductCard1 {...card} />
           </Grid>
         ))}

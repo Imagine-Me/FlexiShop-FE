@@ -19,7 +19,11 @@ export const adminSideMenuConstant: IAdminSideMenuConstant[] = [
     hasSubMenu: true,
     path: AdminUrls.INVENTORY_PAGE,
     subMenu: [
-      { title: 'Products', path: AdminUrls.PRODUCT_PAGE },
+      {
+        title: 'Products',
+        path: AdminUrls.PRODUCT_PAGE,
+        subPath: [AdminUrls.PRODUCT_CREATE_PAGE],
+      },
       { title: 'Orders', path: AdminUrls.ORDER_PAGE },
     ],
   },

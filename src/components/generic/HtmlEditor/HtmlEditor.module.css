@@ -1,0 +1,8 @@
+.formControl {
+    width: 100%;
+}
+
+.editor {
+    height: 200px;
+    overflow-y: auto;
+}

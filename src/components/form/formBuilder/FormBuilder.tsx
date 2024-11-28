@@ -17,6 +17,7 @@ import { MultipleCategory1 } from '../multipleForms/MultipleCategory1'
 import { Category1 } from 'src/interfaces/components/home.interface'
 import { AlignField } from '../fields/AlignField'
 import { ColorField } from '../fields/ColorField'
+import { HtmlEditor } from 'src/components/generic/HtmlEditor/HtmlEditor'
 
 interface IFormBuilderProps<T> {
   schema: IFormSchema[]
@@ -86,6 +87,18 @@ export function FormBuilder<T>({
               onChange={(e) => onFormChange(e.target.value, form.name ?? '')}
             />
           )
+
+        case 'numberField':
+          return (
+            <TextField
+              type="number"
+              helperText={form.description}
+              label={form.label}
+              name={form.name}
+              value={fieldValue}
+              onChange={(e) => onFormChange(e.target.value, form.name ?? '')}
+            />
+          )
         case 'alignField':
           return (
             <AlignField
@@ -122,13 +135,13 @@ export function FormBuilder<T>({
           let value = fieldValue
           if (typeof value === 'string') {
             value = []
-          } else if (!Array.isArray(value)) {
+          } else if (!Array.isArray(value) && value !== undefined) {
             value = [value]
           }
           return (
             <ImageUploader
               multiple={form.metadata?.multiple as boolean}
-              value={value as IImageModel[]}
+              value={(value as IImageModel[]) ?? []}
               label={form.label}
               name={form.name}
               description={form.description}
@@ -194,7 +207,7 @@ export function FormBuilder<T>({
           return (
             form.metadata && (
               <MultipleForm
-                value={fieldValue as any[]}
+                value={(fieldValue as any[]) ?? []}
                 label={form.label}
                 {...form.metadata.multipleField!}
                 onChange={(value) => onFormChange(value, form.name ?? '')}
@@ -212,6 +225,17 @@ export function FormBuilder<T>({
               onChange={(value) => onFormChange(value, form.name ?? '')}
             />
           )
+
+        case 'htmlEditor': {
+          return (
+            <HtmlEditor
+              onChange={(value) => onFormChange(value, form.name ?? '')}
+              value={(fieldValue as string) ?? ''}
+              helperText={form.description}
+              label={form.label}
+            />
+          )
+        }
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
