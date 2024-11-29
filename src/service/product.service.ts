@@ -95,6 +95,16 @@ export const useProductService = () => {
     return { data: [], currentPage: page, total: 0 }
   }
 
+  const fetchBrands = async () => {
+    const response = await fetchData<IBrandModel[]>(
+      'get',
+      ProductsUrls.FETCH_BRANDS
+    )
+    if (response) {
+      return response
+    }
+  }
+
   const getBrand = async (id: string) => {
     const response = await fetchData<IProductModel>(
       'get',
@@ -212,5 +222,6 @@ export const useProductService = () => {
     createCategory,
     deleteCategory,
     updateCategory,
+    fetchBrands
   }
 }

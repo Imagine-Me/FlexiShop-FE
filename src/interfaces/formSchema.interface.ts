@@ -22,6 +22,7 @@ export interface IFormSchema {
     | 'numberField'
     | 'htmlEditor'
     | 'checkbox'
+    | 'brandField'
   description?: string
   cols?: number
   metadata?: {

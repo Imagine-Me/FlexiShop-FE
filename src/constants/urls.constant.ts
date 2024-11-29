@@ -28,5 +28,7 @@ export enum TemplateUrls {
 export enum ProductsUrls {
   GET_PRODUCTS = '/products',
   GET_BRANDS = 'products/brands',
+  FETCH_BRANDS = 'products/brands/all',
   GET_CATEGORIES = 'products/categories',
+  FETCH_CATEGORIES = 'products/categories/all',
 }

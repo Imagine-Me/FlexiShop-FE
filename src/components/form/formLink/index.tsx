@@ -1,6 +1,6 @@
 import { TextField } from '@mui/material'
 import { useState } from 'react'
-import AutoCompleteInput from 'src/components/generic/autoCompleteInput'
+import AutoCompleteInputFreeSolo from 'src/components/generic/autoCompleteInput'
 import { BusinessUrls } from 'src/constants/urls.constant'
 import { ILink } from 'src/interfaces/components/footer.interface'
 
@@ -33,7 +33,7 @@ export const FormLink: React.FC<IFormLinkProps> = ({ link, onChange }) => {
         label="Title"
         helperText="Title for the link"
       />
-      <AutoCompleteInput
+      <AutoCompleteInputFreeSolo
         value={state.url}
         options={appLinks}
         label="URL"
