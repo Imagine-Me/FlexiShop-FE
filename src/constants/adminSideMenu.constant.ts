@@ -22,7 +22,7 @@ export const adminSideMenuConstant: IAdminSideMenuConstant[] = [
       {
         title: 'Products',
         path: AdminUrls.PRODUCT_PAGE,
-        subPath: [AdminUrls.PRODUCT_CREATE_PAGE],
+        subPath: [AdminUrls.PRODUCT_CREATE_PAGE, AdminUrls.PRODUCT_EDIT_PAGE],
       },
       { title: 'Orders', path: AdminUrls.ORDER_PAGE },
     ],

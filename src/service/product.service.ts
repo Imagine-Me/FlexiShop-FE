@@ -20,5 +20,68 @@ export const useProductService = () => {
     return { data: [], currentPage: page, total: 0 }
   }
 
-  return { isLoading, error, getAllProducts }
+  const getProduct = async (id: string) => {
+    const response = await fetchData<IProductModel>(
+      'get',
+      `${ProductsUrls.GET_PRODUCTS}/${id}`
+    )
+    if (response) {
+      return response
+    }
+  }
+
+  const createProduct = async (
+    data: Partial<
+      IProductModel & {
+        isVariant: boolean
+      }
+    >
+  ) => {
+    const response = await fetchData<IProductModel>(
+      'post',
+      ProductsUrls.GET_PRODUCTS,
+      { ...data }
+    )
+    if (response) {
+      return response
+    }
+  }
+
+  const updateProduct = async (
+    id: string,
+    data: Partial<
+      IProductModel & {
+        isVariant: boolean
+      }
+    >
+  ) => {
+    const response = await fetchData<IProductModel>(
+      'patch',
+      `${ProductsUrls.GET_PRODUCTS}/${id}`,
+      { ...data }
+    )
+    if (response) {
+      return response
+    }
+  }
+
+  const deleteProduct = async (id: string) => {
+    const response = await fetchData<IProductModel>(
+      'delete',
+      `${ProductsUrls.GET_PRODUCTS}/${id}`
+    )
+    if (response) {
+      return response
+    }
+  }
+
+  return {
+    isLoading,
+    error,
+    getAllProducts,
+    createProduct,
+    deleteProduct,
+    getProduct,
+    updateProduct,
+  }
 }

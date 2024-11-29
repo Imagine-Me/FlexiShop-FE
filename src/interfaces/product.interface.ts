@@ -7,17 +7,17 @@ export interface IProductVariantModel {
   id?: string
   name: string
   description: string
-  price: number
-  stock: number
+  price: number | null
+  stock: number | null
 }
 
 export interface IProductModel {
   id: string
   name: string
   description: string
-  price: number
-  discountPrice?: number
-  stock: number
+  price: number | null
+  discountPrice?: number | null
+  stock: number | null
   specification?: string
   images?: IImageModel[]
   status: StatusEnum

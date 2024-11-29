@@ -148,6 +148,10 @@ export const AdminLanding = () => {
                 path={AdminUrls.PRODUCT_CREATE_PAGE}
                 element={<CreateProductPage />}
               />
+              <Route
+                path={AdminUrls.PRODUCT_EDIT_PAGE}
+                element={<CreateProductPage />}
+              />
               <Route path="" element={<AllProductPage />} />
             </Route>
             <Route path={AdminUrls.HOME_PAGE} element={<HomePage />}>

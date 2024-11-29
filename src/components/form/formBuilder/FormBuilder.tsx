@@ -1,5 +1,13 @@
-import { Card, Grid, TextField, Typography } from '@mui/material'
-import { useCallback, useState } from 'react'
+import {
+  Card,
+  Checkbox,
+  FormControlLabel,
+  FormHelperText,
+  Grid,
+  TextField,
+  Typography,
+} from '@mui/material'
+import { useCallback } from 'react'
 import { IconPicker } from 'src/components/generic/iconPicker'
 import { ImageUploader } from 'src/components/generic/imageUploader/ImageUploader'
 import { IFormSchema } from 'src/interfaces/formSchema.interface'
@@ -30,7 +38,7 @@ export function FormBuilder<T>({
   value,
   onChange,
 }: IFormBuilderProps<T>) {
-  const [formValue, setFormValue] = useState(structuredClone(value))
+  const formValue = value
 
   const onFormChange = (value: unknown, key: string) => {
     const obj = { ...formValue }
@@ -44,7 +52,6 @@ export function FormBuilder<T>({
       current = current[key] // Navigate deeper
     }
     current[keys[keys.length - 1]] = value
-    setFormValue(obj)
     onChange && onChange(obj)
   }
 
@@ -54,7 +61,6 @@ export function FormBuilder<T>({
       const fieldValue = splittedName.reduce((acc, value) => {
         return (acc as Record<string, unknown>)[value]
       }, formValue as unknown)
-
       switch (form.field) {
         case 'h1':
           return <Typography variant="h1">{form.label}</Typography>
@@ -236,6 +242,27 @@ export function FormBuilder<T>({
             />
           )
         }
+
+        case 'checkbox': {
+          return (
+            <>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={fieldValue as boolean}
+                    onChange={(e) =>
+                      onFormChange(e.target.checked, form.name ?? '')
+                    }
+                  />
+                }
+                label={form.label}
+              />
+              {form.description && (
+                <FormHelperText>{form.description}</FormHelperText>
+              )}
+            </>
+          )
+        }
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -244,11 +271,17 @@ export function FormBuilder<T>({
 
   return (
     <Grid container spacing={4}>
-      {schema.map((value, index) => (
-        <Grid item key={index} xs={12} lg={value.cols ?? 12}>
-          {getFormElement(value)}
-        </Grid>
-      ))}
+      {schema.map((value, index) => {
+        const shouldHide = value.shouldHide && value.shouldHide(formValue)
+        if (shouldHide) {
+          return null
+        }
+        return (
+          <Grid item key={index} xs={12} lg={value.cols ?? 12}>
+            {getFormElement(value)}
+          </Grid>
+        )
+      })}
     </Grid>
   )
 }

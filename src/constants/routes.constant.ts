@@ -5,6 +5,7 @@ export enum AdminUrls {
   INVENTORY_PAGE = 'inventory',
   PRODUCT_PAGE = 'inventory/product',
   PRODUCT_CREATE_PAGE = 'create',
+  PRODUCT_EDIT_PAGE = 'edit/:productId',
   ORDER_PAGE = 'inventory/orders',
   CONFIGURATION_URL = 'configuration',
   GENERAL_PAGE = 'configuration/general',

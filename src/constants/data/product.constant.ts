@@ -4,19 +4,20 @@ import {
   IProductVariantModel,
 } from 'src/interfaces/product.interface'
 
-export const productData: Partial<IProductModel> = {
+export const productData: Partial<IProductModel & { isVariant: boolean }> = {
   description: '',
   name: '',
-  price: 0,
+  price: null,
   status: StatusEnum.ACTIVE,
-  stock: 0,
+  stock: null,
   discountPrice: undefined,
   specification: '',
+  isVariant: false,
 }
 
 export const productVariantData: IProductVariantModel = {
   description: '',
   name: '',
-  price: 0,
-  stock: 0,
+  price: null,
+  stock: null,
 }

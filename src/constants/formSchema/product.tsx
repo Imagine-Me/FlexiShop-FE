@@ -1,4 +1,4 @@
-import { TextField } from '@mui/material'
+import { Grid, TextField } from '@mui/material'
 import { IFormSchema } from 'src/interfaces/formSchema.interface'
 import { productVariantData } from '../data/product.constant'
 
@@ -16,6 +16,12 @@ export const productSchema: IFormSchema[] = [
     description: 'Enter the description of the product',
   },
   {
+    field: 'checkbox',
+    label: 'Is there variants for this product',
+    name: 'isVariant',
+    description: 'Does this product contain variants like color, size etc?',
+  },
+  {
     field: 'multiple',
     label: 'Product Variant',
     name: 'variants',
@@ -27,30 +33,38 @@ export const productSchema: IFormSchema[] = [
             <TextField
               sx={{ mb: 2 }}
               name="name"
+              label="Variant Name"
               value={state.name}
               onChange={(e) => onChange('name', e.target.value)}
             />
             <TextField
               rows={3}
               sx={{ mb: 2 }}
+              label="Description"
               name="description"
               value={state.description}
               onChange={(e) => onChange('description', e.target.value)}
             />
-            <TextField
-              type="number"
-              sx={{ mb: 2 }}
-              name="price"
-              value={state.price}
-              onChange={(e) => onChange('price', e.target.value)}
-            />
-            <TextField
-              type="number"
-              sx={{ mb: 2 }}
-              name="stock"
-              value={state.stock}
-              onChange={(e) => onChange('stock', e.target.value)}
-            />
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  type="number"
+                  name="price"
+                  label="Price"
+                  value={state.price}
+                  onChange={(e) => onChange('price', e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  type="number"
+                  name="stock"
+                  label="Stock"
+                  value={state.stock}
+                  onChange={(e) => onChange('stock', e.target.value)}
+                />
+              </Grid>
+            </Grid>
           </>
         )
       },
@@ -58,6 +72,9 @@ export const productSchema: IFormSchema[] = [
         titleKey: 'name',
         defaultData: productVariantData as any,
       },
+    },
+    shouldHide(formValue: any) {
+      return !formValue.isVariant
     },
   },
   {
@@ -76,13 +93,16 @@ export const productSchema: IFormSchema[] = [
         name: 'discountPrice',
         description: 'Enter the discount price of the product',
       },
+      {
+        field: 'numberField',
+        label: 'Stock',
+        name: 'stock',
+        description: 'Enter the stock number',
+      },
     ],
-  },
-  {
-    field: 'numberField',
-    label: 'Stock',
-    name: 'stock',
-    description: 'Enter the stock number',
+    shouldHide(formValue: any) {
+      return formValue.isVariant
+    },
   },
   {
     field: 'image',
