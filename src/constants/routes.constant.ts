@@ -18,6 +18,11 @@ export const adminInventoryUrls = {
     create: 'create',
     edit: 'edit/:brandId',
   },
+  category: {
+    main: 'inventory/category',
+    create: 'create',
+    edit: 'edit/:categoryId',
+  },
   order: {
     main: 'inventory/orders',
   },

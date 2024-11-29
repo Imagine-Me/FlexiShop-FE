@@ -30,3 +30,9 @@ export interface IBrandModel {
   logo?: IImageModel
   products?: IProductModel[]
 }
+
+export interface ICategoryModel {
+  id?: string
+  name: string
+  products?: IProductModel[]
+}

@@ -135,3 +135,12 @@ export const brandSchema: IFormSchema[] = [
     description: 'Logo of the product',
   },
 ]
+
+export const categorySchema: IFormSchema[] = [
+  {
+    field: 'textfield',
+    label: 'Category Name',
+    name: 'name',
+    description: 'Enter the name of the category',
+  },
+]

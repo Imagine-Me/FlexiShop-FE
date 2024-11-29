@@ -1,7 +1,11 @@
 import { ProductsUrls } from 'src/constants/urls.constant'
 import { useAxios } from 'src/hooks/axios.hook'
 import { PaginateValue } from 'src/interfaces/common.interface'
-import { IBrandModel, IProductModel } from 'src/interfaces/product.interface'
+import {
+  IBrandModel,
+  ICategoryModel,
+  IProductModel,
+} from 'src/interfaces/product.interface'
 
 export const useProductService = () => {
   const { fetchData, isLoading, error } = useAxios()
@@ -133,6 +137,63 @@ export const useProductService = () => {
     }
   }
 
+  //! --------------- CATEGORY CRUD ---------------------------
+  const getAllCategories = async (
+    page = 1,
+    limit = 1
+  ): Promise<PaginateValue<ICategoryModel[]>> => {
+    const response = await fetchData<PaginateValue<ICategoryModel[]>>(
+      'get',
+      `${ProductsUrls.GET_CATEGORIES}?page=${page}&limit=${limit}`
+    )
+    if (response) {
+      return response
+    }
+    return { data: [], currentPage: page, total: 0 }
+  }
+
+  const getCategory = async (id: string) => {
+    const response = await fetchData<ICategoryModel>(
+      'get',
+      `${ProductsUrls.GET_CATEGORIES}/${id}`
+    )
+    if (response) {
+      return response
+    }
+  }
+
+  const createCategory = async (data: ICategoryModel) => {
+    const response = await fetchData<ICategoryModel>(
+      'post',
+      ProductsUrls.GET_CATEGORIES,
+      { ...data }
+    )
+    if (response) {
+      return response
+    }
+  }
+
+  const updateCategory = async (id: string, data: ICategoryModel) => {
+    const response = await fetchData<ICategoryModel>(
+      'patch',
+      `${ProductsUrls.GET_CATEGORIES}/${id}`,
+      { ...data }
+    )
+    if (response) {
+      return response
+    }
+  }
+
+  const deleteCategory = async (id: string) => {
+    const response = await fetchData<ICategoryModel>(
+      'delete',
+      `${ProductsUrls.GET_CATEGORIES}/${id}`
+    )
+    if (response) {
+      return response
+    }
+  }
+
   return {
     isLoading,
     error,
@@ -146,5 +207,10 @@ export const useProductService = () => {
     createBrand,
     deleteBrand,
     updateBrand,
+    getAllCategories,
+    getCategory,
+    createCategory,
+    deleteCategory,
+    updateCategory,
   }
 }

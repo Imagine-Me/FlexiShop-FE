@@ -56,6 +56,18 @@ const CreateBrandPage = lazy(() =>
   }))
 )
 
+const CategoryPage = lazy(() => import('../Inventory/Category'))
+const AllCategoriesPage = lazy(() =>
+  import('../Inventory/Category/AllCategories').then((module) => ({
+    default: module.AllCategories,
+  }))
+)
+const CreateCategoryPage = lazy(() =>
+  import('../Inventory/Category/CreateCategory').then((module) => ({
+    default: module.CreateCategory,
+  }))
+)
+
 const drawerWidth = 240
 export const AdminLanding = () => {
   const theme = useTheme()
@@ -203,6 +215,22 @@ export const AdminLanding = () => {
                 element={<CreateBrandPage />}
               />
               <Route path="" element={<AllBrandPage />} />
+            </Route>
+
+            {/* Category URLS */}
+            <Route
+              path={adminInventoryUrls.category.main}
+              element={<CategoryPage />}
+            >
+              <Route
+                path={adminInventoryUrls.category.create}
+                element={<CreateCategoryPage />}
+              />
+              <Route
+                path={adminInventoryUrls.category.edit}
+                element={<CreateCategoryPage />}
+              />
+              <Route path="" element={<AllCategoriesPage />} />
             </Route>
 
             {/* ---------------- PAGES URLS----------------------------*/}
