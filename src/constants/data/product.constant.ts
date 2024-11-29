@@ -1,5 +1,6 @@
 import { StatusEnum } from 'src/interfaces/common.interface'
 import {
+  IBrandModel,
   IProductModel,
   IProductVariantModel,
 } from 'src/interfaces/product.interface'
@@ -20,4 +21,8 @@ export const productVariantData: IProductVariantModel = {
   name: '',
   price: null,
   stock: null,
+}
+
+export const brandData: IBrandModel = {
+  name: '',
 }

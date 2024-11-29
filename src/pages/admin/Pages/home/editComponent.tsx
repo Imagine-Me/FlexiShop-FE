@@ -1,4 +1,4 @@
-import { AdminUrls } from 'src/constants/routes.constant'
+import { adminPagesUrls } from 'src/constants/routes.constant'
 import { PageWrapper } from '../../Landing/PageWrapper'
 import PreviewComponent from 'src/components/generic/previewComponent'
 import { useHomeContext } from 'src/context/home/home.hook'
@@ -82,7 +82,7 @@ export const EditComponent = () => {
     <PageWrapper
       breadcrumbs={[
         { title: 'Pages' },
-        { title: 'Home', link: `/admin/${AdminUrls.HOME_PAGE}` },
+        { title: 'Home', link: `/admin/${adminPagesUrls.home.main}` },
         { title: 'Edit' },
       ]}
       footer={{

@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react'
 import { useMatch } from 'react-router-dom'
-import { AdminUrls } from 'src/constants/routes.constant'
+import { adminPagesUrls } from 'src/constants/routes.constant'
 import { HomeComponents } from 'src/interfaces/components/home.interface'
 import useTemplateService from 'src/service/template.service'
 import { useConfigStore } from 'src/store/config.store'
@@ -36,9 +36,9 @@ interface HomeContextProviderProps {
 export const HomeContextProvider: React.FC<HomeContextProviderProps> = ({
   children,
 }) => {
-  const isHomePage = useMatch(`/admin/${AdminUrls.HOME_PAGE}`)
+  const isHomePage = useMatch(`/admin/${adminPagesUrls.home.main}`)
   const isEditPage = useMatch(
-    `/admin/${AdminUrls.HOME_PAGE}/${AdminUrls.HOME_PAGE_EDIT}`
+    `/admin/${adminPagesUrls.home.main}/${adminPagesUrls.home.edit}`
   )
 
   const [theme] = useConfigStore((state) => [state.theme])
