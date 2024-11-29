@@ -1,11 +1,11 @@
 import { Card, CardActionArea, Typography } from '@mui/material'
 
 import classes from './Card1.module.css'
-import { IProductModel } from 'src/interfaces/components/home.interface'
+import { IProductModel } from 'src/interfaces/product.interface'
 
 export const ProductCard1: React.FC<IProductModel> = ({
-  image,
-  title,
+  images,
+  name,
   price,
 }) => {
   return (
@@ -13,11 +13,11 @@ export const ProductCard1: React.FC<IProductModel> = ({
       <Card className={classes.card}>
         <div
           className={classes.imageSection}
-          style={{ backgroundImage: `url(${image.url})` }}
+          style={{ backgroundImage: `url(${images?.[0]?.url})` }}
         ></div>
         <div className={classes.contentSection}>
           <Typography variant="body1" className={classes.title}>
-            {title}
+            {name}
           </Typography>
           <Typography variant="body1" className={classes.price} color="success">
             ${price}

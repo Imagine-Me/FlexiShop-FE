@@ -24,3 +24,7 @@ export enum TemplateUrls {
   UPDATE_HOME = '/templates/home',
   UPDATE_THEME = '/templates/theme',
 }
+
+export enum ProductsUrls {
+  GET_PRODUCTS = '/products',
+}

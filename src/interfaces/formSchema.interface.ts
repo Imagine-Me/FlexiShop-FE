@@ -19,6 +19,9 @@ export interface IFormSchema {
     | 'card'
     | 'alignField'
     | 'colorField'
+    | 'numberField'
+    | 'htmlEditor'
+    | 'checkbox'
   description?: string
   cols?: number
   metadata?: {
@@ -32,4 +35,5 @@ export interface IFormSchema {
   }
 
   subSchema?: IFormSchema[]
+  shouldHide?: (formValue: any) => boolean
 }

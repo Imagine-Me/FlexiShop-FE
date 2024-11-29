@@ -27,6 +27,17 @@ const EditComponentPage = lazy(() =>
     default: module.EditComponent,
   }))
 )
+const ProductPage = lazy(() => import('../Inventory/Product'))
+const AllProductPage = lazy(() =>
+  import('../Inventory/Product/AllProducts').then((module) => ({
+    default: module.AllProducts,
+  }))
+)
+const CreateProductPage = lazy(() =>
+  import('../Inventory/Product/CreateProduct').then((module) => ({
+    default: module.CreateProduct,
+  }))
+)
 
 const drawerWidth = 240
 export const AdminLanding = () => {
@@ -132,6 +143,17 @@ export const AdminLanding = () => {
             <Route path={AdminUrls.GENERAL_PAGE} element={<GeneralPage />} />
             <Route path={AdminUrls.HEADER_PAGE} element={<HeaderPage />} />
             <Route path={AdminUrls.FOOTER_PAGE} element={<FooterPage />} />
+            <Route path={AdminUrls.PRODUCT_PAGE} element={<ProductPage />}>
+              <Route
+                path={AdminUrls.PRODUCT_CREATE_PAGE}
+                element={<CreateProductPage />}
+              />
+              <Route
+                path={AdminUrls.PRODUCT_EDIT_PAGE}
+                element={<CreateProductPage />}
+              />
+              <Route path="" element={<AllProductPage />} />
+            </Route>
             <Route path={AdminUrls.HOME_PAGE} element={<HomePage />}>
               <Route
                 path={AdminUrls.HOME_PAGE_EDIT}
