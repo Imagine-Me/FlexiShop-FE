@@ -162,6 +162,16 @@ export const useProductService = () => {
     return { data: [], currentPage: page, total: 0 }
   }
 
+  const fetchCategories = async () => {
+    const response = await fetchData<ICategoryModel[]>(
+      'get',
+      ProductsUrls.FETCH_CATEGORIES
+    )
+    if (response) {
+      return response
+    }
+  }
+
   const getCategory = async (id: string) => {
     const response = await fetchData<ICategoryModel>(
       'get',
@@ -222,6 +232,7 @@ export const useProductService = () => {
     createCategory,
     deleteCategory,
     updateCategory,
-    fetchBrands
+    fetchBrands,
+    fetchCategories,
   }
 }

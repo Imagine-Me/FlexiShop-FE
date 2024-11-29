@@ -25,6 +25,12 @@ export const productSchema: IFormSchema[] = [
         name: 'brand',
         description: 'Select brand for this product',
       },
+      {
+        field: 'categoryField',
+        label: 'Category',
+        name: 'category',
+        description: 'Select category for this product',
+      },
     ],
   },
   {

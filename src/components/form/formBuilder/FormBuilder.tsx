@@ -28,6 +28,7 @@ import { ColorField } from '../fields/ColorField'
 import { HtmlEditor } from 'src/components/generic/HtmlEditor/HtmlEditor'
 import { BrandField } from '../fields/BrandField'
 import { IBrandModel } from 'src/interfaces/product.interface'
+import { CategoryField } from '../fields/CategoryField'
 
 interface IFormBuilderProps<T> {
   schema: IFormSchema[]
@@ -275,6 +276,18 @@ export function FormBuilder<T>({
           return (
             <BrandField
               label={form.label}
+              helperText={form.description}
+              value={fieldValue as IBrandModel}
+              onChange={(value) => onFormChange(value, form.name ?? '')}
+            />
+          )
+        }
+
+        case 'categoryField': {
+          return (
+            <CategoryField
+              label={form.label}
+              helperText={form.description}
               value={fieldValue as IBrandModel}
               onChange={(value) => onFormChange(value, form.name ?? '')}
             />

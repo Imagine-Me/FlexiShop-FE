@@ -70,7 +70,9 @@ export const AutoCompleteInput = <T,>({
         onChange={(_, value) => {
           onChange(value)
         }}
-        isOptionEqualToValue={(option) => value[valueKey] === option[valueKey]}
+        isOptionEqualToValue={(option) =>
+          value?.[valueKey] === option?.[valueKey]
+        }
         renderInput={(params) => (
           <TextField {...params} label={label} name={name} />
         )}
