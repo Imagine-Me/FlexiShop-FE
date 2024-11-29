@@ -23,3 +23,10 @@ export interface IProductModel {
   status: StatusEnum
   variants?: IProductVariantModel[]
 }
+
+export interface IBrandModel {
+  id?: string
+  name: string
+  logo?: IImageModel
+  products?: IProductModel[]
+}

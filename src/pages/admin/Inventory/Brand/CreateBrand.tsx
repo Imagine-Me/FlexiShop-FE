@@ -1,42 +1,36 @@
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { PageWrapper } from '../../Landing/PageWrapper'
-import { Button, CircularProgress, Grid } from '@mui/material'
+import { Button, CircularProgress } from '@mui/material'
 import { adminInventoryUrls } from 'src/constants/routes.constant'
 import { FormBuilder } from 'src/components/form/formBuilder/FormBuilder'
-import { productSchema } from 'src/constants/formSchema/product'
-import { productData } from 'src/constants/data/product.constant'
-import { IProductModel } from 'src/interfaces/product.interface'
+import { brandSchema } from 'src/constants/formSchema/product'
+import { brandData } from 'src/constants/data/product.constant'
+import { IBrandModel } from 'src/interfaces/product.interface'
 import { useProductService } from 'src/service/product.service'
 import { useEffect, useState } from 'react'
 import { Error } from 'src/components/generic/error'
 
-export const CreateProduct = () => {
-  const [state, setState] = useState(productData)
+export const CreateBrand = () => {
+  const [state, setState] = useState(brandData)
 
-  const { createProduct, isLoading, getProduct, updateProduct, error } =
+  const { createBrand, isLoading, getBrand, updateBrand, error } =
     useProductService()
 
   const navigate = useNavigate()
-  const { productId } = useParams()
+  const { brandId } = useParams()
 
-  const onChange = async (
-    data: Partial<
-      IProductModel & {
-        isVariant: boolean
-      }
-    >
-  ) => {
+  const onChange = async (data: IBrandModel) => {
     setState(data)
   }
 
   const onFormSubmit = async () => {
-    if (!productId) {
-      const res = await createProduct(state)
+    if (!brandId) {
+      const res = await createBrand(state)
       if (res) {
-        navigate(`/admin/${adminInventoryUrls.product.main}/edit/${res?.id}`)
+        navigate(`/admin/${adminInventoryUrls.brand.main}/edit/${res?.id}`)
       }
     } else {
-      const res = await updateProduct(productId, state)
+      const res = await updateBrand(brandId, state)
       if (res) {
         setState(res)
       }
@@ -44,20 +38,23 @@ export const CreateProduct = () => {
   }
 
   useEffect(() => {
-    if (productId) {
-      getProduct(productId).then((product) => {
-        if (product) {
-          setState(product)
+    if (brandId) {
+      getBrand(brandId).then((brand) => {
+        if (brand) {
+          setState(brand)
         }
       })
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [productId])
+  }, [brandId])
 
-  const breadcrumbs = [{ title: 'Inventory' }, { title: 'Product' }]
+  const breadcrumbs = [
+    { title: 'Inventory' },
+    { title: 'Brand', link: `/admin/${adminInventoryUrls.brand.main}` },
+  ]
 
-  if (productId) {
+  if (brandId) {
     breadcrumbs.push({ title: 'Edit' })
     breadcrumbs.push({ title: state.name ?? '' })
   } else {
@@ -69,7 +66,7 @@ export const CreateProduct = () => {
       breadcrumbs={breadcrumbs}
       footer={{
         left: (
-          <Link to={`/admin/${adminInventoryUrls.product.main}`}>
+          <Link to={`/admin/${adminInventoryUrls.brand.main}`}>
             <Button>Back</Button>
           </Link>
         ),
@@ -82,24 +79,13 @@ export const CreateProduct = () => {
             {isLoading && (
               <CircularProgress sx={{ mr: 1, color: 'white' }} size={12} />
             )}
-            {productId ? 'Update' : 'Create'}
+            {brandId ? 'Update' : 'Create'}
           </Button>
         ),
       }}
     >
       <Error error={error} />
-      <Grid container spacing={3}>
-        <Grid item sm={12} lg={8}>
-          <FormBuilder
-            schema={productSchema}
-            value={state}
-            onChange={onChange}
-          />
-        </Grid>
-        <Grid item sm={12} lg={4}>
-          2
-        </Grid>
-      </Grid>
+      <FormBuilder schema={brandSchema} value={state} onChange={onChange} />
     </PageWrapper>
   )
 }

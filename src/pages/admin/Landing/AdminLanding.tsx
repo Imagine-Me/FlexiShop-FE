@@ -9,7 +9,12 @@ import Typography from '@mui/material/Typography'
 import { CircularProgress, useMediaQuery, useTheme } from '@mui/material'
 import { AdminSideMenu } from 'src/components/admin/sideMenu/AdminSideMenu'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { AdminUrls } from 'src/constants/routes.constant'
+import {
+  adminConfigurationUrls,
+  adminInventoryUrls,
+  adminPagesUrls,
+  AdminUrls,
+} from 'src/constants/routes.constant'
 
 // lazy imports
 const ThemePage = lazy(() => import('../Configuration/Theme'))
@@ -36,6 +41,18 @@ const AllProductPage = lazy(() =>
 const CreateProductPage = lazy(() =>
   import('../Inventory/Product/CreateProduct').then((module) => ({
     default: module.CreateProduct,
+  }))
+)
+
+const BrandPage = lazy(() => import('../Inventory/Brand'))
+const AllBrandPage = lazy(() =>
+  import('../Inventory/Brand/AllBrands').then((module) => ({
+    default: module.AllBrand,
+  }))
+)
+const CreateBrandPage = lazy(() =>
+  import('../Inventory/Brand/CreateBrand').then((module) => ({
+    default: module.CreateBrand,
   }))
 )
 
@@ -139,24 +156,59 @@ export const AdminLanding = () => {
         >
           <Routes>
             <Route path={AdminUrls.DASHBOARD_PAGE} element={'Dashboard'} />
-            <Route path={AdminUrls.THEME_PAGE} element={<ThemePage />} />
-            <Route path={AdminUrls.GENERAL_PAGE} element={<GeneralPage />} />
-            <Route path={AdminUrls.HEADER_PAGE} element={<HeaderPage />} />
-            <Route path={AdminUrls.FOOTER_PAGE} element={<FooterPage />} />
-            <Route path={AdminUrls.PRODUCT_PAGE} element={<ProductPage />}>
+
+            {/* ---------------------------- CONFIGURATION URLS --------------------------------- */}
+            <Route
+              path={adminConfigurationUrls.theme.main}
+              element={<ThemePage />}
+            />
+            <Route
+              path={adminConfigurationUrls.general.main}
+              element={<GeneralPage />}
+            />
+            <Route
+              path={adminConfigurationUrls.header.main}
+              element={<HeaderPage />}
+            />
+            <Route
+              path={adminConfigurationUrls.footer.main}
+              element={<FooterPage />}
+            />
+
+            {/* ---------------------------- INVENTORY URLS --------------------------------- */}
+            {/* Product URLS */}
+            <Route
+              path={adminInventoryUrls.product.main}
+              element={<ProductPage />}
+            >
               <Route
-                path={AdminUrls.PRODUCT_CREATE_PAGE}
+                path={adminInventoryUrls.product.create}
                 element={<CreateProductPage />}
               />
               <Route
-                path={AdminUrls.PRODUCT_EDIT_PAGE}
+                path={adminInventoryUrls.product.edit}
                 element={<CreateProductPage />}
               />
               <Route path="" element={<AllProductPage />} />
             </Route>
-            <Route path={AdminUrls.HOME_PAGE} element={<HomePage />}>
+
+            {/* Brand URLS */}
+            <Route path={adminInventoryUrls.brand.main} element={<BrandPage />}>
               <Route
-                path={AdminUrls.HOME_PAGE_EDIT}
+                path={adminInventoryUrls.brand.create}
+                element={<CreateBrandPage />}
+              />
+              <Route
+                path={adminInventoryUrls.brand.edit}
+                element={<CreateBrandPage />}
+              />
+              <Route path="" element={<AllBrandPage />} />
+            </Route>
+
+            {/* ---------------- PAGES URLS----------------------------*/}
+            <Route path={adminPagesUrls.home.main} element={<HomePage />}>
+              <Route
+                path={adminPagesUrls.home.edit}
                 element={<EditComponentPage />}
               />
               <Route path="" element={<ComponentPage />} />

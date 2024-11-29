@@ -105,7 +105,7 @@ const DeletableImage: React.FC<IDeletableImageProps> = ({
         src={image as string}
         alt={`selected_image_${index}`}
         loading="lazy"
-        style={{ objectFit: 'cover' }}
+        style={{ objectFit: 'contain' }}
         width={100}
         height={100}
       />
@@ -217,6 +217,10 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  useEffect(() => {
+    setSelectedImages(value)
+  }, [value])
+
   return (
     <>
       <Box>
@@ -283,7 +287,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
                   <img
                     width="100"
                     height="100"
-                    style={{ objectFit: 'cover' }}
+                    style={{ objectFit: 'contain' }}
                     srcSet={`${item.url}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                     src={`${item.url}?w=164&h=164&fit=crop&auto=format`}
                     alt={item.name}

@@ -4,7 +4,12 @@ import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded'
 import LayersIcon from '@mui/icons-material/Layers'
 import InventoryIcon from '@mui/icons-material/Inventory'
 import { IAdminSideMenuConstant } from 'src/interfaces/admin.interface'
-import { AdminUrls } from './routes.constant'
+import {
+  adminConfigurationUrls,
+  adminInventoryUrls,
+  adminPagesUrls,
+  AdminUrls,
+} from './routes.constant'
 
 export const adminSideMenuConstant: IAdminSideMenuConstant[] = [
   {
@@ -21,10 +26,21 @@ export const adminSideMenuConstant: IAdminSideMenuConstant[] = [
     subMenu: [
       {
         title: 'Products',
-        path: AdminUrls.PRODUCT_PAGE,
-        subPath: [AdminUrls.PRODUCT_CREATE_PAGE, AdminUrls.PRODUCT_EDIT_PAGE],
+        path: adminInventoryUrls.product.main,
+        subPath: [
+          adminInventoryUrls.product.create,
+          adminInventoryUrls.product.edit,
+        ],
       },
-      { title: 'Orders', path: AdminUrls.ORDER_PAGE },
+      { title: 'Orders', path: adminInventoryUrls.order.main },
+      {
+        title: 'Brands',
+        path: adminInventoryUrls.brand.main,
+        subPath: [
+          adminInventoryUrls.brand.create,
+          adminInventoryUrls.brand.edit,
+        ],
+      },
     ],
   },
   {
@@ -50,23 +66,23 @@ export const adminSideMenuConstant: IAdminSideMenuConstant[] = [
     subMenu: [
       {
         title: 'Template',
-        path: AdminUrls.TEMPLATE_PAGE,
+        path: adminConfigurationUrls.template.main,
       },
       {
         title: 'General',
-        path: AdminUrls.GENERAL_PAGE,
+        path: adminConfigurationUrls.general.main,
       },
       {
         title: 'Header',
-        path: AdminUrls.HEADER_PAGE,
+        path: adminConfigurationUrls.header.main,
       },
       {
         title: 'Footer',
-        path: AdminUrls.FOOTER_PAGE,
+        path: adminConfigurationUrls.footer.main,
       },
       {
         title: 'Theme',
-        path: AdminUrls.THEME_PAGE,
+        path: adminConfigurationUrls.theme.main,
       },
     ],
   },
@@ -78,8 +94,8 @@ export const adminSideMenuConstant: IAdminSideMenuConstant[] = [
     subMenu: [
       {
         title: 'Home',
-        path: AdminUrls.HOME_PAGE,
-        subPath: [AdminUrls.HOME_PAGE_EDIT],
+        path: adminPagesUrls.home.main,
+        subPath: [adminPagesUrls.home.edit],
       },
     ],
   },

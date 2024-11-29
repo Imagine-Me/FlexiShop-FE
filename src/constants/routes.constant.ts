@@ -3,17 +3,47 @@ export enum AdminUrls {
   ADMIN_REROUTE_PAGE = '/admin/dashboard',
   DASHBOARD_PAGE = 'dashboard',
   INVENTORY_PAGE = 'inventory',
-  PRODUCT_PAGE = 'inventory/product',
-  PRODUCT_CREATE_PAGE = 'create',
-  PRODUCT_EDIT_PAGE = 'edit/:productId',
-  ORDER_PAGE = 'inventory/orders',
   CONFIGURATION_URL = 'configuration',
-  GENERAL_PAGE = 'configuration/general',
-  TEMPLATE_PAGE = 'configuration/template',
-  HEADER_PAGE = 'configuration/header',
-  THEME_PAGE = 'configuration/theme',
-  FOOTER_PAGE = 'configuration/footer',
   PAGE_URL = 'pages',
-  HOME_PAGE = 'pages/home-page',
-  HOME_PAGE_EDIT = 'edit/:id',
+}
+
+export const adminInventoryUrls = {
+  product: {
+    main: 'inventory/product',
+    create: 'create',
+    edit: 'edit/:productId',
+  },
+  brand: {
+    main: 'inventory/brand',
+    create: 'create',
+    edit: 'edit/:brandId',
+  },
+  order: {
+    main: 'inventory/orders',
+  },
+}
+
+export const adminConfigurationUrls = {
+  general: {
+    main: 'configuration/general',
+  },
+  template: {
+    main: 'configuration/template',
+  },
+  header: {
+    main: 'configuration/header',
+  },
+  theme: {
+    main: 'configuration/theme',
+  },
+  footer: {
+    main: 'configuration/footer',
+  },
+}
+
+export const adminPagesUrls = {
+  home: {
+    main: 'pages/home-page',
+    edit: 'edit/:id',
+  },
 }
