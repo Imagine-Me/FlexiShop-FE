@@ -1,6 +1,7 @@
 import { StatusEnum } from 'src/interfaces/common.interface'
 import {
   IBrandModel,
+  ICategoryModel,
   IProductModel,
   IProductVariantModel,
 } from 'src/interfaces/product.interface'
@@ -24,5 +25,8 @@ export const productVariantData: IProductVariantModel = {
 }
 
 export const brandData: IBrandModel = {
+  name: '',
+}
+export const categoryData: ICategoryModel = {
   name: '',
 }
