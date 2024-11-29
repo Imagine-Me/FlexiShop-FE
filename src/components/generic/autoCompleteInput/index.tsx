@@ -1,14 +1,19 @@
 import React from 'react'
-import { Autocomplete, TextField } from '@mui/material'
+import {
+  Autocomplete,
+  FormControl,
+  FormHelperText,
+  TextField,
+} from '@mui/material'
 
-interface AutoCompleteInputProps {
+interface AutoCompleteInputFreeSolo {
   value: string
   options: { label: string; value: string }[] // Predefined options
   label: string // Label for the input
   onChange: (value: string) => void // Callback for value changes
 }
 
-const AutoCompleteInput: React.FC<AutoCompleteInputProps> = ({
+const AutoCompleteInputFreeSolo: React.FC<AutoCompleteInputFreeSolo> = ({
   options,
   label,
   onChange,
@@ -31,4 +36,48 @@ const AutoCompleteInput: React.FC<AutoCompleteInputProps> = ({
   )
 }
 
-export default AutoCompleteInput
+export default AutoCompleteInputFreeSolo
+
+interface AutoCompleteInputProps<T> {
+  value: T
+  options: T[]
+  label: string
+  labelKey: keyof T
+  valueKey: keyof T
+  helperText?: string
+  name?: string
+  onChange: (value?: T | null) => void
+}
+
+export const AutoCompleteInput = <T,>({
+  label,
+  onChange,
+  value,
+  helperText,
+  name,
+  options,
+  labelKey,
+  valueKey,
+}: AutoCompleteInputProps<T>) => {
+  const selectedValue = { ...value }
+  return (
+    <FormControl fullWidth>
+      <Autocomplete
+        value={selectedValue}
+        disablePortal
+        options={options}
+        getOptionLabel={(value) => (value[labelKey] as string) ?? ''}
+        onChange={(_, value) => {
+          onChange(value)
+        }}
+        isOptionEqualToValue={(option) =>
+          value?.[valueKey] === option?.[valueKey]
+        }
+        renderInput={(params) => (
+          <TextField {...params} label={label} name={name} />
+        )}
+      />
+      {helperText && <FormHelperText>{helperText}</FormHelperText>}
+    </FormControl>
+  )
+}

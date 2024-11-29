@@ -16,6 +16,24 @@ export const productSchema: IFormSchema[] = [
     description: 'Enter the description of the product',
   },
   {
+    field: 'flex-2',
+    label: '',
+    subSchema: [
+      {
+        field: 'brandField',
+        label: 'Brand',
+        name: 'brand',
+        description: 'Select brand for this product',
+      },
+      {
+        field: 'categoryField',
+        label: 'Category',
+        name: 'category',
+        description: 'Select category for this product',
+      },
+    ],
+  },
+  {
     field: 'checkbox',
     label: 'Is there variants for this product',
     name: 'isVariant',

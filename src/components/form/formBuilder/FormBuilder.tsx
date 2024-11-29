@@ -26,6 +26,9 @@ import { Category1 } from 'src/interfaces/components/home.interface'
 import { AlignField } from '../fields/AlignField'
 import { ColorField } from '../fields/ColorField'
 import { HtmlEditor } from 'src/components/generic/HtmlEditor/HtmlEditor'
+import { BrandField } from '../fields/BrandField'
+import { IBrandModel } from 'src/interfaces/product.interface'
+import { CategoryField } from '../fields/CategoryField'
 
 interface IFormBuilderProps<T> {
   schema: IFormSchema[]
@@ -141,9 +144,14 @@ export function FormBuilder<T>({
           let value = fieldValue
           if (typeof value === 'string') {
             value = []
-          } else if (!Array.isArray(value) && value !== undefined) {
+          } else if (
+            !Array.isArray(value) &&
+            value !== undefined &&
+            value !== null
+          ) {
             value = [value]
           }
+
           return (
             <ImageUploader
               multiple={form.metadata?.multiple as boolean}
@@ -261,6 +269,28 @@ export function FormBuilder<T>({
                 <FormHelperText>{form.description}</FormHelperText>
               )}
             </>
+          )
+        }
+
+        case 'brandField': {
+          return (
+            <BrandField
+              label={form.label}
+              helperText={form.description}
+              value={fieldValue as IBrandModel}
+              onChange={(value) => onFormChange(value, form.name ?? '')}
+            />
+          )
+        }
+
+        case 'categoryField': {
+          return (
+            <CategoryField
+              label={form.label}
+              helperText={form.description}
+              value={fieldValue as IBrandModel}
+              onChange={(value) => onFormChange(value, form.name ?? '')}
+            />
           )
         }
       }
