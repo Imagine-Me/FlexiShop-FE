@@ -28,11 +28,13 @@ export const PageWrapper: React.FC<PageWrapperProps> = ({
           >
             {breadcrumbs.map((breadcrumb) =>
               breadcrumb.link ? (
-                <Typography key={breadcrumb.title} variant="body2">
-                  <Link key={breadcrumb.title} to={breadcrumb.link}>
-                    {breadcrumb.title}
-                  </Link>
-                </Typography>
+                <Link
+                  key={breadcrumb.title}
+                  to={breadcrumb.link}
+                  className={classes.breadcrumbLink}
+                >
+                  {breadcrumb.title}
+                </Link>
               ) : (
                 <Typography key={breadcrumb.title} variant="body2">
                   {breadcrumb.title}

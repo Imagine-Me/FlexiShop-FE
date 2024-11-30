@@ -81,3 +81,42 @@ export const AutoCompleteInput = <T,>({
     </FormControl>
   )
 }
+
+interface AutoCompleteInputMultipleProps<T> {
+  value: T[]
+  options: T[]
+  label: string
+  labelKey: keyof T
+  helperText?: string
+  name?: string
+  onChange: (value?: T[] | null) => void
+}
+
+export const AutoCompleteInputMultiple = <T,>({
+  label,
+  onChange,
+  value,
+  helperText,
+  name,
+  options,
+  labelKey,
+}: AutoCompleteInputMultipleProps<T>) => {
+  return (
+    <FormControl fullWidth>
+      <Autocomplete
+        value={value}
+        disablePortal
+        options={options}
+        getOptionLabel={(value) => (value[labelKey] as string) ?? ''}
+        onChange={(_, value) => {
+          onChange(value)
+        }}
+        renderInput={(params) => (
+          <TextField {...params} label={label} name={name} />
+        )}
+        multiple
+      />
+      {helperText && <FormHelperText>{helperText}</FormHelperText>}
+    </FormControl>
+  )
+}

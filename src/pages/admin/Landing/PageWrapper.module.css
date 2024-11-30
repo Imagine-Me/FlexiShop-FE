@@ -27,13 +27,8 @@
 
     .breadcrumbList {
         a {
-            text-decoration: none;
             color: var(--mui-action-active);
-        }
-
-        a:hover {
-            text-decoration: underline;
-            color: var(--mui-primary-color);
+            font-size: 14px;
         }
 
         :global(.MuiBreadcrumbs-li:last-child) {

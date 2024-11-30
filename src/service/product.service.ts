@@ -5,6 +5,7 @@ import {
   IBrandModel,
   ICategoryModel,
   IProductModel,
+  ITagModel,
 } from 'src/interfaces/product.interface'
 
 export const useProductService = () => {
@@ -214,6 +215,71 @@ export const useProductService = () => {
     }
   }
 
+  //! --------------- TAGS CRUD ---------------------------
+  const getAllTags = async (
+    page = 1,
+    limit = 1
+  ): Promise<PaginateValue<ITagModel[]>> => {
+    const response = await fetchData<PaginateValue<ITagModel[]>>(
+      'get',
+      `${ProductsUrls.GET_TAGS}?page=${page}&limit=${limit}`
+    )
+    if (response) {
+      return response
+    }
+    return { data: [], currentPage: page, total: 0 }
+  }
+
+  const fetchTags = async () => {
+    const response = await fetchData<ITagModel[]>(
+      'get',
+      ProductsUrls.FETCH_TAGS
+    )
+    if (response) {
+      return response
+    }
+  }
+
+  const getTag = async (id: string) => {
+    const response = await fetchData<ITagModel>(
+      'get',
+      `${ProductsUrls.GET_TAGS}/${id}`
+    )
+    if (response) {
+      return response
+    }
+  }
+
+  const createTag = async (data: ITagModel) => {
+    const response = await fetchData<ITagModel>('post', ProductsUrls.GET_TAGS, {
+      ...data,
+    })
+    if (response) {
+      return response
+    }
+  }
+
+  const updateTag = async (id: string, data: ITagModel) => {
+    const response = await fetchData<ITagModel>(
+      'patch',
+      `${ProductsUrls.GET_TAGS}/${id}`,
+      { ...data }
+    )
+    if (response) {
+      return response
+    }
+  }
+
+  const deleteTag = async (id: string) => {
+    const response = await fetchData<ITagModel>(
+      'delete',
+      `${ProductsUrls.GET_TAGS}/${id}`
+    )
+    if (response) {
+      return response
+    }
+  }
+
   return {
     isLoading,
     error,
@@ -234,5 +300,11 @@ export const useProductService = () => {
     updateCategory,
     fetchBrands,
     fetchCategories,
+    fetchTags,
+    getAllTags,
+    getTag,
+    createTag,
+    deleteTag,
+    updateTag,
   }
 }

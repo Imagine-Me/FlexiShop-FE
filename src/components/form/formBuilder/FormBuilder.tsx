@@ -27,8 +27,9 @@ import { AlignField } from '../fields/AlignField'
 import { ColorField } from '../fields/ColorField'
 import { HtmlEditor } from 'src/components/generic/HtmlEditor/HtmlEditor'
 import { BrandField } from '../fields/BrandField'
-import { IBrandModel } from 'src/interfaces/product.interface'
+import { IBrandModel, ITagModel } from 'src/interfaces/product.interface'
 import { CategoryField } from '../fields/CategoryField'
+import { TagField } from '../fields/TagField'
 
 interface IFormBuilderProps<T> {
   schema: IFormSchema[]
@@ -289,6 +290,17 @@ export function FormBuilder<T>({
               label={form.label}
               helperText={form.description}
               value={fieldValue as IBrandModel}
+              onChange={(value) => onFormChange(value, form.name ?? '')}
+            />
+          )
+        }
+
+        case 'tagField': {
+          return (
+            <TagField
+              label={form.label}
+              helperText={form.description}
+              value={(fieldValue as ITagModel[]) ?? []}
               onChange={(value) => onFormChange(value, form.name ?? '')}
             />
           )

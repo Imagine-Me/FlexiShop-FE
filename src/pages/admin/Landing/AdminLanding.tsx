@@ -68,6 +68,18 @@ const CreateCategoryPage = lazy(() =>
   }))
 )
 
+const TagPage = lazy(() => import('../Inventory/Tag'))
+const AllTagsPage = lazy(() =>
+  import('../Inventory/Tag/AllTags').then((module) => ({
+    default: module.AllTags,
+  }))
+)
+const CreateTagPage = lazy(() =>
+  import('../Inventory/Tag/CreateTag').then((module) => ({
+    default: module.CreateTag,
+  }))
+)
+
 const drawerWidth = 240
 export const AdminLanding = () => {
   const theme = useTheme()
@@ -233,6 +245,18 @@ export const AdminLanding = () => {
               <Route path="" element={<AllCategoriesPage />} />
             </Route>
 
+            {/* Tags URLS */}
+            <Route path={adminInventoryUrls.tags.main} element={<TagPage />}>
+              <Route
+                path={adminInventoryUrls.tags.create}
+                element={<CreateTagPage />}
+              />
+              <Route
+                path={adminInventoryUrls.tags.edit}
+                element={<CreateTagPage />}
+              />
+              <Route path="" element={<AllTagsPage />} />
+            </Route>
             {/* ---------------- PAGES URLS----------------------------*/}
             <Route path={adminPagesUrls.home.main} element={<HomePage />}>
               <Route
