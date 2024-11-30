@@ -5,6 +5,7 @@ import {
   AccordionSummary,
   Box,
   Button,
+  Card,
   Divider,
   FormLabel,
   Typography,
@@ -25,6 +26,7 @@ interface MultipleFormProps<T> {
   value: T[]
   label: string
   titleKey: string
+  insideKey?: string
   defaultData: T
   onChange?: (value: T[]) => void
 }
@@ -35,6 +37,7 @@ export const MultipleForm = <T,>({
   label,
   titleKey,
   defaultData,
+  insideKey,
   onChange,
 }: MultipleFormProps<T>) => {
   const [state, setState] = useState(structuredClone(value))
@@ -73,8 +76,21 @@ export const MultipleForm = <T,>({
     setState(updatedState)
   }
 
+  const replacePlaceholders = (data: any) => {
+    if(!data) return ''
+    return titleKey.replace(/(\w+)/g, (match) => data[match] || match)
+  }
+
+  const getAccordionTitle = (form: T, index: number) => {
+    const value = insideKey ? form[insideKey as keyof T] : form
+    return (
+      replacePlaceholders(value) ||
+      `${capitalizeFirstLetter(titleKey)} ${index + 1}`
+    )
+  }
+
   return (
-    <>
+    <Card sx={{ p: 2 }}>
       <FormLabel sx={{ mb: 2 }}>{label}</FormLabel>
       <div className={classes.container}>
         {state.map((form, index) => (
@@ -86,8 +102,7 @@ export const MultipleForm = <T,>({
             >
               <Box>
                 <Typography variant="body1">
-                  {(form[titleKey as keyof T] as string) ||
-                    `${capitalizeFirstLetter(titleKey)} ${index + 1}`}
+                  {getAccordionTitle(form, index)}
                 </Typography>
               </Box>
             </AccordionSummary>
@@ -112,6 +127,6 @@ export const MultipleForm = <T,>({
           Add
         </Button>
       </div>
-    </>
+    </Card>
   )
 }

@@ -30,6 +30,7 @@ import { BrandField } from '../fields/BrandField'
 import { IBrandModel, ITagModel } from 'src/interfaces/product.interface'
 import { CategoryField } from '../fields/CategoryField'
 import { TagField } from '../fields/TagField'
+import { VariantField } from '../fields/VariantField'
 
 interface IFormBuilderProps<T> {
   schema: IFormSchema[]
@@ -65,6 +66,7 @@ export function FormBuilder<T>({
       const fieldValue = splittedName.reduce((acc, value) => {
         return (acc as Record<string, unknown>)[value]
       }, formValue as unknown)
+
       switch (form.field) {
         case 'h1':
           return <Typography variant="h1">{form.label}</Typography>
@@ -305,6 +307,16 @@ export function FormBuilder<T>({
             />
           )
         }
+        case 'variantField': {
+          return (
+            <VariantField
+              label={form.label}
+              helperText={form.description}
+              value={(fieldValue as string) ?? ''}
+              onChange={(value) => onFormChange(value, form.name ?? '')}
+            />
+          )
+        }
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -312,7 +324,7 @@ export function FormBuilder<T>({
   )
 
   return (
-    <Grid container spacing={4}>
+    <Grid container spacing={2}>
       {schema.map((value, index) => {
         const shouldHide = value.shouldHide && value.shouldHide(formValue)
         if (shouldHide) {

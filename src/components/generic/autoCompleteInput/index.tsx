@@ -46,12 +46,14 @@ interface AutoCompleteInputProps<T> {
   valueKey: keyof T
   helperText?: string
   name?: string
+  groupBy?: ((option: T) => string) | undefined
   onChange: (value?: T | null) => void
 }
 
 export const AutoCompleteInput = <T,>({
   label,
   onChange,
+  groupBy,
   value,
   helperText,
   name,
@@ -76,6 +78,7 @@ export const AutoCompleteInput = <T,>({
         renderInput={(params) => (
           <TextField {...params} label={label} name={name} />
         )}
+        groupBy={groupBy}
       />
       {helperText && <FormHelperText>{helperText}</FormHelperText>}
     </FormControl>

@@ -6,6 +6,7 @@ import {
   ICategoryModel,
   IProductModel,
   ITagModel,
+  IVariantModel,
 } from 'src/interfaces/product.interface'
 
 export const useProductService = () => {
@@ -280,6 +281,85 @@ export const useProductService = () => {
     }
   }
 
+  //! --------------- VARIANTS CRUD ---------------------------
+  const getAllVariants = async (
+    page = 1,
+    limit = 1
+  ): Promise<PaginateValue<IVariantModel[]>> => {
+    const response = await fetchData<PaginateValue<IVariantModel[]>>(
+      'get',
+      `${ProductsUrls.GET_VARIANTS}?page=${page}&limit=${limit}`
+    )
+    if (response) {
+      return response
+    }
+    return { data: [], currentPage: page, total: 0 }
+  }
+
+  const fetchVariantsDistinct = async () => {
+    const response = await fetchData<IVariantModel[]>(
+      'get',
+      ProductsUrls.FETCH_VARIANTS_DISTINCT
+    )
+    if (response) {
+      return response
+    }
+  }
+
+  const fetchVariants = async () => {
+    const response = await fetchData<IVariantModel[]>(
+      'get',
+      ProductsUrls.FETCH_VARIANTS
+    )
+    if (response) {
+      return response
+    }
+  }
+
+  const getVariant = async (id: string) => {
+    const response = await fetchData<IVariantModel>(
+      'get',
+      `${ProductsUrls.GET_VARIANTS}/${id}`
+    )
+    if (response) {
+      return response
+    }
+  }
+
+  const createVariant = async (data: IVariantModel) => {
+    const response = await fetchData<IVariantModel>(
+      'post',
+      ProductsUrls.GET_VARIANTS,
+      {
+        ...data,
+      }
+    )
+    if (response) {
+      return response
+    }
+  }
+
+  const updateVariant = async (id: string, data: IVariantModel) => {
+    const response = await fetchData<IVariantModel>(
+      'patch',
+      `${ProductsUrls.GET_VARIANTS}/${id}`,
+      { ...data }
+    )
+    if (response) {
+      return response
+    }
+  }
+
+  const deleteVariant = async (id: string) => {
+    const response = await fetchData<IVariantModel>(
+      'delete',
+      `${ProductsUrls.GET_VARIANTS}/${id}`
+    )
+    if (response) {
+      return response
+    }
+  }
+
   return {
     isLoading,
     error,
@@ -306,5 +386,12 @@ export const useProductService = () => {
     createTag,
     deleteTag,
     updateTag,
+    fetchVariants,
+    getAllVariants,
+    fetchVariantsDistinct,
+    getVariant,
+    createVariant,
+    updateVariant,
+    deleteVariant,
   }
 }

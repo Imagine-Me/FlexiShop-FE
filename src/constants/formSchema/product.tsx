@@ -1,6 +1,10 @@
 import { Grid, TextField } from '@mui/material'
 import { IFormSchema } from 'src/interfaces/formSchema.interface'
 import { productVariantData } from '../data/product.constant'
+import { ImageUploader } from 'src/components/generic/imageUploader/ImageUploader'
+import { IProductVariantModel } from 'src/interfaces/product.interface'
+import { HtmlEditor } from 'src/components/generic/HtmlEditor/HtmlEditor'
+import { VariantFieldGroupBy } from 'src/components/form/fields/VariantField'
 
 export const productSchema: IFormSchema[] = [
   {
@@ -16,30 +20,6 @@ export const productSchema: IFormSchema[] = [
     description: 'Enter the description of the product',
   },
   {
-    field: 'flex-2',
-    label: '',
-    subSchema: [
-      {
-        field: 'brandField',
-        label: 'Brand',
-        name: 'brand',
-        description: 'Select brand for this product',
-      },
-      {
-        field: 'categoryField',
-        label: 'Category',
-        name: 'category',
-        description: 'Select category for this product',
-      },
-      {
-        field: 'tagField',
-        label: 'Tags',
-        name: 'tags',
-        description: 'Select tags for this product',
-      },
-    ],
-  },
-  {
     field: 'checkbox',
     label: 'Is there variants for this product',
     name: 'isVariant',
@@ -47,29 +27,23 @@ export const productSchema: IFormSchema[] = [
   },
   {
     field: 'multiple',
-    label: 'Product Variant',
+    label: 'Add Product Variants',
     name: 'variants',
     description: 'Add variants if exists',
     metadata: {
-      component(state, onChange) {
+      component(
+        state: IProductVariantModel,
+        onChange: (key: keyof IProductVariantModel, value: any) => void
+      ) {
         return (
           <>
-            <TextField
-              sx={{ mb: 2 }}
-              name="name"
-              label="Variant Name"
-              value={state.name}
-              onChange={(e) => onChange('name', e.target.value)}
+            <VariantFieldGroupBy
+              label="Variant"
+              onChange={(value) => onChange('variant', value)}
+              value={state.variant!}
+              helperText="Select variants for this product"
             />
-            <TextField
-              rows={3}
-              sx={{ mb: 2 }}
-              label="Description"
-              name="description"
-              value={state.description}
-              onChange={(e) => onChange('description', e.target.value)}
-            />
-            <Grid container spacing={2}>
+            <Grid container spacing={2} sx={{ mt: 1 }}>
               <Grid item xs={12} md={6}>
                 <TextField
                   type="number"
@@ -89,11 +63,25 @@ export const productSchema: IFormSchema[] = [
                 />
               </Grid>
             </Grid>
+            <ImageUploader
+              multiple
+              value={state.images ?? []}
+              label="Image for this product"
+              name="images"
+              description="Add multiple images for this product"
+              onChange={(value) => onChange('images', value)}
+            />
+            <HtmlEditor
+              onChange={(value) => onChange('specifications', value)}
+              value={state.specifications}
+              label="Specifications"
+            />
           </>
         )
       },
       multipleField: {
-        titleKey: 'name',
+        insideKey: 'variant',
+        titleKey: 'name - value',
         defaultData: productVariantData as any,
       },
     },
@@ -136,12 +124,42 @@ export const productSchema: IFormSchema[] = [
     metadata: {
       multiple: true,
     },
+    shouldHide(formValue: any) {
+      return formValue.isVariant
+    },
   },
   {
     field: 'htmlEditor',
     label: 'Specification',
     name: 'specifications',
     description: 'Enter the specification of the product',
+    shouldHide(formValue: any) {
+      return formValue.isVariant
+    },
+  },
+  {
+    field: 'flex-2',
+    label: '',
+    subSchema: [
+      {
+        field: 'brandField',
+        label: 'Brand',
+        name: 'brand',
+        description: 'Select brand for this product',
+      },
+      {
+        field: 'categoryField',
+        label: 'Category',
+        name: 'category',
+        description: 'Select category for this product',
+      },
+      {
+        field: 'tagField',
+        label: 'Tags',
+        name: 'tags',
+        description: 'Select tags for this product',
+      },
+    ],
   },
 ]
 
@@ -175,5 +193,27 @@ export const tagSchema: IFormSchema[] = [
     label: 'Tag Name',
     name: 'name',
     description: 'Enter the name of the tag',
+  },
+]
+
+export const variantSchema: IFormSchema[] = [
+  {
+    field: 'variantField',
+    label: 'Variant Name',
+    name: 'name',
+    description: 'Enter the name of the variant',
+  },
+  {
+    field: 'textfield',
+    label: 'Variant value',
+    name: 'value',
+    description: 'Enter the name of the variant',
+  },
+  {
+    field: 'textarea',
+    label: 'HTML',
+    name: 'html',
+    description:
+      'How to show in the app. You can add an HTML code here which will show up in app.',
   },
 ]
