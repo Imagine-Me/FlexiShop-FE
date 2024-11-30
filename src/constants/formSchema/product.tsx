@@ -102,7 +102,7 @@ export const productSchema: IFormSchema[] = [
       {
         field: 'numberField',
         label: 'Price',
-        name: 'description',
+        name: 'price',
         description: 'Enter the price of the product',
       },
       {
@@ -134,7 +134,7 @@ export const productSchema: IFormSchema[] = [
   {
     field: 'htmlEditor',
     label: 'Specification',
-    name: 'specification',
+    name: 'specifications',
     description: 'Enter the specification of the product',
   },
 ]
@@ -160,5 +160,14 @@ export const categorySchema: IFormSchema[] = [
     label: 'Category Name',
     name: 'name',
     description: 'Enter the name of the category',
+  },
+]
+
+export const tagSchema: IFormSchema[] = [
+  {
+    field: 'textfield',
+    label: 'Tag Name',
+    name: 'name',
+    description: 'Enter the name of the tag',
   },
 ]

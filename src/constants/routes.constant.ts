@@ -23,6 +23,11 @@ export const adminInventoryUrls = {
     create: 'create',
     edit: 'edit/:categoryId',
   },
+  tags: {
+    main: 'inventory/tag',
+    create: 'create',
+    edit: 'edit/:tagId',
+  },
   order: {
     main: 'inventory/orders',
   },

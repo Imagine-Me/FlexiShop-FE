@@ -49,6 +49,11 @@ export const adminSideMenuConstant: IAdminSideMenuConstant[] = [
           adminInventoryUrls.category.edit,
         ],
       },
+      {
+        title: 'Tags',
+        path: adminInventoryUrls.tags.main,
+        subPath: [adminInventoryUrls.tags.create, adminInventoryUrls.tags.edit],
+      },
     ],
   },
   {

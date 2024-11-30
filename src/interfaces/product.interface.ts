@@ -36,3 +36,8 @@ export interface ICategoryModel {
   name: string
   products?: IProductModel[]
 }
+
+export interface ITagModel {
+  id?: string
+  name: string
+}

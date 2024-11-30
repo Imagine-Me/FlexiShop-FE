@@ -31,4 +31,6 @@ export enum ProductsUrls {
   FETCH_BRANDS = 'products/brands/all',
   GET_CATEGORIES = 'products/categories',
   FETCH_CATEGORIES = 'products/categories/all',
+  GET_TAGS = 'products/tags',
+  FETCH_TAGS = 'products/tags/all',
 }
