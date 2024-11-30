@@ -5,10 +5,11 @@ export interface IProductVariantModel {
   createdAt?: string
   updatedAt?: string
   id?: string
-  name: string
-  description: string
+  variant?: IVariantModel
   price: number | null
   stock: number | null
+  images: IImageModel[] | null
+  specifications: string
 }
 
 export interface IProductModel {
@@ -40,4 +41,12 @@ export interface ICategoryModel {
 export interface ITagModel {
   id?: string
   name: string
+}
+
+export interface IVariantModel {
+  id?: string
+  name: string
+  value: string
+  html?: string
+  productVariant?: IProductVariantModel[]
 }

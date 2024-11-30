@@ -3,33 +3,34 @@ import { PageWrapper } from '../../Landing/PageWrapper'
 import { Button, CircularProgress } from '@mui/material'
 import { adminInventoryUrls } from 'src/constants/routes.constant'
 import { FormBuilder } from 'src/components/form/formBuilder/FormBuilder'
-import { tagSchema } from 'src/constants/formSchema/product'
-import { tagData } from 'src/constants/data/product.constant'
-import { ITagModel } from 'src/interfaces/product.interface'
+import { variantSchema } from 'src/constants/formSchema/product'
+import { variantData } from 'src/constants/data/product.constant'
+import { IVariantModel } from 'src/interfaces/product.interface'
 import { useProductService } from 'src/service/product.service'
 import { useEffect, useState } from 'react'
 import { Error } from 'src/components/generic/error'
 
-export const CreateTag = () => {
-  const [state, setState] = useState(tagData)
+export const CreateVariant = () => {
+  const [state, setState] = useState(variantData)
 
-  const { createTag, isLoading, getTag, updateTag, error } = useProductService()
+  const { createVariant, isLoading, getVariant, updateVariant, error } =
+    useProductService()
 
   const navigate = useNavigate()
-  const { tagId } = useParams()
+  const { variantId } = useParams()
 
-  const onChange = async (data: ITagModel) => {
+  const onChange = async (data: IVariantModel) => {
     setState(data)
   }
 
   const onFormSubmit = async () => {
-    if (!tagId) {
-      const res = await createTag(state)
+    if (!variantId) {
+      const res = await createVariant(state)
       if (res) {
-        navigate(`/admin/${adminInventoryUrls.tags.main}/edit/${res?.id}`)
+        navigate(`/admin/${adminInventoryUrls.variants.main}/edit/${res?.id}`)
       }
     } else {
-      const res = await updateTag(tagId, state)
+      const res = await updateVariant(variantId, state)
       if (res) {
         setState(res)
       }
@@ -37,8 +38,8 @@ export const CreateTag = () => {
   }
 
   useEffect(() => {
-    if (tagId) {
-      getTag(tagId).then((tag) => {
+    if (variantId) {
+      getVariant(variantId).then((tag) => {
         if (tag) {
           setState(tag)
         }
@@ -46,14 +47,14 @@ export const CreateTag = () => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tagId])
+  }, [variantId])
 
   const breadcrumbs = [
     { title: 'Inventory' },
-    { title: 'Tag', link: `/admin/${adminInventoryUrls.tags.main}` },
+    { title: 'Variant', link: `/admin/${adminInventoryUrls.variants.main}` },
   ]
 
-  if (tagId) {
+  if (variantId) {
     breadcrumbs.push({ title: 'Edit' })
     breadcrumbs.push({ title: state.name ?? '' })
   } else {
@@ -65,7 +66,7 @@ export const CreateTag = () => {
       breadcrumbs={breadcrumbs}
       footer={{
         left: (
-          <Link to={`/admin/${adminInventoryUrls.tags.main}`}>
+          <Link to={`/admin/${adminInventoryUrls.variants.main}`}>
             <Button>Back</Button>
           </Link>
         ),
@@ -78,13 +79,13 @@ export const CreateTag = () => {
             {isLoading && (
               <CircularProgress sx={{ mr: 1, color: 'white' }} size={12} />
             )}
-            {tagId ? 'Update' : 'Create'}
+            {variantId ? 'Update' : 'Create'}
           </Button>
         ),
       }}
     >
       <Error error={error} />
-      <FormBuilder schema={tagSchema} value={state} onChange={onChange} />
+      <FormBuilder schema={variantSchema} value={state} onChange={onChange} />
     </PageWrapper>
   )
 }

@@ -4,6 +4,8 @@ import {
   ICategoryModel,
   IProductModel,
   IProductVariantModel,
+  ITagModel,
+  IVariantModel,
 } from 'src/interfaces/product.interface'
 
 export const productData: Partial<IProductModel & { isVariant: boolean }> = {
@@ -18,15 +20,26 @@ export const productData: Partial<IProductModel & { isVariant: boolean }> = {
 }
 
 export const productVariantData: IProductVariantModel = {
-  description: '',
-  name: '',
   price: null,
   stock: null,
+  images: [],
+  specifications: '',
 }
 
 export const brandData: IBrandModel = {
   name: '',
 }
+
 export const categoryData: ICategoryModel = {
   name: '',
+}
+
+export const tagData: ITagModel = {
+  name: '',
+}
+
+export const variantData: IVariantModel = {
+  name: '',
+  value: '',
+  html: '',
 }

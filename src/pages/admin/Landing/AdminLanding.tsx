@@ -80,6 +80,18 @@ const CreateTagPage = lazy(() =>
   }))
 )
 
+const VariantPage = lazy(() => import('../Inventory/Variant'))
+const AllVariantsPage = lazy(() =>
+  import('../Inventory/Variant/AllVariants').then((module) => ({
+    default: module.AllVariants,
+  }))
+)
+const CreateVariantPage = lazy(() =>
+  import('../Inventory/Variant/CreateVariant').then((module) => ({
+    default: module.CreateVariant,
+  }))
+)
+
 const drawerWidth = 240
 export const AdminLanding = () => {
   const theme = useTheme()
@@ -257,6 +269,23 @@ export const AdminLanding = () => {
               />
               <Route path="" element={<AllTagsPage />} />
             </Route>
+
+            {/* Variants URLS */}
+            <Route
+              path={adminInventoryUrls.variants.main}
+              element={<VariantPage />}
+            >
+              <Route
+                path={adminInventoryUrls.variants.create}
+                element={<CreateVariantPage />}
+              />
+              <Route
+                path={adminInventoryUrls.variants.edit}
+                element={<CreateVariantPage />}
+              />
+              <Route path="" element={<AllVariantsPage />} />
+            </Route>
+
             {/* ---------------- PAGES URLS----------------------------*/}
             <Route path={adminPagesUrls.home.main} element={<HomePage />}>
               <Route

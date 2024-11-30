@@ -24,6 +24,7 @@ export const MultipleIconLinks: React.FC<MultipleIconLinksProps> = ({
         defaultData={footerIconLinkData}
         label="Social Media Links"
         titleKey="title"
+        insideKey='link'
         onChange={onChange}
       >
         {(state, onChange) => {

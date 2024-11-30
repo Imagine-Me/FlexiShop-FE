@@ -25,12 +25,14 @@ export interface IFormSchema {
     | 'brandField'
     | 'categoryField'
     | 'tagField'
+    | 'variantField'
   description?: string
   cols?: number
   metadata?: {
     component?: (state: any, onChange: any) => React.ReactNode
     schema?: IFormSchema[]
     multipleField?: {
+      insideKey?: string
       titleKey: string
       defaultData: Record<string, unknown>
     }
