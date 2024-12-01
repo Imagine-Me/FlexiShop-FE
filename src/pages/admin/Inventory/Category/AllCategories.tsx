@@ -14,14 +14,16 @@ import { useAlertDialogContext } from 'src/context/alertDialog/alertDialog.hook'
 import { DataGrid } from 'src/components/generic/dataGrid'
 
 export const AllCategories = () => {
-  const [categories, setCategories] = useState<PaginateValue<ICategoryModel[]>>({
-    data: [],
-    currentPage: 1,
-    total: 10,
-  })
+  const [categories, setCategories] = useState<PaginateValue<ICategoryModel[]>>(
+    {
+      data: [],
+      currentPage: 1,
+      total: 10,
+    }
+  )
   const [pagination, setPagination] = useState<GridPaginationModel>({
     page: 1,
-    pageSize: 10,
+    pageSize: 25,
   })
 
   const { deleteCategory, getAllCategories } = useProductService()
@@ -65,7 +67,10 @@ export const AllCategories = () => {
                   <EditOutlinedIcon />
                 </IconButton>
               </Link>
-              <IconButton color="error" onClick={() => onCategoryDelete(row.id!)}>
+              <IconButton
+                color="error"
+                onClick={() => onCategoryDelete(row.id!)}
+              >
                 <DeleteOutlineIcon />
               </IconButton>
             </>

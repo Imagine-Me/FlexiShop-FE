@@ -21,7 +21,7 @@ export const AllBrand = () => {
   })
   const [pagination, setPagination] = useState<GridPaginationModel>({
     page: 1,
-    pageSize: 10,
+    pageSize: 25,
   })
 
   const { deleteBrand, getAllBrands } = useProductService()
