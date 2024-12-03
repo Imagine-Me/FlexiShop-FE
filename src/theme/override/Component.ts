@@ -20,6 +20,7 @@ export const Component = (theme: Theme) => {
           '--mui-common-black': theme.palette.common.black,
           '--mui-action-selected': theme.palette.action.selected,
           '--mui-action-active': theme.palette.action.active,
+          '--mui-action-hover': theme.palette.action.hover,
           '--mui-body-color': theme.palette.background.default,
         },
       },

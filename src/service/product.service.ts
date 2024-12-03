@@ -5,6 +5,7 @@ import {
   IBrandModel,
   ICategoryModel,
   IProductModel,
+  IProductSearchModel,
   ITagModel,
   IVariantModel,
 } from 'src/interfaces/product.interface'
@@ -31,6 +32,16 @@ export const useProductService = () => {
     const response = await fetchData<IProductModel>(
       'get',
       `${ProductsUrls.GET_PRODUCTS}/${id}`
+    )
+    if (response) {
+      return response
+    }
+  }
+
+  const searchProducts = async (product: string) => {
+    const response = await fetchData<IProductSearchModel[]>(
+      'get',
+      `${ProductsUrls.SEARCH_PRODUCTS}/${product}`
     )
     if (response) {
       return response
@@ -365,6 +376,7 @@ export const useProductService = () => {
     error,
     getAllProducts,
     createProduct,
+    searchProducts,
     deleteProduct,
     getProduct,
     updateProduct,

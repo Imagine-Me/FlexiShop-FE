@@ -12,11 +12,12 @@ export const BusinessLayout: React.FC = () => {
     state.header,
     state.footer,
   ])
-
   return (
     <Box className={classes.container}>
       <Header headerProps={headerProps} />
-      <Outlet />
+      <div className={classes.content}>
+        <Outlet />
+      </div>
       <Footer footerProps={footerProps} />
     </Box>
   )

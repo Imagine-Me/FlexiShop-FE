@@ -25,6 +25,13 @@ export interface IProductModel {
   variants?: IProductVariantModel[]
 }
 
+export interface IProductSearchModel {
+  name: string
+  link: string
+  image?: IImageModel
+  default?: boolean
+}
+
 export interface IBrandModel {
   id?: string
   name: string
