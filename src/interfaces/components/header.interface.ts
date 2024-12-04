@@ -7,3 +7,5 @@ export interface IHeader {
   wishListIcon: IIcon
   cartIcon: IIcon
 }
+
+export interface IHeaderProps extends IHeader {}

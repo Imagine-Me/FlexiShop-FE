@@ -5,6 +5,8 @@
     background-repeat: no-repeat;
     transition: transform 0.3s ease-in-out;
     overflow: hidden;
+    object-fit: cover;
+    width: 100%;
 
     &:hover {
         transform: scale(1.05)

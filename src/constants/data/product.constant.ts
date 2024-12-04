@@ -8,7 +8,7 @@ import {
   IVariantModel,
 } from 'src/interfaces/product.interface'
 
-export const productData: Partial<IProductModel & { isVariant: boolean }> = {
+export const productData: Partial<IProductModel> = {
   description: '',
   name: '',
   price: null,

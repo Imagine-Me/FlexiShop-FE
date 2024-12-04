@@ -19,13 +19,7 @@ export const CreateProduct = () => {
   const navigate = useNavigate()
   const { productId } = useParams()
 
-  const onChange = async (
-    data: Partial<
-      IProductModel & {
-        isVariant: boolean
-      }
-    >
-  ) => {
+  const onChange = async (data: Partial<IProductModel>) => {
     setState(data)
   }
 

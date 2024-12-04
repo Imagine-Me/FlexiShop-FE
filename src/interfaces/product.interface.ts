@@ -22,7 +22,15 @@ export interface IProductModel {
   specification?: string
   images?: IImageModel[]
   status: StatusEnum
+  isVariant: boolean 
   variants?: IProductVariantModel[]
+}
+
+export interface IProductSearchModel {
+  name: string
+  link: string
+  image?: IImageModel
+  default?: boolean
 }
 
 export interface IBrandModel {

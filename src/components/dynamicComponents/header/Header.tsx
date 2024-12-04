@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react'
-import { IHeader } from 'src/interfaces/components/header.interface'
+import { IHeaderProps } from 'src/interfaces/components/header.interface'
 
 interface HeaderProps {
-  headerProps: IHeader | null
+  headerProps: IHeaderProps | null
 }
 
 export const Header: React.FC<HeaderProps> = ({ headerProps }) => {

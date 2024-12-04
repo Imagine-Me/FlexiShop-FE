@@ -22,7 +22,7 @@ export const AllVariants = () => {
   })
   const [pagination, setPagination] = useState<GridPaginationModel>({
     page: 1,
-    pageSize: 10,
+    pageSize: 25,
   })
 
   const { deleteVariant, getAllVariants } = useProductService()
