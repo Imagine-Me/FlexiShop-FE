@@ -22,6 +22,7 @@ export interface IProductModel {
   specification?: string
   images?: IImageModel[]
   status: StatusEnum
+  isVariant: boolean 
   variants?: IProductVariantModel[]
 }
 

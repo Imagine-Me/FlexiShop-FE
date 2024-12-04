@@ -48,13 +48,17 @@ export const useProductService = () => {
     }
   }
 
-  const createProduct = async (
-    data: Partial<
-      IProductModel & {
-        isVariant: boolean
-      }
-    >
-  ) => {
+  const getProductsList = async (product: string) => {
+    const response = await fetchData<IProductModel[]>(
+      'get',
+      `${ProductsUrls.GET_PRODUCT_LIST}?${product}`
+    )
+    if (response) {
+      return response
+    }
+  }
+
+  const createProduct = async (data: Partial<IProductModel>) => {
     const response = await fetchData<IProductModel>(
       'post',
       ProductsUrls.GET_PRODUCTS,
@@ -65,14 +69,7 @@ export const useProductService = () => {
     }
   }
 
-  const updateProduct = async (
-    id: string,
-    data: Partial<
-      IProductModel & {
-        isVariant: boolean
-      }
-    >
-  ) => {
+  const updateProduct = async (id: string, data: Partial<IProductModel>) => {
     const response = await fetchData<IProductModel>(
       'patch',
       `${ProductsUrls.GET_PRODUCTS}/${id}`,
@@ -379,6 +376,7 @@ export const useProductService = () => {
     searchProducts,
     deleteProduct,
     getProduct,
+    getProductsList,
     updateProduct,
     getAllBrands,
     getBrand,
