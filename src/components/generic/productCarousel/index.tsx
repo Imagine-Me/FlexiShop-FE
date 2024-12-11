@@ -14,7 +14,6 @@ interface IProductModelProps {
 
 const CustomPrevArrow = (props: any) => {
   const { className, onClick } = props
-  console.log(className)
   return (
     <IconButton
       onClick={onClick}

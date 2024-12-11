@@ -93,6 +93,7 @@ interface AutoCompleteInputMultipleProps<T> {
   helperText?: string
   name?: string
   onChange: (value?: T[] | null) => void
+  groupBy?: (option: T) => string
 }
 
 export const AutoCompleteInputMultiple = <T,>({
@@ -103,6 +104,7 @@ export const AutoCompleteInputMultiple = <T,>({
   name,
   options,
   labelKey,
+  groupBy,
 }: AutoCompleteInputMultipleProps<T>) => {
   return (
     <FormControl fullWidth>
@@ -118,6 +120,7 @@ export const AutoCompleteInputMultiple = <T,>({
           <TextField {...params} label={label} name={name} />
         )}
         multiple
+        groupBy={groupBy}
       />
       {helperText && <FormHelperText>{helperText}</FormHelperText>}
     </FormControl>

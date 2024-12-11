@@ -77,12 +77,22 @@ export const MultipleForm = <T,>({
   }
 
   const replacePlaceholders = (data: any) => {
-    if(!data) return ''
+    if (!data) return ''
     return titleKey.replace(/(\w+)/g, (match) => data[match] || match)
   }
 
   const getAccordionTitle = (form: T, index: number) => {
     const value = insideKey ? form[insideKey as keyof T] : form
+    if (Array.isArray(value)) {
+      return value
+        .map((value) => {
+          return (
+            replacePlaceholders(value) ||
+            `${capitalizeFirstLetter(titleKey)} ${index + 1}`
+          )
+        })
+        .join(', ')
+    }
     return (
       replacePlaceholders(value) ||
       `${capitalizeFirstLetter(titleKey)} ${index + 1}`

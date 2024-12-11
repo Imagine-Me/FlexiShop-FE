@@ -39,8 +39,8 @@ export const productSchema: IFormSchema[] = [
           <>
             <VariantFieldGroupBy
               label="Variant"
-              onChange={(value) => onChange('variant', value)}
-              value={state.variant!}
+              onChange={(value) => onChange('variants', value)}
+              value={state.variants!}
               helperText="Select variants for this product"
             />
             <Grid container spacing={2} sx={{ mt: 1 }}>
@@ -80,7 +80,7 @@ export const productSchema: IFormSchema[] = [
         )
       },
       multipleField: {
-        insideKey: 'variant',
+        insideKey: 'variants',
         titleKey: 'name - value',
         defaultData: productVariantData as any,
       },

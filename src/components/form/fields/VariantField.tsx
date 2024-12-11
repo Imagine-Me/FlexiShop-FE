@@ -1,7 +1,7 @@
 import { FormControl, FormHelperText } from '@mui/material'
 import { useEffect, useState } from 'react'
 import AutoCompleteInputFreeSolo, {
-  AutoCompleteInput,
+  AutoCompleteInputMultiple,
 } from 'src/components/generic/autoCompleteInput'
 import { IVariantModel } from 'src/interfaces/product.interface'
 import { useProductService } from 'src/service/product.service'
@@ -51,11 +51,11 @@ export const VariantField: React.FC<VariantFieldProps> = ({
 }
 
 interface VariantFieldGroupByProps {
-  value: IVariantModel
+  value: IVariantModel[]
   label: string
   helperText?: string
   name?: string
-  onChange: (value?: IVariantModel | null) => void
+  onChange: (value?: IVariantModel[] | null) => void
 }
 
 export const VariantFieldGroupBy: React.FC<VariantFieldGroupByProps> = ({
@@ -79,11 +79,10 @@ export const VariantFieldGroupBy: React.FC<VariantFieldGroupByProps> = ({
 
   return (
     <FormControl fullWidth>
-      <AutoCompleteInput
+      <AutoCompleteInputMultiple
         options={state}
         label={label}
         labelKey="value"
-        valueKey="id"
         onChange={onChange}
         value={value}
         groupBy={(option) => option.name}

@@ -5,7 +5,7 @@ export interface IProductVariantModel {
   createdAt?: string
   updatedAt?: string
   id?: string
-  variant?: IVariantModel
+  variants?: IVariantModel[]
   price: number | null
   stock: number | null
   images: IImageModel[] | null
@@ -22,7 +22,7 @@ export interface IProductModel {
   specification?: string
   images?: IImageModel[]
   status: StatusEnum
-  isVariant: boolean 
+  isVariant: boolean
   variants?: IProductVariantModel[]
 }
 
