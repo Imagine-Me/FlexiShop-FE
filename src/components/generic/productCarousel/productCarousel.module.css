@@ -1,0 +1,70 @@
+.magnifyImage {
+    >img {
+        height: 600px !important;
+        object-fit: contain;
+    }
+}
+
+.slick {
+    :global(.slick-slide) {
+
+        >div {
+            margin-right: 8px;
+        }
+    }
+}
+
+.sliderContainer {
+    margin-top: 12px;
+    padding: 0 25px;
+
+    .slickButton {
+        border-radius: 50%;
+        outline: none;
+        display: block;
+        background: var(--mui-primary-color);
+
+        &:global(.slick-disabled) {
+            background: var(--mui-action-disabled);
+        }
+
+        svg {
+            fill: var(--mui-common-white);
+            width: auto;
+            height: auto;
+        }
+    }
+
+    .slickButton:hover {
+        background-color: var(--mui-primary-light-color);
+    }
+
+    .slickButton::before {
+        content: '';
+    }
+
+    .carouselImageContainer {
+        cursor: pointer;
+        border: 2px solid transparent;
+        border-radius: 5px;
+        margin-right: 5px;
+        outline: none;
+
+        &:hover {
+            border-color: var(--var-primary-color);
+        }
+
+        &.active {
+            border-color: var(--var-primary-color);
+        }
+
+        .carouselImage {
+            width: 100%;
+            height: 150px;
+            background-position: center;
+            object-fit: contain;
+            margin: auto;
+
+        }
+    }
+}

@@ -11,10 +11,10 @@ export const Home: React.FC = () => {
   const [theme] = useConfigStore((state) => [state.theme])
 
   return (
-    <div className={`${classes.body} ${classes[theme?.name ?? '']}`}>
+    <div className={`${classes.body} ${theme?.name ?? ''}`}>
       {home?.map((component, index) => (
         <div key={`component_${index}`} className={component.className}>
-          <HomeComponentLazy {...component} />{' '}
+          <HomeComponentLazy {...component} />
         </div>
       ))}
     </div>

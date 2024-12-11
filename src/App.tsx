@@ -6,6 +6,8 @@ import { Helmet } from './components/generic/helmet/Helmet'
 import { useImageService } from './service/images.service'
 import { AlertDialogProvider } from './context/alertDialog/alertDialog.context'
 
+import './App.css'
+
 export const App: React.FC = () => {
   const { general } = useConfigStore()
   const { getImages } = useImageService()

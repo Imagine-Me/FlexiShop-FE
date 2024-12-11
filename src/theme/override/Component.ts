@@ -21,6 +21,7 @@ export const Component = (theme: Theme) => {
           '--mui-action-selected': theme.palette.action.selected,
           '--mui-action-active': theme.palette.action.active,
           '--mui-action-hover': theme.palette.action.hover,
+          '--mui-action-disabled': theme.palette.action.disabled,
           '--mui-body-color': theme.palette.background.default,
         },
       },
